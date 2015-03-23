@@ -13,18 +13,21 @@ public class Queues <T> implements Queue<T> {
     private Node<T> rear;
     private int size;
     
+    
     public Queues(){
         this.front = new Node<>();
         this.rear = this.front;
         this.size = 0;
     }
 
+    @Override
     public void enqueue(T element) {
         this.rear.setNext(new Node<T>(element, null));
         this.rear = rear.getNext();
         this.size++;
     }
 
+    @Override
     public T dequeue() {
         if(this.size == 0){
             System.out.println("Cola esta vacia");
@@ -40,6 +43,7 @@ public class Queues <T> implements Queue<T> {
         return temp;
     }
 
+    @Override
     public T first() {
         if(this.size == 0){
             System.out.println("Cola esta vacia");
@@ -48,22 +52,31 @@ public class Queues <T> implements Queue<T> {
         return this.front.getNext().getElement();
     }
 
+    @Override
     public int size() {
         return this.size;
     }
 
+    @Override
     public void clear() {
         this.front = new Node<>();
         this.rear = this.front;
         this.size = 0;
     }
 
+    @Override
     public DataStructure getType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public boolean isEmpty() {
-        return size==0;
+        if (size==0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     
     private class Node<T>{

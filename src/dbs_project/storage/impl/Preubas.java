@@ -6,6 +6,7 @@
 package dbs_project.storage.impl;
 
 import dbs_project.structures.LinearList;
+import dbs_project.structures.Stack;
 
 /**
  *aqui pueden hacer las preubas despues que lo copian solo delen clik derecho y ejecutan solo este archivo.
@@ -14,7 +15,8 @@ import dbs_project.structures.LinearList;
 public class Preubas {
     
     public static void main(String[] args) {
-        LinearList<Integer> nuevo= new DoublyLinkedList<>();
+        
+        /*LinearList<Integer> nuevo= new DoublyLinkedList<>();
         nuevo.append(6);
         nuevo.append(3);
         nuevo.append(9);
@@ -37,7 +39,18 @@ public class Preubas {
         nuevo.append(7);
         System.out.println(nuevo.toString());
         nuevo.clear();
-        System.out.println(nuevo.isEmpty());
+        System.out.println(nuevo.isEmpty());*/
+        
+        Stack<Integer> pilaEnteros = new Stacks<>();
+        pilaEnteros.push(5);
+        pilaEnteros.push(3);
+        System.out.println(pilaEnteros.toString());
+        pilaEnteros.pop();
+        pilaEnteros.push(7);
+        System.out.println(pilaEnteros.toString());
+        pilaEnteros.top();
+        System.out.println(pilaEnteros.toString());
+    
     }
     
 }
