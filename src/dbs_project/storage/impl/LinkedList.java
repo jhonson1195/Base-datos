@@ -6,6 +6,7 @@
 package dbs_project.storage.impl;
 
 import dbs_project.structures.DataStructure;
+import static dbs_project.structures.DataStructure.LINKEDLIST;
 import dbs_project.structures.LinearList;
 
 /**
@@ -47,12 +48,12 @@ public class LinkedList<T> implements LinearList <T> {
     
      /**
      * Agrega un nodo despues de la cola actual 
-     * @param <T> variable generica
+     * @param element
      */
 
     @Override
     public void append(T element) {
-	Node<T> newNode = new Node<T>(element);
+	Node<T> newNode = new Node<>(element);
 	this.tail.setNext(newNode);
 	this.tail = newNode;
 	this.size++;        
@@ -208,7 +209,8 @@ public class LinkedList<T> implements LinearList <T> {
      * Devuelve el tipo de lista
      */
     public DataStructure getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DataStructure structure= LINKEDLIST;
+        return structure;
     }
 
     @Override  
@@ -248,9 +250,11 @@ public class LinkedList<T> implements LinearList <T> {
     
       /**
      * Clase para crear una variable de tipo Nodo
-     * @param <T>
+     * 
+     * @return StringBuffer 
      */
     
+    @Override
     public String toString() {
 		Node currentNode = this.head.getNext();
 		
@@ -283,6 +287,7 @@ public class LinkedList<T> implements LinearList <T> {
         }
          /**
          * Contrutor que inicializa las variables
+         * @param Element
          */
         public Node(T Element){
             next=null;
@@ -290,7 +295,8 @@ public class LinkedList<T> implements LinearList <T> {
         }
          /**
          * Contrutor que inicializa las variables
-         */
+         * @param Element
+         * @param next         */
         public Node(T Element, Node<T> next){
             this.Element= Element;
             this.next=next; 
