@@ -67,8 +67,7 @@ public class Queues <T> implements Queue<T> {
 
     @Override
     public DataStructure getType() {
-        DataStructure structure= QUEUE;
-        return structure;
+        return DataStructure.QUEUE;
     }
 
     @Override

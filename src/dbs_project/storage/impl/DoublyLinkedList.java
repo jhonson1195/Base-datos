@@ -205,8 +205,7 @@ public class DoublyLinkedList <T>implements LinearList<T> {
      * Devuelve el tipo de lista
      */
     public DataStructure getType() {
-        DataStructure structure= DOUBLYLINKEDLIST;
-        return structure;
+        return DataStructure.DOUBLYLINKEDLIST;
     }
 
     @Override

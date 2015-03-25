@@ -83,8 +83,7 @@ public class Stacks <T>implements Stack<T>{
 
     @Override
     public DataStructure getType() {
-        DataStructure structure= STACK;
-        return structure;
+        return DataStructure.STACK;
     }
 
     @Override

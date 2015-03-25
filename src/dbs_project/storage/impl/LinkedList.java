@@ -6,7 +6,6 @@
 package dbs_project.storage.impl;
 
 import dbs_project.structures.DataStructure;
-import static dbs_project.structures.DataStructure.LINKEDLIST;
 import dbs_project.structures.LinearList;
 
 /**
@@ -209,8 +208,7 @@ public class LinkedList<T> implements LinearList <T> {
      * Devuelve el tipo de lista
      */
     public DataStructure getType() {
-        DataStructure structure= LINKEDLIST;
-        return structure;
+        return DataStructure.LINKEDLIST;
     }
 
     @Override  
