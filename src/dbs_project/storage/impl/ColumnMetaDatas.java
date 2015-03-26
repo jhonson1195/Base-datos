@@ -28,10 +28,20 @@ public class ColumnMetaDatas implements ColumnMetaData {
      * Constructor
      * 
      * @param Name
+     * @param Source
+     * @param Label
+     * @param Type
+     * @param RowId
+     * @param Id
      */
-    public ColumnMetaDatas(String Name){
+    public ColumnMetaDatas(String Name, Table Source, String Label, Type Type,int RowId, int Id){
         Count=0;
         this.Name=Name;
+        this.Source = Source;
+        this.Label = Label;
+        this.Type = Type;
+        this.RowId = RowId;
+        this.Id = Id;
         
     }
     /**

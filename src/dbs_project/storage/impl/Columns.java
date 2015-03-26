@@ -7,9 +7,16 @@ package dbs_project.storage.impl;
 
 import dbs_project.storage.Column;
 import dbs_project.storage.ColumnMetaData;
+import dbs_project.storage.Table;
+import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
+import static dbs_project.structures.DataStructure.LINKEDLIST;
+import static dbs_project.structures.DataStructure.QUEUE;
+import static dbs_project.structures.DataStructure.STACK;
 import dbs_project.structures.LinearDataStructure;
 import dbs_project.structures.LinearList;
+import dbs_project.structures.Queue;
+import dbs_project.structures.Stack;
 import java.util.Date;
 
 /**
@@ -22,9 +29,9 @@ public class Columns <T>implements Column{
     private LinearList<T> list;
     private ColumnMetaDatas Metadata;
     
-    public Columns(String Name){
+    public Columns(String Name, Table Source, String Label, Type Type,int RowId, int Id){
          list= new DoublyLinkedList<>();
-         Metadata=new ColumnMetaDatas(Name);
+         Metadata=new ColumnMetaDatas(Name, Source, Label, Type, RowId,Id);
     }
     
     public void appenElement(T elemnt){
@@ -32,6 +39,7 @@ public class Columns <T>implements Column{
         Metadata.increaseCount();
         
     }
+    
     public LinearList getList(){
         return list;
     }
@@ -85,6 +93,37 @@ public class Columns <T>implements Column{
 
     @Override
     public LinearDataStructure<?> asLinearDataStructure(DataStructure type) {
+        if (type==list.getType()){
+            return list;
+        }
+        
+        list.goToStart();
+        
+        if (type==LINKEDLIST){
+            LinearList <T> ListaSimple = new LinkedList<>();
+            ListaSimple.append(list.getElement());
+            while(list.next()){
+                ListaSimple.append(list.getElement());
+            }
+            return ListaSimple;
+        }
+        if(type==QUEUE){
+            Queue<T> Cola = new Queues<>();
+            Cola.enqueue(list.getElement());
+            while(list.next()){
+                Cola.enqueue(list.getElement());
+            }
+            return Cola;
+            
+        }
+        if(type==STACK){
+            Stack<T> Pila = new Stacks<>();
+            Pila.push(list.getElement());
+            while(list.next()){
+                Pila.push(list.getElement());
+            }
+            return Pila;
+        }
         return null;
     }
     
