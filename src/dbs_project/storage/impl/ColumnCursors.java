@@ -5,87 +5,87 @@
  */
 package dbs_project.storage.impl;
 
-import dbs_project.storage.Column;
+import dbs_project.storage.ColumnCursor;
 import dbs_project.storage.ColumnMetaData;
 import dbs_project.structures.DataStructure;
 import dbs_project.structures.LinearDataStructure;
-import dbs_project.structures.LinearList;
 import java.util.Date;
 
 /**
  *
  * @author jhonson
- * @param <T>
  */
-public class Columns <T>implements Column{
+public class ColumnCursors <T>implements ColumnCursor{
     
-    private LinearList<T> list;
-    private ColumnMetaDatas Metadata;
+    private Columns<T> Columna;
     
-    public Columns(String Name){
-         list= new DoublyLinkedList<>();
-         Metadata=new ColumnMetaDatas(Name);
-    }
-    
-    public void appenElement(T elemnt){
-        list.append(elemnt);
-        Metadata.increaseCount();
-        
-    }
-    public LinearList getList(){
-        return list;
+    public ColumnCursors(Columns<T> Columna){
+        this.Columna=Columna;
     }
 
     @Override
     public ColumnMetaData getMetaData() {
-        return Metadata;
+        return Columna.getMetaData();
     }
 
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-        list.goToPos(index);
-        return (Integer)list.getElement();
+        return Columna.getInteger(index);
     }
 
     @Override
     public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
-        list.goToPos(index);
-        return (Boolean)list.getElement();
+        return Columna.getBoolean(index);
     }
 
     @Override
     public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
-        list.goToPos(index);
-        return (Double)list.getElement();
+        return Columna.getDouble(index);
     }
 
     @Override
     public Date getDate(int index) throws IndexOutOfBoundsException, ClassCastException {
-        list.goToPos(index);
-        return (Date)list.getElement();
+        return Columna.getDate(index);
     }
 
     @Override
     public String getString(int index) throws IndexOutOfBoundsException {
-        list.goToPos(index);
-        return (String)list.getElement();
+        return Columna.getString(index);
     }
 
     @Override
     public Object getObject(int index) throws IndexOutOfBoundsException {
-        list.goToPos(index);
-        return (Object)list.getElement();
+        return Columna.getObject(index);
     }
 
     @Override
     public boolean isNull(int index) throws IndexOutOfBoundsException {
-        list.goToPos(index);
-        return null==list.getElement();
+        return Columna.isNull(index);
     }
 
     @Override
     public LinearDataStructure<?> asLinearDataStructure(DataStructure type) {
         return null;
+    }
+
+    @Override
+    public boolean next() {
+        return Columna.getList().next();
+    }
+
+    @Override
+    public int getCursorPosition() {
+        return Columna.getList().getPosition();
+    }
+
+    @Override
+    public void close() {
+        Columna.getList().clear();
+    }
+
+    @Override
+    public DataStructure getType() {
+        return Columna.getList().getType();
     }
     
 }

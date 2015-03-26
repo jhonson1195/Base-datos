@@ -18,9 +18,19 @@ public class Preubas {
     public static void main(String[] args) {
                 Columns nuevo= new Columns<>("jhonson");
                 nuevo.appenElement(4);
+                nuevo.appenElement(5);
+                nuevo.appenElement(6);
+                nuevo.appenElement(7);
+                nuevo.appenElement(8);
                 System.out.println(nuevo.getInteger(0));
                 System.out.println(nuevo.getMetaData().getName());
                 System.out.println(nuevo.getMetaData().getRowCount());
+                ColumnCursors<Integer> cursor = new ColumnCursors(nuevo);
+                cursor.next();
+                System.out.println(cursor.getInteger(2));
+                cursor.close();
+                System.out.println(cursor.next());
+                
                 
                 
         

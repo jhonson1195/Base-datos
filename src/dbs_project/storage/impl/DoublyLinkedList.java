@@ -6,7 +6,6 @@
 package dbs_project.storage.impl;
 
 import dbs_project.structures.DataStructure;
-import static dbs_project.structures.DataStructure.DOUBLYLINKEDLIST;
 import dbs_project.structures.LinearList;
 
 /**
@@ -161,7 +160,7 @@ public class DoublyLinkedList <T>implements LinearList<T> {
      * @param pos
      */
     public void goToPos(int pos) throws IndexOutOfBoundsException {
-        current=head.getNext();
+        
         if(pos>=0 && pos<size){
             if(pos>position){
                 while(pos>position){
