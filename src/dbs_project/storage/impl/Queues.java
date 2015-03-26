@@ -6,6 +6,7 @@
 package dbs_project.storage.impl;
 
 import dbs_project.structures.DataStructure;
+import static dbs_project.structures.DataStructure.QUEUE;
 import dbs_project.structures.Queue;
 
 public class Queues <T> implements Queue<T> {
@@ -66,7 +67,7 @@ public class Queues <T> implements Queue<T> {
 
     @Override
     public DataStructure getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return DataStructure.QUEUE;
     }
 
     @Override

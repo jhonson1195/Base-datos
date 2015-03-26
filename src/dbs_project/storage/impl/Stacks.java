@@ -6,6 +6,7 @@
 package dbs_project.storage.impl;
 
 import dbs_project.structures.DataStructure;
+import static dbs_project.structures.DataStructure.STACK;
 import dbs_project.structures.Stack;
 
 /**
@@ -82,7 +83,7 @@ public class Stacks <T>implements Stack<T>{
 
     @Override
     public DataStructure getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return DataStructure.STACK;
     }
 
     @Override
@@ -99,7 +100,9 @@ public class Stacks <T>implements Stack<T>{
     }
     /**
      * Devuelve los elemento de la pila
+     * @return 
      */
+    @Override
     public String toString(){
         String result = "Pila \n";
         Node<T>temp = top;

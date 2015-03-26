@@ -35,7 +35,7 @@ public class DoublyLinkedList <T>implements LinearList<T> {
      * @param <T> variable generica
      */
     public void insert(T element) {
-        Node<T> newnode = new Node<T>(element, current, current.getLast());
+        Node<T> newnode = new Node<>(element, current, current.getLast());
         Node<T> temp=current.getLast();
         temp.setNext(newnode);
         current.setLast(newnode);
@@ -53,7 +53,7 @@ public class DoublyLinkedList <T>implements LinearList<T> {
      * @param <T>
      */
     public void append(T Date) {
-        Node<T> newnode = new Node<T>(Date);
+        Node<T> newnode = new Node<>(Date);
         tail.setNext(newnode);
         newnode.setLast(tail);
         tail=newnode;
@@ -160,7 +160,7 @@ public class DoublyLinkedList <T>implements LinearList<T> {
      * @param pos
      */
     public void goToPos(int pos) throws IndexOutOfBoundsException {
-        current=head.getNext();
+        
         if(pos>=0 && pos<size){
             if(pos>position){
                 while(pos>position){
@@ -204,7 +204,7 @@ public class DoublyLinkedList <T>implements LinearList<T> {
      * Devuelve el tipo de lista
      */
     public DataStructure getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return DataStructure.DOUBLYLINKEDLIST;
     }
 
     @Override
@@ -243,7 +243,9 @@ public class DoublyLinkedList <T>implements LinearList<T> {
     }
     /**
      * Imprime los elementos de la lista
+     * @return 
      */
+    @Override
     public String toString(){
         String result= "Lista doblemente enlazada \n";
         Node<T> temp =head.getNext();
@@ -274,6 +276,7 @@ public class DoublyLinkedList <T>implements LinearList<T> {
         }
          /**
          * Contrutor que inicializa las variables
+         * @param Date
          */
         public Node(T Date){
             next=null;
@@ -282,6 +285,9 @@ public class DoublyLinkedList <T>implements LinearList<T> {
         }
          /**
          * Contrutor que inicializa las variables
+         * @param Date
+         * @param next
+         * @param last
          */
         public Node(T Date, Node<T> next,Node<T> last){
             this.Date= Date;
