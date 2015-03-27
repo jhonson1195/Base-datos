@@ -22,14 +22,14 @@ public class Preubas {
                 nuevo.appenElement(6);
                 nuevo.appenElement(7);
                 nuevo.appenElement(8);
-                System.out.println(nuevo.getInteger(0));
-                System.out.println(nuevo.getMetaData().getName());
-                System.out.println(nuevo.getMetaData().getRowCount());
+                System.out.println("Este es el integer que se encuentra en la posicion 0= "+nuevo.getInteger(0));
+                System.out.println("Este es el nombre de la MetaData= "+nuevo.getMetaData().getName());
+                System.out.println("Este cuenta la cantidad de fila= "+nuevo.getMetaData().getRowCount());
                 ColumnCursors<Integer> cursor = new ColumnCursors(nuevo);
                 cursor.next();
-                System.out.println(cursor.getInteger(2));
+                System.out.println("Este es el integer que se encuentra en la posicion 2= "+cursor.getInteger(2));
                 cursor.close();
-                System.out.println(cursor.next());
+                System.out.println("Este es el next del cursor= "+cursor.next());
                 
                 
                 

@@ -104,7 +104,7 @@ public class DoublyLinkedList <T>implements LinearList<T> {
      */
     public boolean next() {
         if(current==tail){
-            System.out.println("no se puede avanzar");
+            System.out.println("La lista esta vacia, no se puede avanzar");
             return false;
         }
         current=current.getNext();
