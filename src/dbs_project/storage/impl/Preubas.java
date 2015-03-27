@@ -28,7 +28,6 @@ public class Preubas {
                 nuevo.appenElement(6);
                 nuevo.appenElement(7);
                 nuevo.appenElement(8);
-<<<<<<< HEAD
                 System.out.println("Este es el integer que se encuentra en la posicion 0= "+nuevo.getInteger(0));
                 System.out.println("Este es el nombre de la MetaData= "+nuevo.getMetaData().getName());
                 System.out.println("Este cuenta la cantidad de fila= "+nuevo.getMetaData().getRowCount());
@@ -37,7 +36,6 @@ public class Preubas {
                 System.out.println("Este es el integer que se encuentra en la posicion 2= "+cursor.getInteger(2));
                 cursor.close();
                 System.out.println("Este es el next del cursor= "+cursor.next());
-=======
                 Stack <Integer> Lista;
                 //Lista.enqueue(5);
                 //Lista.enqueue(56);
@@ -47,8 +45,6 @@ public class Preubas {
                 
                 //Lista= (Queues<Integer>)nuevo.asLinearDataStructure(DataStructure.QUEUE);
                 //Lista.toString();
-                
->>>>>>> origin/master
                 
                 
                 
