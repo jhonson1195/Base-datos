@@ -22,7 +22,7 @@ public class Preubas {
     
     public static void main(String[] args) {
                 Table tabla = new Tables();
-                Columns nuevo= new Columns<>("jhonson", tabla,"Label",Type.INTEGER, 1, 2);
+                Columns nuevo= new Columns<>("jhonson", tabla, "Label", Type.INTEGER, 1, 2);
                 nuevo.appenElement(4);
                 nuevo.appenElement(5);
                 nuevo.appenElement(6);

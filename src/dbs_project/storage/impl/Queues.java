@@ -8,18 +8,32 @@ package dbs_project.storage.impl;
 import dbs_project.structures.DataStructure;
 import dbs_project.structures.Queue;
 
+/**
+ *
+ * @author Esteban
+ * @param <T>
+ */
+
+/* 
+* Clase Queues implementada con la interfaz generica Queue
+* Esta clase va a crear una estructura de datos de tipo Cola
+*/
 public class Queues <T> implements Queue<T> {
-    private Node<T> front;
-    private Node<T> rear;
-    private int size;
+    private Node<T> front;//Front siempre va a ser el primer elemento de la Cola
+    private Node<T> rear; //Rear va a ser el ultimo elemento agregado a la Cola
+                          //ultimo en salir 
+    private int size;     //Tamaño de la Cola
     
-    
+    //Constructor de la Clase "Queues"
     public Queues(){
         this.front = new Node<>();
         this.rear = this.front;
         this.size = 0;
     }
-
+    
+    //Metodos de la Clase "Queues"
+    
+    //Agregar a la Cola
     @Override
     public void enqueue(T element) {
         this.rear.setNext(new Node<T>(element, null));
@@ -27,6 +41,7 @@ public class Queues <T> implements Queue<T> {
         this.size++;
     }
 
+    //Borrar/Sacar el primero de la Cola
     @Override
     public T dequeue() {
         if(this.size == 0){
@@ -43,6 +58,7 @@ public class Queues <T> implements Queue<T> {
         return temp;
     }
 
+    //Retorna el primer elemento de la Cola
     @Override
     public T first() {
         if(this.size == 0){
@@ -52,11 +68,13 @@ public class Queues <T> implements Queue<T> {
         return this.front.getNext().getElement();
     }
 
+    //Retorna el tamaño de la cola 
     @Override
     public int size() {
         return this.size;
     }
 
+    //Limpia la Cola
     @Override
     public void clear() {
         this.front = new Node<>();
@@ -64,11 +82,13 @@ public class Queues <T> implements Queue<T> {
         this.size = 0;
     }
 
+    //Retorna el tipo de Estructura(en este caso es QUEUE)
     @Override
     public DataStructure getType() {
         return DataStructure.QUEUE;
     }
 
+    //Retorna si la Cola esta Vacia
     @Override
     public boolean isEmpty() {
         if (size==0){
@@ -78,6 +98,8 @@ public class Queues <T> implements Queue<T> {
             return false;
         }
     }
+    
+    //Los datos de la Cola, van a ser ingresados a un String
     @Override
     public String toString(){
         String result= "Lista doblemente enlazada \n";
@@ -90,9 +112,10 @@ public class Queues <T> implements Queue<T> {
         return result+=temp.getElement();
     }
     
+    //Clase de "Node"
     private class Node<T>{
-        private T element;
-        private Node<T> next;
+        private T element; // Elemento del Nodo
+        private Node<T> next; //Dirige al siguiente Nodo
 
         // CONSTRUCTORES "Node"
         public Node(){

@@ -9,7 +9,7 @@ import dbs_project.structures.DataStructure;
 import dbs_project.structures.LinearList;
 
 /**
- *Lista doblemente enlazada implementada con la interfaz LinearList generica
+ *Lista simplemente enlazada implementada con la interfaz LinearList generica
  * @author Carlos Ramirez
  * @param <T>
  */

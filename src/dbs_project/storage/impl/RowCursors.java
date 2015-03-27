@@ -16,18 +16,29 @@ import java.util.Date;
  * @author Esteban
  * @param <T>
  */
+/*
+* Clase RowCursors Implementada con la Interfaz generica RowCursor
+*/
 public class RowCursors <T>implements RowCursor{
+    // Atributos de la Clase "RowCursors"
     private Rows<T> Fila;
 
+    // Constructores de Clase "RowCursors"
     public RowCursors(Rows <T> Fila){
         this.Fila = Fila;
     }
 
+    // Metodos de Clase "RowCursors"
+    
+    // Retorna el MetaData de la Fila
     @Override
     public RowMetaData getMetaData(){
         return Fila.getMetaData();
     }
 
+    /*
+    * Utiliza los metodos de la Clase "Rows", para retornar los datos
+    */
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
         return Fila.getInteger(index);
@@ -65,7 +76,7 @@ public class RowCursors <T>implements RowCursor{
 
     @Override
     public LinearDataStructure<?> asLinearDataStructure (DataStructure type) {
-        return null;
+        return Fila.asLinearDataStructure(type);
     }
 
     @Override
@@ -78,7 +89,6 @@ public class RowCursors <T>implements RowCursor{
         return Fila.getList().getPosition();
     }
 
-    @Override
     public void close(){
         Fila.getList().clear();
     }

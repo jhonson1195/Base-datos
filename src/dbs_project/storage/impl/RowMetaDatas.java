@@ -14,6 +14,9 @@ import dbs_project.storage.Type;
  *
  * @author Esteban
  */
+/*
+* Clase RowMetaDatas Implementada con la Interfaz generica RowMetaData
+*/
 public class RowMetaDatas implements RowMetaData{
     /*
     Todo depende de los tipos de datos que se guarden en el MetaData, 
@@ -21,8 +24,9 @@ public class RowMetaDatas implements RowMetaData{
     cambiarlos xq no van a ser los mismos usados en columna
     */
     
-    
-    //private int Count;
+    // Atributos de la Clase "RowMetaDatas"
+    // Estos atributos son la informacion de la Fila
+    private int Count;
     private Table Source;
     //private String Label;
     //private Type Type;
@@ -30,27 +34,32 @@ public class RowMetaDatas implements RowMetaData{
     private int Id;
     private String Name;
 
+    // Constructores de Clase "RowMetaDatas"
     public RowMetaDatas(String Name){
-    //    Count=0;
+        Count=0;
         this.Name=Name;
     }
 
     RowMetaDatas(String Name, Table Source, int ColumnID, int Id) {
+        Count=0;
         this.Name=Name;
         this.Source = Source;
         this.ColumnId = ColumnID;
         this.Id = Id;
     }
 
-    //public void increaseCount(){
-    //    Count++;
-    //}
+    // Metodos de Clase "RowMetaDatas"
+    // Incrementa el contador
+    public void increaseCount(){
+        Count++;
+    }
+    
+    // Retorna el Contador
+    public int getRowCount(){
+        return Count;
+    }
 
-    //@Override
-    //public int getRowCount(){
-    //    return Count;
-    //}
-
+    // Retorna el nombre de la tabla ¿?
     public Table getSourceTable(){
         return Source;
     }
@@ -63,10 +72,12 @@ public class RowMetaDatas implements RowMetaData{
     //    return Type;
     //}
 
+    // Retorna el ColumnId, de la fila en la que se encuentra
     public int getColumnId(int positionInRow) throws IndexOutOfBoundsException {
         return ColumnId;
     }
 
+    // Retorna el Id de la Fila ¿?
     @Override
     public int getId(){
         return Id;
@@ -83,6 +94,7 @@ public class RowMetaDatas implements RowMetaData{
 
     @Override
     public int getColumnCount() {
+        return ColumnId;
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
