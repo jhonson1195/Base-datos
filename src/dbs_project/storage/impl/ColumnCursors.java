@@ -14,6 +14,7 @@ import java.util.Date;
 /**
  *
  * @author jhonson
+ * @param <T>
  */
 public class ColumnCursors <T>implements ColumnCursor{
     
@@ -65,7 +66,7 @@ public class ColumnCursors <T>implements ColumnCursor{
 
     @Override
     public LinearDataStructure<?> asLinearDataStructure(DataStructure type) {
-        return null;
+        return Columna.asLinearDataStructure(type);
     }
 
     @Override

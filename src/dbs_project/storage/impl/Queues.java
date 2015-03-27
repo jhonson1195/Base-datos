@@ -6,7 +6,6 @@
 package dbs_project.storage.impl;
 
 import dbs_project.structures.DataStructure;
-import static dbs_project.structures.DataStructure.QUEUE;
 import dbs_project.structures.Queue;
 
 public class Queues <T> implements Queue<T> {
@@ -78,6 +77,17 @@ public class Queues <T> implements Queue<T> {
         else{
             return false;
         }
+    }
+    @Override
+    public String toString(){
+        String result= "Lista doblemente enlazada \n";
+        Node<T> temp =front.getNext();
+        while (temp.getNext()!=null){
+            result+=temp.getElement()+ "\n";
+            temp=temp.getNext();
+            
+        }
+        return result+=temp.getElement();
     }
     
     private class Node<T>{
