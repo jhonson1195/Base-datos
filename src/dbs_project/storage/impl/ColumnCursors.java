@@ -23,7 +23,7 @@ public class ColumnCursors <T>implements ColumnCursor{
     public ColumnCursors(Columns<T> Columna){
         this.Columna=Columna;
     }
-
+    
     @Override
     public ColumnMetaData getMetaData() {
         return Columna.getMetaData();
@@ -88,5 +88,5 @@ public class ColumnCursors <T>implements ColumnCursor{
     public DataStructure getType() {
         return Columna.getList().getType();
     }
-    
+
 }

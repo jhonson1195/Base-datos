@@ -27,8 +27,12 @@ public class RowCursors <T>implements RowCursor{
     public RowCursors(Rows <T> Fila){
         this.Fila = Fila;
     }
-
+        
     // Metodos de Clase "RowCursors"
+    
+    /*
+    * Utiliza los metodos de la Clase "Rows", para retornar los datos
+    */
     
     // Retorna el MetaData de la Fila
     @Override
@@ -36,9 +40,6 @@ public class RowCursors <T>implements RowCursor{
         return Fila.getMetaData();
     }
 
-    /*
-    * Utiliza los metodos de la Clase "Rows", para retornar los datos
-    */
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
         return Fila.getInteger(index);
@@ -88,7 +89,8 @@ public class RowCursors <T>implements RowCursor{
     public int getCursorPosition(){
         return Fila.getList().getPosition();
     }
-
+    
+    // Close es igual a limpiar???
     public void close(){
         Fila.getList().clear();
     }
@@ -96,5 +98,5 @@ public class RowCursors <T>implements RowCursor{
     @Override
     public DataStructure getType() {
         return Fila.getList().getType();
-    }
+    }   
 }
