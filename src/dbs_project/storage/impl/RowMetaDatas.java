@@ -7,6 +7,8 @@ package dbs_project.storage.impl;
 
 import dbs_project.storage.ColumnMetaData;
 import dbs_project.storage.RowMetaData;
+import dbs_project.storage.Table;
+import dbs_project.storage.Type;
 
 /**
  *
@@ -29,10 +31,10 @@ public class RowMetaDatas implements RowMetaData{
     private int Id;
 
     // Constructores de Clase "RowMetaDatas"
-    public RowMetaDatas(int Id, ColumnMetaDatas metaData) {
+    public RowMetaDatas(String Name, Table Source, String Label, Type Type, int IdColumn) {
         Count=0;
         this.Id = Id;
-        this.Metadata = metaData;
+        this.Metadata = new ColumnMetaDatas(Name, Source, Label, Type, Id, IdColumn);
     }
     
     // Metodos de Clase "RowMetaDatas"
@@ -98,5 +100,4 @@ public class RowMetaDatas implements RowMetaData{
         return Name;
     }
     */
-      
 }

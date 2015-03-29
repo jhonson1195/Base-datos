@@ -7,6 +7,8 @@ package dbs_project.storage.impl;
 
 import dbs_project.storage.Row;
 import dbs_project.storage.RowMetaData;
+import dbs_project.storage.Table;
+import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
 import static dbs_project.structures.DataStructure.LINKEDLIST;
 import static dbs_project.structures.DataStructure.QUEUE;
@@ -36,9 +38,9 @@ public class Rows <T> implements Row{
     en RowMetaData
     */
     // Constructores de Clase "Rows"
-    public Rows(int Id, ColumnMetaDatas metaData){
+    public Rows(String Name, Table Source, String Label, Type Type, int IdColumn){
         list= new DoublyLinkedList<>(); //Lista de la fila
-        MetaData= new RowMetaDatas(Id, metaData);
+        MetaData= new RowMetaDatas(Name, Source, Label, Type, IdColumn);
     }
     
     // Metodos de Clase "Rows"
