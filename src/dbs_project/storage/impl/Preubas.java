@@ -21,33 +21,11 @@ import dbs_project.structures.Stack;
 public class Preubas {
     
     public static void main(String[] args) {
-                Table tabla = new Tables();
-                Columns nuevo= new Columns<>("jhonson", tabla, "Label", Type.INTEGER, 2);
-                nuevo.appenElement(4);
-                nuevo.appenElement(5);
-                nuevo.appenElement(6);
-                nuevo.appenElement(7);
-                nuevo.appenElement(8);
-                System.out.println("Este es el integer que se encuentra en la posicion 0= "+nuevo.getInteger(0));
-                System.out.println("Este es el nombre de la MetaData= "+nuevo.getMetaData().getName());
-                System.out.println("Este cuenta la cantidad de fila= "+nuevo.getMetaData().getRowCount());
-                ColumnCursors<Integer> cursor = new ColumnCursors(nuevo);
-                cursor.next();
-                System.out.println("Este es el integer que se encuentra en la posicion 2= "+cursor.getInteger(2));
-                cursor.close();
-                System.out.println("Este es el next del cursor= "+cursor.next());
-                Stack <Integer> Lista;
-                //Lista.enqueue(5);
-                //Lista.enqueue(56);
-                Lista= (Stack<Integer>) nuevo.asLinearDataStructure(DataStructure.STACK);
-                System.out.println(Lista.toString());
-                
-                
-                //Lista= (Queues<Integer>)nuevo.asLinearDataStructure(DataStructure.QUEUE);
-                //Lista.toString();
-                
-                
-                
+        
+        Maps <Integer, Integer> tabla = new Maps<>();
+        tabla.put(1, 1000);
+        System.out.println(tabla.get(1));
+                 
         
 	}
   
