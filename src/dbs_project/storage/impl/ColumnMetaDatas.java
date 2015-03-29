@@ -31,10 +31,10 @@ public class ColumnMetaDatas implements ColumnMetaData {
      * @param Source
      * @param Label
      * @param Type
-     * @param RowId
      * @param Id
      */
-    public ColumnMetaDatas(String Name, Table Source, String Label, Type Type,int RowId, int Id){
+    public ColumnMetaDatas(String Name, Table Source, String Label, Type Type,int Id){
+        //variables 
         Count=0;
         this.Name=Name;
         this.Source = Source;
@@ -72,6 +72,7 @@ public class ColumnMetaDatas implements ColumnMetaData {
     }
 
     @Override
+    //Falta implementar y entender
     public int getRowId(int positionInColumn) throws IndexOutOfBoundsException {
         return RowId;
     }

@@ -12,23 +12,31 @@ import dbs_project.structures.LinearDataStructure;
 import java.util.Date;
 
 /**
- *
+ *Creacion de una columna
  * @author jhonson
  * @param <T>
  */
 public class ColumnCursors <T>implements ColumnCursor{
     
     private Columns<T> Columna;
-    
+    /**
+     * Constructor que recibe la columna para manipularla
+     * @param Columna
+     */
     public ColumnCursors(Columns<T> Columna){
         this.Columna=Columna;
     }
     
     @Override
+    /**
+     * Devuelve los metadatos de la columna
+     * @return ColumnMetaData
+     */
     public ColumnMetaData getMetaData() {
         return Columna.getMetaData();
     }
 
+    //Metodos que retornan los tipos de datos relizando una convercion o comprovacion del dato
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
         return Columna.getInteger(index);
@@ -65,26 +73,46 @@ public class ColumnCursors <T>implements ColumnCursor{
     }
 
     @Override
+    /**
+     * Se pasa de una estrutura de almacenamieto a otra
+     * @param type
+     * @return LinearDataStructure<?>
+     */
     public LinearDataStructure<?> asLinearDataStructure(DataStructure type) {
         return Columna.asLinearDataStructure(type);
     }
 
     @Override
+    /**
+     * Avanza la posicion del elemento en la lista
+     * @return boolean
+     */
     public boolean next() {
         return Columna.getList().next();
     }
 
     @Override
+    /**
+     * retorna la posicion del actual en la lista
+     * @return int
+     */
     public int getCursorPosition() {
         return Columna.getList().getPosition();
     }
 
     @Override
+    /**
+     * Vacia la lista
+     */
     public void close() {
         Columna.getList().clear();
     }
 
     @Override
+    /**
+     * Devuelve la estructura de datos en la que se basa la columna
+     * @return DataStructure
+     */
     public DataStructure getType() {
         return Columna.getList().getType();
     }

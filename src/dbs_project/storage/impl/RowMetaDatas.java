@@ -34,7 +34,8 @@ public class RowMetaDatas implements RowMetaData{
     public RowMetaDatas(String Name, Table Source, String Label, Type Type, int IdColumn) {
         Count=0;
         this.Id = Id;
-        this.Metadata = new ColumnMetaDatas(Name, Source, Label, Type, Id, IdColumn);
+        //no tiene que hacer esto con solo pedir el metadata del la columna ya puede ingresar a los datos
+        this.Metadata = new ColumnMetaDatas(Name, Source, Label, Type, IdColumn);
     }
     
     // Metodos de Clase "RowMetaDatas"

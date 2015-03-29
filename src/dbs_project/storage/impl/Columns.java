@@ -29,26 +29,36 @@ public class Columns <T>implements Column{
     private LinearList<T> list;
     private ColumnMetaDatas Metadata;
     
-    public Columns(String Name, Table Source, String Label, Type Type,int RowId, int Id){
+    public Columns(String Name, Table Source, String Label, Type Type, int Id){
          list= new DoublyLinkedList<>();
-         Metadata=new ColumnMetaDatas(Name, Source, Label, Type, RowId,Id);
+         Metadata=new ColumnMetaDatas(Name, Source, Label, Type,Id);
     }
-    
+    /**
+     * Agrega un elemento a la lista
+     * @param elemnt
+     */
     public void appenElement(T elemnt){
         list.append(elemnt);
         Metadata.increaseCount();
         
     }
-    
+    /**
+     * Devuelve la lista utilizada para almacenar elementos
+     * @return List
+     */
     public LinearList getList(){
         return list;
     }
 
     @Override
+    /**
+     * Retorna los metadatos de la conlumna
+     * @return ColumnMetaData
+     */
     public ColumnMetaData getMetaData() {
         return Metadata;
     }
-
+    //Retorna los datos de la lista
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
         list.goToPos(index);
@@ -92,6 +102,11 @@ public class Columns <T>implements Column{
     }
 
     @Override
+    /**
+     * Se pasa de una estrutura de almacenamieto a otra
+     * @param type
+     * @return LinearDataStructure<?>
+     */
     public LinearDataStructure<?> asLinearDataStructure(DataStructure type) {
         if (type==list.getType()){
             return list;
