@@ -13,6 +13,7 @@ import dbs_project.storage.TableMetaData;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
 import dbs_project.structures.LinearDataStructure;
+import dbs_project.structures.LinearList;
 import java.util.Map;
 
 /**
@@ -20,6 +21,9 @@ import java.util.Map;
  * @author jhonson
  */
 public class StorageLayerSMMDS implements StorageLayer{
+    
+    private LinearList<Tables> ListaTablas = new DoublyLinkedList<>();
+    
 
     @Override
     public int createTable(String tableName, Map<String, Type> schema, DataStructure type) throws TableAlreadyExistsException {

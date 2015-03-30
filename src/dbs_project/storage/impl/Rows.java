@@ -38,7 +38,7 @@ public class Rows <T> implements Row{
     en RowMetaData
     */
     // Constructores de Clase "Rows"
-    public Rows(String Name, Table Source, String Label, Type Type, int IdColumn){
+    public Rows(String Name, Tables Source, String Label, Type Type, int IdColumn){
         list= new DoublyLinkedList<>(); //Lista de la fila
         MetaData= new RowMetaDatas(Name, Source, Label, Type, IdColumn);
     }

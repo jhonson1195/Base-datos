@@ -24,15 +24,23 @@ import org.apache.commons.collections.primitives.IntIterator;
  * @author jhonson
  */
 public class Tables implements Table{
+    Maps<Integer, Columns> tablaEsquema;
+    
+    public Tables(Maps<Integer, Columns> tablaEsquema){
+        this.tablaEsquema=tablaEsquema;
+    }
 
     @Override
     public void renameColumn(int columnId, String newColumnName) throws ColumnAlreadyExistsException, NoSuchColumnException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int indice=tablaEsquema.findIndex(columnId);
+        tablaEsquema.get(indice).getMetaData().setName(newColumnName);
     }
 
     @Override
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Columns<Type> columna = new Columns<>(columnName, this, "d", columnType, tablaEsquema.size()+1);
+        tablaEsquema.put(tablaEsquema.size()+1, columna);
+        return tablaEsquema.size();
     }
 
     @Override

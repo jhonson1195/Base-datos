@@ -5,6 +5,7 @@
  */
 package dbs_project.storage.impl;
 
+import dbs_project.exceptions.ColumnAlreadyExistsException;
 import dbs_project.storage.Column;
 import dbs_project.storage.Table;
 import dbs_project.storage.Type;
@@ -20,11 +21,18 @@ import dbs_project.structures.Stack;
  */
 public class Preubas {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ColumnAlreadyExistsException {
         
-        Maps <Integer, Integer> tabla = new Maps<>();
-        tabla.put(1, 1000);
-        System.out.println(tabla.get(1));
+        Maps <Integer, Columns> tabla = new Maps<>();
+        Tables tabla1 = new Tables(tabla);
+        Columns<Integer> columna = new Columns<>("jhon", tabla1, "label",Type.INTEGER,0);
+        
+        tabla.put(1, columna);
+        
+        tabla1.createColumn("d", Type.DATE);
+        System.out.println(tabla1.createColumn("d", Type.DATE));
+        tabla.get(3).getList().append(1);
+        System.out.println(tabla.get(3).getInteger(0));
                  
         
 	}

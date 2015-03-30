@@ -6,8 +6,6 @@
 package dbs_project.storage.impl;
 
 import dbs_project.storage.Column;
-import dbs_project.storage.ColumnMetaData;
-import dbs_project.storage.Table;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
 import static dbs_project.structures.DataStructure.LINKEDLIST;
@@ -29,7 +27,7 @@ public class Columns <T>implements Column{
     private LinearList<T> list;
     private ColumnMetaDatas Metadata;
     
-    public Columns(String Name, Table Source, String Label, Type Type, int Id){
+    public Columns(String Name, Tables Source, String Label, Type Type, int Id){
          list= new DoublyLinkedList<>();
          Metadata=new ColumnMetaDatas(Name, Source, Label, Type,Id);
     }
@@ -40,7 +38,6 @@ public class Columns <T>implements Column{
     public void appenElement(T elemnt){
         list.append(elemnt);
         Metadata.increaseCount();
-        
     }
     /**
      * Devuelve la lista utilizada para almacenar elementos
@@ -55,7 +52,7 @@ public class Columns <T>implements Column{
      * Retorna los metadatos de la conlumna
      * @return ColumnMetaData
      */
-    public ColumnMetaData getMetaData() {
+    public ColumnMetaDatas getMetaData() {
         return Metadata;
     }
     //Retorna los datos de la lista

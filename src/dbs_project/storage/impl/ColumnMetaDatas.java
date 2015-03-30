@@ -33,14 +33,13 @@ public class ColumnMetaDatas implements ColumnMetaData {
      * @param Type
      * @param Id
      */
-    public ColumnMetaDatas(String Name, Table Source, String Label, Type Type,int Id){
+    public ColumnMetaDatas(String Name, Tables Source, String Label, Type Type,int Id){
         //variables 
         Count=0;
         this.Name=Name;
         this.Source = Source;
         this.Label = Label;
         this.Type = Type;
-        this.RowId = RowId;
         this.Id = Id;
         
     }
@@ -85,6 +84,10 @@ public class ColumnMetaDatas implements ColumnMetaData {
     @Override
     public String getName() {
         return Name;
+    }
+    
+    public void setName(String name){
+        this.Name=name;
     }
     
 }
