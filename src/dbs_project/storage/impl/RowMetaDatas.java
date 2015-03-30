@@ -5,10 +5,12 @@
  */
 package dbs_project.storage.impl;
 
+import dbs_project.exceptions.NoSuchColumnException;
 import dbs_project.storage.ColumnMetaData;
 import dbs_project.storage.RowMetaData;
-import dbs_project.storage.Table;
-import dbs_project.storage.Type;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -18,24 +20,18 @@ import dbs_project.storage.Type;
 * Clase RowMetaDatas Implementada con la Interfaz generica RowMetaData
 */
 public class RowMetaDatas implements RowMetaData{
-    /*
-    Todo depende de los tipos de datos que se guarden en el MetaData, 
-    aqui se dejan solo esos para probar.... pero me imagino que hay que
-    cambiarlos xq no van a ser los mismos usados en columna
-    */
-    
+
     // Atributos de la Clase "RowMetaDatas"
     // Estos atributos son la informacion de la Fila
     private int Count;
-    private ColumnMetaDatas Metadata;
     private int Id;
+    Tables tabla;
 
     // Constructores de Clase "RowMetaDatas"
-    public RowMetaDatas(String Name, Tables Source, String Label, Type Type, int IdColumn) {
-        Count=0;
+    public RowMetaDatas(int Id, Tables tabla) {
         this.Id = Id;
-        //no tiene que hacer esto con solo pedir el metadata del la columna ya puede ingresar a los datos
-        this.Metadata = new ColumnMetaDatas(Name, Source, Label, Type, IdColumn);
+        this.tabla=tabla;
+        
     }
     
     // Metodos de Clase "RowMetaDatas"
@@ -50,7 +46,12 @@ public class RowMetaDatas implements RowMetaData{
     // Retorma el ColumnMetaData
     @Override
     public ColumnMetaData getColumnMetaData(int positionInTheRow) throws IndexOutOfBoundsException {
-        return Metadata;
+        try {
+            return tabla.getColumn(positionInTheRow).getMetaData();
+        } catch (NoSuchColumnException ex) {
+            Logger.getLogger(RowMetaDatas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     // Retorna el Contador
@@ -64,41 +65,4 @@ public class RowMetaDatas implements RowMetaData{
     public int getId() {
         return Id;
     }
-
-    
-    
-    /*
-    // Metodos de Clase "RowMetaDatas"
-    #######################################################################
-    # Estos metodos son los primeros que yo cree en base a las columnas   #
-    # Estan malos, por que no son los principales de interfaz RowMetaData #
-    #######################################################################
-    
-    // Retorna el Contador
-    public int getRowCount(){
-        return Count;
-    }
-
-    // Retorna el nombre de la tabla ¿?
-    public Table getSourceTable(){
-        return Source;
-    }
-
-    //public String getLabel(){
-    //    return Label;
-    //}
-
-    //public Type getType(){
-    //    return Type;
-    //}
-
-    // Retorna el ColumnId, de la fila en la que se encuentra
-    public int getColumnId(int positionInRow) throws IndexOutOfBoundsException {
-        return ColumnId;
-    }
-
-    public String getName(){
-        return Name;
-    }
-    */
 }

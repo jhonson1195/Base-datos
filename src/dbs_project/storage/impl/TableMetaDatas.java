@@ -14,6 +14,16 @@ import java.util.Map;
  * @author jhonson
  */
 public class TableMetaDatas implements TableMetaData{
+    
+    private String Name;
+    private int Id;
+    private int rowcount;
+    
+    public TableMetaDatas(String Name, int Id){
+        this.Name=Name;
+        this.Id=Id;
+        
+    }
 
     @Override
     public Map<String, ColumnMetaData> getTableSchema() {
@@ -22,17 +32,21 @@ public class TableMetaDatas implements TableMetaData{
 
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return rowcount;
+    }
+    
+    public void increaseCount(){
+        rowcount++;
     }
 
     @Override
     public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Id;
     }
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Name;
     }
     
 }

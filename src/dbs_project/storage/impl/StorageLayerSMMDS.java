@@ -20,14 +20,16 @@ import java.util.Map;
  *
  * @author jhonson
  */
-public class StorageLayerSMMDS implements StorageLayer{
+public abstract class StorageLayerSMMDS implements StorageLayer{
     
     private LinearList<Tables> ListaTablas = new DoublyLinkedList<>();
     
 
-    @Override
-    public int createTable(String tableName, Map<String, Type> schema, DataStructure type) throws TableAlreadyExistsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public int createTable(String tableName, Maps<Integer, Columns> schema, DataStructure type) throws TableAlreadyExistsException {
+        Tables tabla = new Tables(schema, tableName, ListaTablas.size()+1);
+        ListaTablas.append(tabla);
+        return ListaTablas.size();
     }
 
     @Override

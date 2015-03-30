@@ -14,7 +14,6 @@ import dbs_project.storage.ColumnCursor;
 import dbs_project.storage.Row;
 import dbs_project.storage.RowCursor;
 import dbs_project.storage.Table;
-import dbs_project.storage.TableMetaData;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
 import org.apache.commons.collections.primitives.IntIterator;
@@ -24,10 +23,12 @@ import org.apache.commons.collections.primitives.IntIterator;
  * @author jhonson
  */
 public class Tables implements Table{
-    Maps<Integer, Columns> tablaEsquema;
+    private Maps<Integer, Columns> tablaEsquema;
+    private TableMetaDatas MetaData;
     
-    public Tables(Maps<Integer, Columns> tablaEsquema){
+    public Tables(Maps<Integer, Columns> tablaEsquema, String Name, int Id){
         this.tablaEsquema=tablaEsquema;
+         MetaData= new TableMetaDatas(Name, Id);
     }
 
     @Override
@@ -84,8 +85,9 @@ public class Tables implements Table{
     }
 
     @Override
-    public Column getColumn(int columnId) throws NoSuchColumnException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Columns getColumn(int columnId) throws NoSuchColumnException {
+        int indice=tablaEsquema.findIndex(columnId);
+        return tablaEsquema.get(indice);
     }
 
     @Override
@@ -124,8 +126,8 @@ public class Tables implements Table{
     }
 
     @Override
-    public TableMetaData getTableMetaData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public TableMetaDatas getTableMetaData() {
+        return MetaData;
     }
 
     @Override
