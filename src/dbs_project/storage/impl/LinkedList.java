@@ -15,12 +15,15 @@ import dbs_project.structures.LinearList;
  */
 public class LinkedList<T> implements LinearList <T> {
         
-//Definicion de atributos
-    Node<T> head, current, tail;
+/**
+ * Se declaran los atributos, los tipo nodo son genericos
+ */
+    Node<T> head, current, tail; 
     private int position;
     private int size;
     /**
      * contructor que inicializa las variables
+     * En este caso se creara una lista vacia
      */
     public LinkedList(){
         head=new Node<>();
@@ -46,7 +49,7 @@ public class LinkedList<T> implements LinearList <T> {
     }
     
      /**
-     * Agrega un nodo despues de la cola actual 
+     * Agrega un nodo despues del ultimo nodo
      * @param element
      */
 
@@ -91,7 +94,7 @@ public class LinkedList<T> implements LinearList <T> {
      * @return <T> element
      */
     public T getElement() {
-        return current.getElement(); 
+        return this.current.getElement(); 
     }
 
     @Override
@@ -101,11 +104,11 @@ public class LinkedList<T> implements LinearList <T> {
      * @return boolean
      */
     public boolean next() {
-       if(current==tail){
+       if(this.current==this.tail){
            System.out.println("no se puede avanzar");
            return false;
        }
-       current=current.getNext();
+       this.current=this.current.getNext();
        position++;
        return true;
     }
@@ -121,7 +124,7 @@ public class LinkedList<T> implements LinearList <T> {
             System.out.println("Actualmente en primer nodo, no se puede retroceder");
             return false;
 	}
-	Node<T> temp = head;
+	Node<T> temp = this.head;
             this.position = -1;
             while (temp.getNext() != this.current) {
 		temp = temp.getNext();
@@ -225,11 +228,10 @@ public class LinkedList<T> implements LinearList <T> {
      * Borra todos los nodos de la lista y crea una nueva
      */
     public void clear() {
-        head=new Node<>();
-        current = head;
-        tail = head;
-        size = 0;
-        position = -1; 
+        this.head=new Node<>();
+        this.current = this.tail = this.head;
+        this.size = 0;
+        this.position = -1; 
     }
 
     @Override
@@ -238,7 +240,7 @@ public class LinkedList<T> implements LinearList <T> {
      * @return boolean
      */
     public boolean isEmpty() {
-        if(size>0){
+        if(this.size>0){
             return false;
         }
         else{
@@ -280,15 +282,15 @@ public class LinkedList<T> implements LinearList <T> {
          * Contrutor que inicializa las variables
          */
         public Node(){
-            next=null;
-            Element=null;
+            this.next=null;
+            this.Element=null;
         }
          /**
          * Contrutor que inicializa las variables
          * @param Element
          */
         public Node(T Element){
-            next=null;
+            this.next=null;
             this.Element=Element;
         }
          /**
@@ -304,7 +306,7 @@ public class LinkedList<T> implements LinearList <T> {
          * @return Date
          */
         public T getElement(){
-            return Element;
+            return this.Element;
         }
          /**
          * Define la varialbe del nodo
@@ -318,7 +320,7 @@ public class LinkedList<T> implements LinearList <T> {
          * @return next
          */
         public Node<T> getNext(){
-            return next;
+            return this.next;
         }
          /**
          * Define el noso siguiente
