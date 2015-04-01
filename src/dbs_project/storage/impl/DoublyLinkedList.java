@@ -74,6 +74,11 @@ public class DoublyLinkedList <T>implements LinearList<T> {
             System.out.println("Lista vacia");
             return;
         }
+        if(current==tail){
+            current.getLast().setNext(null);
+            tail=current=current.getLast();
+            return;
+        }
         
         Node<T> temp = current.getLast();
         Node<T> temp2 = current.getNext();
@@ -250,7 +255,7 @@ public class DoublyLinkedList <T>implements LinearList<T> {
         String result= "Lista doblemente enlazada \n";
         Node<T> temp =head.getNext();
         while (temp.getNext()!=null){
-            result+=temp.getDate()+ "\n";
+            result+=temp.getDate()+ ", ";
             temp=temp.getNext();
             
         }
