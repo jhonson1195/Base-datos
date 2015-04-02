@@ -11,12 +11,15 @@ import dbs_project.structures.LinearList;
 
 /**
  *
+ * Los Maps es una lista DoublyLinkedList, que va a tener como elementos
+ * keys y dentro de los key van a haber values
  * @author jhonson
  */
 public class Maps <K,V>implements Map<K,V>{
     
     private LinearList<Entrys<K,V>> table = new DoublyLinkedList<>();
-    
+
+    //Retorna la posicion de la lista en donde se encuentra una keys en especifico
     public int findIndex(K key){
         int n = table.size();
         for (int j=0; j<n; j++){
@@ -29,20 +32,24 @@ public class Maps <K,V>implements Map<K,V>{
     }
 
     @Override
+    //Va a introducir nuevas keys
     public V put(K key, V value) {
+        //Primero busca que la key no se encuentre creada
         int j=findIndex(key);
         if (j==-1){
             table.append(new Entrys<>(key, value));
             return null;
         }
+        //Si se encuentra creada va a cambiar solo el valor
         else{
             table.goToPos(j);
             return table.getElement().setValue(value);
         }
     }
 
-    @Override
-    public V get(K key) {
+    //Retornar valor
+    public V getValue(K key) {
+        //Primero busca que la key se encuentre creada
         int j=findIndex(key);
         if(j==-1){
             return null;
@@ -51,9 +58,11 @@ public class Maps <K,V>implements Map<K,V>{
         return table.getElement().getValue();
         
     }
-
+    
+    //Remover valor, debe 
     @Override
     public V remove(K key) {
+        //Primero busca que la key se encuentre creada
         int j=findIndex(key);
         if(j==-1){
             return null;

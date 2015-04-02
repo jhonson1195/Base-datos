@@ -49,6 +49,11 @@ public class Pbienvenida extends javax.swing.JPanel {
         jLabel1.setText("Small Main Memory Database System  JEC ");
 
         jButton1.setText("Agregar Tabla");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Agregar Columna");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +185,10 @@ public class Pbienvenida extends javax.swing.JPanel {
     private void jList1ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jList1ComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_jList1ComponentHidden
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

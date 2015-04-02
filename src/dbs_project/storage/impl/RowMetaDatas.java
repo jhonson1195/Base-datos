@@ -30,8 +30,7 @@ public class RowMetaDatas implements RowMetaData{
     // Constructores de Clase "RowMetaDatas"
     public RowMetaDatas(int Id, Tables tabla) {
         this.Id = Id;
-        this.tabla=tabla;
-        
+        this.tabla=tabla;        
     }
     
     // Metodos de Clase "RowMetaDatas"

@@ -33,13 +33,18 @@ public class Tables implements Table{
 
     @Override
     public void renameColumn(int columnId, String newColumnName) throws ColumnAlreadyExistsException, NoSuchColumnException {
+        //columnId va a ser el nombre del key que se desea cambiar por newColumnName
         int indice=tablaEsquema.findIndex(columnId);
-        tablaEsquema.get(indice).getMetaData().setName(newColumnName);
+        //************************************************
+        //Debe haber condicional si el indice es -1 ???  *
+        //************************************************
+        tablaEsquema.getValue(indice).getMetaData().setName(newColumnName);
     }
 
     @Override
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
         Columns<Type> columna = new Columns<>(columnName, this, "d", columnType, tablaEsquema.size()+1);
+        //LA ENTRADA DEL PUT ES UN INT COMO KEY???
         tablaEsquema.put(tablaEsquema.size()+1, columna);
         return tablaEsquema.size();
     }
@@ -51,6 +56,9 @@ public class Tables implements Table{
 
     @Override
     public IntIterator addRows(RowCursor rows) throws SchemaMismatchException {
+        for(int i=0; i<this.tablaEsquema.size();i++){
+            tablaEsquema.put(i, null);
+        }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -87,7 +95,7 @@ public class Tables implements Table{
     @Override
     public Columns getColumn(int columnId) throws NoSuchColumnException {
         int indice=tablaEsquema.findIndex(columnId);
-        return tablaEsquema.get(indice);
+        return tablaEsquema.getValue(indice);
     }
 
     @Override
