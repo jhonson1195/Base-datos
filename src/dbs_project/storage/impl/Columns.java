@@ -46,6 +46,11 @@ public class Columns <T>implements Column{
     public LinearList getList(){
         return list;
     }
+    
+    public void removeRow(int index){
+        list.goToPos(index);
+        list.remove();
+    }
 
     @Override
     /**

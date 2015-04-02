@@ -19,7 +19,6 @@ public class ColumnMetaDatas implements ColumnMetaData {
     private Table Source;
     private String Label;
     private Type Type;
-    private int RowId;
     private int Id;
     private String Name;
     
@@ -73,7 +72,7 @@ public class ColumnMetaDatas implements ColumnMetaData {
     @Override
     //Falta implementar y entender
     public int getRowId(int positionInColumn) throws IndexOutOfBoundsException {
-        return RowId;
+        return positionInColumn;
     }
 
     @Override

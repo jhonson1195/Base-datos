@@ -6,6 +6,7 @@
 package dbs_project.storage.impl;
 
 import dbs_project.exceptions.ColumnAlreadyExistsException;
+import dbs_project.exceptions.NoSuchRowException;
 import dbs_project.storage.Column;
 import dbs_project.storage.Table;
 import dbs_project.storage.Type;
@@ -21,19 +22,30 @@ import dbs_project.structures.Stack;
  */
 public class Preubas {
     
-    public static void main(String[] args) throws ColumnAlreadyExistsException {
+    public static void main(String[] args) throws ColumnAlreadyExistsException, NoSuchRowException {
         
-        /**Maps <Integer, Columns> tabla = new Maps<>();
-        Tables tabla1 = new Tables(tabla);
+        
+        Maps <Integer, Columns> tabla = new Maps<>();
+        Tables tabla1 = new Tables(tabla, "Prueba",0);
         Columns<Integer> columna = new Columns<>("jhon", tabla1, "label",Type.INTEGER,0);
+        columna.appenElement(1000);
+        columna.appenElement(2222);
+        columna.appenElement(7777);
+        Columns<Integer> columna2 = new Columns<>("jhon", tabla1, "label",Type.INTEGER,0);
+        columna2.appenElement(1000);
+        columna2.appenElement(2222);
+        columna2.appenElement(7777);
+        tabla.put(0, columna);
+        tabla.put(1, columna2);
         
-        tabla.put(1, columna);
+        tabla1.deleteRow(2);
+        System.out.println(columna.getList().toString());
+        System.out.println(columna2.getList().toString());
         
-        tabla1.createColumn("d", Type.DATE);
-        System.out.println(tabla1.createColumn("d", Type.DATE));
-        tabla.get(3).getList().append(1);
-        System.out.println(tabla.get(3).getInteger(0));
-           */      
+        
+        
+        
+             
         
 	}
   

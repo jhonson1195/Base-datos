@@ -26,6 +26,7 @@ public class Tables implements Table{
     private Maps<Integer, Columns> tablaEsquema;
     private TableMetaDatas MetaData;
     
+    
     public Tables(Maps<Integer, Columns> tablaEsquema, String Name, int Id){
         this.tablaEsquema=tablaEsquema;
          MetaData= new TableMetaDatas(Name, Id);
@@ -43,8 +44,12 @@ public class Tables implements Table{
 
     @Override
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
+<<<<<<< HEAD
         Columns<Type> columna = new Columns<>(columnName, this, "d", columnType, tablaEsquema.size()+1);
         //LA ENTRADA DEL PUT ES UN INT COMO KEY???
+=======
+        Columns<Type> columna = new Columns<>(columnName, this, "Columna "+tablaEsquema.size()+1, columnType, tablaEsquema.size()+1);
+>>>>>>> origin/master
         tablaEsquema.put(tablaEsquema.size()+1, columna);
         return tablaEsquema.size();
     }
@@ -62,9 +67,12 @@ public class Tables implements Table{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public int addColumn(Column column) throws SchemaMismatchException, ColumnAlreadyExistsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int addColumn(Columns column) throws SchemaMismatchException, ColumnAlreadyExistsException {
+        if(tablaEsquema.get(0).getMetaData().getRowCount()!=column.getMetaData().getRowCount()){
+            throw new SchemaMismatchException("La columna no coincide con el numero de filas");
+        }
+        tablaEsquema.put(tablaEsquema.size()+1, column);
+        return tablaEsquema.size();
     }
 
     @Override
@@ -74,7 +82,15 @@ public class Tables implements Table{
 
     @Override
     public void deleteRow(int rowID) throws NoSuchRowException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(tablaEsquema.get(0).getList().size()>rowID){
+         
+        for(int i=0; tablaEsquema.size()>i;++i){
+            tablaEsquema.get(i).removeRow(rowID);
+        } 
+        }
+        else{
+            throw new NoSuchRowException("Id invalido");
+        }
     }
 
     @Override
@@ -145,6 +161,11 @@ public class Tables implements Table{
 
     @Override
     public ColumnCursor getColumns(DataStructure type) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int addColumn(Column column) throws SchemaMismatchException, ColumnAlreadyExistsException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
