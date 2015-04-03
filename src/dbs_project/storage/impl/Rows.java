@@ -110,6 +110,10 @@ public class Rows <T> implements Row{
         list.goToPos(index);
         return null==list.getElement();
     }
+    
+    public int getSize(){
+        return list.size();
+    }
 
     // Convierte la lista de la Fila, 
     // en algun otro tipo de estructura

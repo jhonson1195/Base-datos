@@ -102,6 +102,10 @@ public class Columns <T>implements Column{
         list.goToPos(index);
         return null==list.getElement();
     }
+    
+    public int getSize(){
+        return list.size();
+    }
 
     @Override
     /**
