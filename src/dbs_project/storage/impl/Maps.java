@@ -20,6 +20,9 @@ public class Maps <K,V>implements Map<K,V>{
     private LinearList<Entrys<K,V>> table = new DoublyLinkedList<>();
 
     //Retorna la posicion de la lista en donde se encuentra una keys en especifico
+    public LinearList getList(){
+        return table;
+    }
     public int findIndex(K key){
         int n = table.size();
         for (int j=0; j<n; j++){
@@ -48,7 +51,8 @@ public class Maps <K,V>implements Map<K,V>{
     }
 
     //Retornar valor
-    public V getValue(K key) {
+    @Override
+    public V get(K key) {
         //Primero busca que la key se encuentre creada
         int j=findIndex(key);
         if(j==-1){

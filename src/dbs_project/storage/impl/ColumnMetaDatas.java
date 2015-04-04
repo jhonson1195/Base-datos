@@ -72,6 +72,10 @@ public class ColumnMetaDatas implements ColumnMetaData {
     @Override
     //Falta implementar y entender
     public int getRowId(int positionInColumn) throws IndexOutOfBoundsException {
+        /**
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }*/
         return positionInColumn;
     }
 

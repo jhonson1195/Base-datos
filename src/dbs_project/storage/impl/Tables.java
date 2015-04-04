@@ -32,21 +32,32 @@ public class Tables implements Table{
         this.tablaEsquema=tablaEsquema;
          MetaData= new TableMetaDatas(Name, Id);
     }
+    
+    public void ColumnAlreadyExists(String name)throws ColumnAlreadyExistsException{
+        for(int i=0; tablaEsquema.size()>i;++i){
+            if(tablaEsquema.get(i).getMetaData().getName()==name){
+                throw new ColumnAlreadyExistsException("Columna ya existente");
+            }
+        } 
+    }
+    
+    public void NoSuchColumn(int indice)throws NoSuchColumnException{
+        if(indice==-1){
+            throw new NoSuchColumnException("Columna no encontrada");  
+        }
+    }
 
     @Override
     public void renameColumn(int columnId, String newColumnName) throws ColumnAlreadyExistsException, NoSuchColumnException {
-        //columnId va a ser el nombre del key que se desea cambiar por newColumnName
         int indice=tablaEsquema.findIndex(columnId);
-        //************************************************
-        //Debe haber condicional si el indice es -1 ???  *
-        //************************************************
-        tablaEsquema.getValue(indice).getMetaData().setName(newColumnName);
+        NoSuchColumn(indice);
+        ColumnAlreadyExists(newColumnName);
+        tablaEsquema.get(indice).getMetaData().setName(newColumnName);
     }
 
     @Override
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
-        Columns<Type> columna = new Columns<>(columnName, this, "d", columnType, tablaEsquema.size()+1);
-        //LA ENTRADA DEL PUT ES UN INT COMO KEY???
+        ColumnAlreadyExists(columnName);
         Columns<Type> columna = new Columns<>(columnName, this, "Columna "+tablaEsquema.size()+1, columnType, tablaEsquema.size()+1);
         tablaEsquema.put(tablaEsquema.size()+1, columna);
         return tablaEsquema.size();
@@ -66,6 +77,7 @@ public class Tables implements Table{
     }
 
     public int addColumn(Columns column) throws SchemaMismatchException, ColumnAlreadyExistsException {
+        
         if(tablaEsquema.get(0).getMetaData().getRowCount()!=column.getMetaData().getRowCount()){
             throw new SchemaMismatchException("La columna no coincide con el numero de filas");
         }
@@ -109,7 +121,8 @@ public class Tables implements Table{
     @Override
     public Columns getColumn(int columnId) throws NoSuchColumnException {
         int indice=tablaEsquema.findIndex(columnId);
-        return tablaEsquema.getValue(indice);
+        NoSuchColumn(indice);
+        return tablaEsquema.get(indice);
     }
 
     @Override

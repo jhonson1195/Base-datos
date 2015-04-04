@@ -63,36 +63,54 @@ public class Columns <T>implements Column{
     //Retorna los datos de la lista
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-        list.goToPos(index);
-        return (Integer)list.getElement();
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
+            list.goToPos(index);
+            return (Integer)list.getElement(); 
     }
 
     @Override
     public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (Boolean)list.getElement();
     }
 
     @Override
     public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (Double)list.getElement();
     }
 
     @Override
     public Date getDate(int index) throws IndexOutOfBoundsException, ClassCastException {
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (Date)list.getElement();
     }
 
     @Override
     public String getString(int index) throws IndexOutOfBoundsException {
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (String)list.getElement();
     }
 
     @Override
     public Object getObject(int index) throws IndexOutOfBoundsException {
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (Object)list.getElement();
     }

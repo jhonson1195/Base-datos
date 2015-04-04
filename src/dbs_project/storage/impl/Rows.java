@@ -65,6 +65,9 @@ public class Rows <T> implements Row{
     // Retorna un Integer en una posicion especifica
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (Integer) list.getElement();
     }
@@ -72,6 +75,9 @@ public class Rows <T> implements Row{
     // Retorna un boolean en una posicion especifica
     @Override
     public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (Boolean) list.getElement();
     }
@@ -79,6 +85,9 @@ public class Rows <T> implements Row{
     // Retorna un double en una posicion especifica
     @Override
     public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException{
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (Double) list.getElement();
     }
@@ -86,6 +95,9 @@ public class Rows <T> implements Row{
     // Retorna una fecha en una posicion especifica
     @Override
     public Date getDate(int index) throws IndexOutOfBoundsException, ClassCastException{
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (Date) list.getElement();
     }
@@ -93,6 +105,9 @@ public class Rows <T> implements Row{
     // Retorna un string en una posicion especifica
     @Override
     public String getString(int index) throws IndexOutOfBoundsException {
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (String) list.getElement();
     }
@@ -100,6 +115,9 @@ public class Rows <T> implements Row{
     // Retorna un objeto en una posicion especifica
     @Override
     public Object getObject(int index) throws IndexOutOfBoundsException{
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return (Object) list.getElement();
 }
@@ -107,6 +125,9 @@ public class Rows <T> implements Row{
     // Retorna si una posicion especifica, esta vacia
     @Override
     public boolean isNull(int index) throws IndexOutOfBoundsException{
+        if (index<0 || index>list.size()){
+            throw new IndexOutOfBoundsException("Indice invalido");
+        }
         list.goToPos(index);
         return null==list.getElement();
     }

@@ -46,6 +46,13 @@ public class RowMetaDatas implements RowMetaData{
     @Override
     public ColumnMetaData getColumnMetaData(int positionInTheRow) throws IndexOutOfBoundsException {
         try {
+            if (positionInTheRow<0 || positionInTheRow>tabla.getColumn(positionInTheRow).getList().size()){
+                throw new IndexOutOfBoundsException("Indice invalido");
+            }
+        } catch (NoSuchColumnException ex) {
+            Logger.getLogger(RowMetaDatas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             return tabla.getColumn(positionInTheRow).getMetaData();
         } catch (NoSuchColumnException ex) {
             Logger.getLogger(RowMetaDatas.class.getName()).log(Level.SEVERE, null, ex);
