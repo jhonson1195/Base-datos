@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class modifica_tabla {
     public void mostrar_celda_elegida(JTable tabla){
-        int c= tabla.getSelectedColumn()
+        int c= tabla.getSelectedColumn();
         int i= tabla.getSelectedRow();
         
         
