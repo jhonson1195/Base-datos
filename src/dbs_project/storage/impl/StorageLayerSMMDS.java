@@ -12,7 +12,14 @@ import dbs_project.storage.Table;
 import dbs_project.storage.TableMetaData;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
+import static dbs_project.structures.DataStructure.DOUBLYLINKEDLIST;
+import static dbs_project.structures.DataStructure.LINKEDLIST;
+import static dbs_project.structures.DataStructure.QUEUE;
+import static dbs_project.structures.DataStructure.STACK;
 import dbs_project.structures.LinearDataStructure;
+import dbs_project.structures.LinearList;
+import dbs_project.structures.Queue;
+import dbs_project.structures.Stack;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,12 +89,45 @@ public class StorageLayerSMMDS implements StorageLayer{
 
     @Override
     public LinearDataStructure<? extends Table> getTables(DataStructure type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Object [] values=MapTablas.values().toArray();
+        if (type==LINKEDLIST){
+            LinearList <Tables> ListaSimple = new LinkedList<>();
+            for(int i=0;values.length>i;++i){
+            ListaSimple.append((Tables)values[i]);}
+            return ListaSimple;
+        }
+        if (type==DOUBLYLINKEDLIST){
+            LinearList <Tables> Listadoble = new DoublyLinkedList<>();
+            for(int i=0;values.length>i;++i){
+            Listadoble.append((Tables)values[i]);}
+            return Listadoble;
+        }
+        if(type==QUEUE){
+            Queue<Tables> Cola = new Queues<>();
+            for(int i=0;values.length>i;++i){
+            Cola.enqueue((Tables)values[i]);}
+            return Cola;
+            
+        }
+        if(type==STACK){
+            Stack<Tables> Pila = new Stacks<>();
+            for(int i=0;values.length>i;++i){
+            Pila.push((Tables)values[i]);}
+            return Pila;
+        }
+        return null;
+    
     }
 
     @Override
     public Map<String, TableMetaData> getDatabaseSchema() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map <String, TableMetaData> MapMetadata = new HashMap<>();
+        Object [] values=MapTablas.values().toArray();
+        for(int i=0;values.length>i;++i){
+            Tables temp=(Tables)values[i];
+            MapMetadata.put(temp.getTableMetaData().getName(), temp.getTableMetaData());}
+        return MapMetadata;
+        
     }
     
 }

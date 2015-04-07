@@ -41,6 +41,8 @@ public class Preubas {
         hola.createTable("h", tabla, DataStructure.STACK);
         int h=hola.getTable(0).getColumn(0).getMetaData().getId();
         hola.renameTable(0,"nnnn");
+        hola.getTables(DataStructure.STACK);
+        hola.getDatabaseSchema();
     
         
  
