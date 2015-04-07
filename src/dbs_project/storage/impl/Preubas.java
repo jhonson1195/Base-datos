@@ -8,6 +8,8 @@ package dbs_project.storage.impl;
 import dbs_project.exceptions.ColumnAlreadyExistsException;
 import dbs_project.exceptions.NoSuchColumnException;
 import dbs_project.exceptions.NoSuchRowException;
+import dbs_project.exceptions.NoSuchTableException;
+import dbs_project.exceptions.TableAlreadyExistsException;
 import dbs_project.storage.Column;
 import dbs_project.storage.Table;
 import dbs_project.storage.Type;
@@ -15,6 +17,11 @@ import dbs_project.structures.DataStructure;
 import dbs_project.structures.LinearList;
 import dbs_project.structures.Queue;
 import dbs_project.structures.Stack;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -23,29 +30,22 @@ import dbs_project.structures.Stack;
  */
 public class Preubas {
     
-    public static void main(String[] args) throws ColumnAlreadyExistsException, NoSuchRowException, NoSuchColumnException {
+    public static void main(String[] args) throws ColumnAlreadyExistsException, NoSuchRowException, NoSuchColumnException, NoSuchTableException, TableAlreadyExistsException {
         
         
-        Maps <Integer, Columns> tabla = new Maps<>();
-        Tables tabla1 = new Tables(tabla, "Prueba",0);
-        Columns<Integer> columna = new Columns<>("jhon", tabla1, "label",Type.INTEGER,0);
-        columna.appenElement(1000);
-        columna.appenElement(2222);
-        columna.appenElement(7777);
-        Columns<Integer> columna2 = new Columns<>("jho2", tabla1, "label",Type.INTEGER,1);
-        columna2.appenElement(1000);
-        columna2.appenElement(2222);
-        columna2.appenElement(7777);
-        tabla.put(0, columna);
-        tabla.put(1, columna2);
+        Map <String, Type> tabla = new HashMap<>();
+        tabla.put("Tabla integer", Type.INTEGER);
+        tabla.put("Tabla boolean", Type.BOOLEAN);
+        StorageLayerSMMDS hola = new StorageLayerSMMDS();
+        hola.createTable("f", tabla, DataStructure.STACK);
+        hola.createTable("h", tabla, DataStructure.STACK);
+        int h=hola.getTable(0).getColumn(0).getMetaData().getId();
+        hola.renameTable(0,"nnnn");
+        hola.getTables(DataStructure.STACK);
+        hola.getDatabaseSchema();
+    
         
-        tabla1.renameColumn(0, "jhon");
-        
-        
-        
-        
-             
-        
+ 
 	}
   
 }

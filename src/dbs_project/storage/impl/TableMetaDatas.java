@@ -49,4 +49,7 @@ public class TableMetaDatas implements TableMetaData{
         return Name;
     }
     
+    public void setName(String Name){
+        this.Name=Name;
+    }
 }

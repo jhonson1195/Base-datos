@@ -16,21 +16,22 @@ import dbs_project.storage.RowCursor;
 import dbs_project.storage.Table;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
-import java.util.Iterator;
+import java.util.HashMap;
 import org.apache.commons.collections.primitives.IntIterator;
+import java.util.Map;
 
 /**
  *
  * @author jhonson
  */
 public class Tables implements Table{
-    private Maps<Integer, Columns> tablaEsquema;
+    private Map<Integer, Columns> tablaEsquema;
     private TableMetaDatas MetaData;
     
     
-    public Tables(Maps<Integer, Columns> tablaEsquema, String Name, int Id){
-        this.tablaEsquema=tablaEsquema;
-         MetaData= new TableMetaDatas(Name, Id);
+    public Tables(Map <Integer, Columns> tablaEsquema, String Name, int Id){
+        this.tablaEsquema= tablaEsquema;
+        MetaData= new TableMetaDatas(Name, Id);
     }
     
     public void ColumnAlreadyExists(String name)throws ColumnAlreadyExistsException{
@@ -49,10 +50,8 @@ public class Tables implements Table{
 
     @Override
     public void renameColumn(int columnId, String newColumnName) throws ColumnAlreadyExistsException, NoSuchColumnException {
-        int indice=tablaEsquema.findIndex(columnId);
-        NoSuchColumn(indice);
         ColumnAlreadyExists(newColumnName);
-        tablaEsquema.get(indice).getMetaData().setName(newColumnName);
+        tablaEsquema.get(columnId).getMetaData().setName(newColumnName);
     }
 
     @Override
@@ -120,9 +119,7 @@ public class Tables implements Table{
 
     @Override
     public Columns getColumn(int columnId) throws NoSuchColumnException {
-        int indice=tablaEsquema.findIndex(columnId);
-        NoSuchColumn(indice);
-        return tablaEsquema.get(indice);
+        return tablaEsquema.get(columnId);
     }
 
     @Override
