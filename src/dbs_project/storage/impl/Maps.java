@@ -86,15 +86,7 @@ public class Maps <K,V>implements Map<K,V>{
 
     @Override
     public Iterable values() {
-        ConjuntoMap Nuevo = new ConjuntoMap ((Maps) table);
-        Iterator<Maps> it1 = Nuevo.iterator();
-        DoublyLinkedList tempp = new DoublyLinkedList();
-        while (it1.hasNext()){
-            Maps temp = it1.next();
-            tempp.insert(temp.table.getElement());
-        }
-        Iterator<DoublyLinkedList> temp = tempp.;
-        return temp;
+        return null;
     }
 
     @Override
@@ -128,7 +120,7 @@ public class Maps <K,V>implements Map<K,V>{
     //http://migranitodejava.blogspot.com/2011/06/iterator.html
     
     
-        public class ConjuntoMap implements Iterable<Maps>{      //Se usa IntIterable o Iterable
+    public class ConjuntoMap implements Iterable<Maps>{      //Se usa IntIterable o Iterable
         public Maps conjuntoMap; 
         public ConjuntoMap (Maps map) { 
     	// Constructor de la clase
@@ -167,7 +159,7 @@ public class Maps <K,V>implements Map<K,V>{
             }
         }
     }
-    
+    /*
     public class ConjuntoColumn implements Iterable<Columns>{      //Se usa IntIterable o Iterable
         public Columns conjuntoColumn; 
         public ConjuntoColumn (Columns column) { 
@@ -256,5 +248,5 @@ public class Maps <K,V>implements Map<K,V>{
     //http://commons.apache.org/proper/commons-primitives/apidocs/org/apache/commons/collections/primitives/adapters/package-tree.html
     //http://commons.apache.org/proper/commons-primitives/apidocs/org/apache/commons/collections/primitives/IntIterator.html
     //
-    
+    */
 }
