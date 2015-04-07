@@ -13,38 +13,71 @@ import dbs_project.storage.TableMetaData;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
 import dbs_project.structures.LinearDataStructure;
-import dbs_project.structures.LinearList;
+import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  *
  * @author jhonson
  */
-public abstract class StorageLayerSMMDS implements StorageLayer{
+public class StorageLayerSMMDS implements StorageLayer{
+    private int con;
+    private Map <Integer, Tables> MapTablas = new HashMap<>();
     
-    private LinearList<Tables> ListaTablas = new DoublyLinkedList<>();
+    public StorageLayerSMMDS(){
+        con=-1;
+    }
     
-
+    public void TableAlreadyExists(String name) throws TableAlreadyExistsException{
+        Object [] values=MapTablas.values().toArray();
+        for(int i=0;values.length>i;++i){
+            Tables temp =(Tables)values[i];
+            if(temp.getTableMetaData().getName()== name){
+                throw new TableAlreadyExistsException("La tabla ya existe");
+            }
+        }  
+    }
     
-    public int createTable(String tableName, Maps<Integer, Columns> schema, DataStructure type) throws TableAlreadyExistsException {
-        Tables tabla = new Tables(schema, tableName, ListaTablas.size()+1);
-        ListaTablas.append(tabla);
-        return ListaTablas.size();
+    public void NoSuchTable(int id) throws NoSuchTableException{
+            if (!MapTablas.containsKey(id)){
+                throw new NoSuchTableException("Id no encontrado");
+            }
+        }  
+    
+    
+    @Override
+    public int createTable(String tableName, Map<String, Type> schema, DataStructure type) throws TableAlreadyExistsException {
+        TableAlreadyExists(tableName);
+        Object [] ArregloString = schema.keySet().toArray();
+        Object [] ArregloType = schema.values().toArray();
+        Map <Integer, Columns> tablaEsquema = new HashMap<>();
+        Tables tabla = new Tables(tablaEsquema,tableName,con++);
+        for(int i=0;ArregloString.length>i;++i){
+            Columns<Type> columna = new Columns<>((String)ArregloString[i],tabla,tableName+"."+(String)ArregloString[i],(Type)ArregloType[i],i);
+            tablaEsquema.put(i, columna);
+        }
+        MapTablas.put(con, tabla);
+        return con;
     }
 
     @Override
     public void deleteTable(int tableID) throws NoSuchTableException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        NoSuchTable(tableID);
+        MapTablas.remove(tableID);
     }
 
     @Override
     public void renameTable(int tableID, String newName) throws TableAlreadyExistsException, NoSuchTableException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TableAlreadyExists(newName);
+        NoSuchTable(tableID);
+        MapTablas.get(tableID).getTableMetaData().setName(newName);
     }
 
     @Override
     public Table getTable(int tableID) throws NoSuchTableException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        NoSuchTable(tableID);
+        return MapTablas.get(tableID);
     }
 
     @Override
