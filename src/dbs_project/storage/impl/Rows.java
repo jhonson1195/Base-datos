@@ -36,9 +36,9 @@ public class Rows <T> implements Row{
     en RowMetaData
     */
     // Constructores de Clase "Rows"
-    public Rows(int Id, Tables tabla){
+    public Rows(int Id){
         list= new DoublyLinkedList<>(); //Lista de la fila
-        MetaData= new RowMetaDatas(Id, tabla);
+        MetaData= new RowMetaDatas(Id);
     }
     
     // Metodos de Clase "Rows"
@@ -54,6 +54,13 @@ public class Rows <T> implements Row{
     // ++++++++++++++++++
     public LinearList getList(){
         return list;
+    }
+    
+    public boolean getNext(){
+        return list.next();
+    }
+    public T getElement(){
+        return list.getElement();
     }
 
     // Retorna el metadata de la fila

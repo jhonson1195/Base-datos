@@ -27,23 +27,34 @@ import java.util.Map;
 public class Tables implements Table{
     private Map<Integer, Columns> tablaEsquema;
     private TableMetaDatas MetaData;
+    int countID;
     
     
-    public Tables(Map <Integer, Columns> tablaEsquema, String Name, int Id){
+    public Tables(Map <Integer, Columns> tablaEsquema, String Name, int Id,int countID){
         this.tablaEsquema= tablaEsquema;
         MetaData= new TableMetaDatas(Name, Id);
+        this.countID= countID-1;
+    }
+    
+    public void SchemaMismatchRow(int countRow) throws SchemaMismatchException{
+        
+        if(tablaEsquema.size()!=countRow){
+            throw new SchemaMismatchException("La fila no concuerda con el numero de columnas");
+        }
     }
     
     public void ColumnAlreadyExists(String name)throws ColumnAlreadyExistsException{
-        for(int i=0; tablaEsquema.size()>i;++i){
-            if(tablaEsquema.get(i).getMetaData().getName()==name){
-                throw new ColumnAlreadyExistsException("Columna ya existente");
+        Object [] values=tablaEsquema.values().toArray();
+        for(int i=0;values.length>i;++i){
+            Columns temp =(Columns)values[i];
+            if(temp.getMetaData().getName()== name){
+                throw new ColumnAlreadyExistsException("La tabla ya existe");
             }
-        } 
+        }  
     }
     
     public void NoSuchColumn(int indice)throws NoSuchColumnException{
-        if(indice==-1){
+        if(!tablaEsquema.containsKey(indice)){
             throw new NoSuchColumnException("Columna no encontrada");  
         }
     }
@@ -57,14 +68,20 @@ public class Tables implements Table{
     @Override
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
         ColumnAlreadyExists(columnName);
-        Columns<Type> columna = new Columns<>(columnName, this, "Columna "+tablaEsquema.size()+1, columnType, tablaEsquema.size()+1);
-        tablaEsquema.put(tablaEsquema.size()+1, columna);
-        return tablaEsquema.size();
+        Columns<Type> columna = new Columns<>(columnName, this, MetaData.getName()+"."+columnName, columnType, countID++);
+        tablaEsquema.put(countID, columna);
+        return countID;
     }
 
     @Override
     public int addRow(Row row) throws SchemaMismatchException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SchemaMismatchRow(row.getMetaData().getColumnCount());
+        Object [] values=tablaEsquema.values().toArray();
+        for(int i=0; values.length>i;++i){
+            tablaEsquema.get(i).appenElement(row.getInteger(i));
+        }
+        return 0;
+        
     }
 
     @Override

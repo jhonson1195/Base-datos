@@ -59,7 +59,7 @@ public class StorageLayerSMMDS implements StorageLayer{
         Object [] ArregloString = schema.keySet().toArray();
         Object [] ArregloType = schema.values().toArray();
         Map <Integer, Columns> tablaEsquema = new HashMap<>();
-        Tables tabla = new Tables(tablaEsquema,tableName,con++);
+        Tables tabla = new Tables(tablaEsquema,tableName,con++,schema.size());
         for(int i=0;ArregloString.length>i;++i){
             Columns<Type> columna = new Columns<>((String)ArregloString[i],tabla,tableName+"."+(String)ArregloString[i],(Type)ArregloType[i],i);
             tablaEsquema.put(i, columna);
