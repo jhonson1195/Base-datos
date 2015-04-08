@@ -36,6 +36,23 @@ public class controla {
         t.ajustar_columnas(tabla, nColumnas, nFilas);
     }
     
+    public void agregar_columna(JTable tabla){
+        modifica_tabla t = new modifica_tabla();
+        t.ajustar_columnas(tabla, tabla.getColumnCount()+1, tabla.getRowCount());
+    }
     
+    public void eliminar_columna(JTable tabla){
+        modifica_tabla t = new modifica_tabla();
+        t.ajustar_columnas(tabla, tabla.getColumnCount()-1, tabla.getRowCount());
+    }
     
+    public void agregar_fila(JTable tabla){
+        modifica_tabla t = new modifica_tabla();
+        t.ajustar_columnas(tabla, tabla.getColumnCount(), tabla.getRowCount()+1);
+    }
+    
+    public void eliminar_fila(JTable tabla){
+        modifica_tabla t = new modifica_tabla();
+        t.ajustar_columnas(tabla, tabla.getColumnCount(), tabla.getRowCount()-1);
+    }
 }

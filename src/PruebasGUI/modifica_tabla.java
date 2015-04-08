@@ -24,55 +24,60 @@ public class modifica_tabla {
         }
     }
     
-        public void mostrar_toda_tabla(JTable tabla){
-        String dato="";
-        int columnas = tabla.getColumnCount();
-        int filas = tabla.getRowCount();
-        
-            for (int i = 0; i < filas; i++) {
-                for (int j = 0; j <columnas; j++) {
-                    dato+=tabla.getValueAt(i , j)+ "|";
-                   
-                    //System.out .println(""+tabla.getValueAt(i, j));
-                    
-                }
-                dato+="\n";
-                
-                
-            }
-            System.out.println(""+dato);
-            
-    }
-        public void mostrar_filas_y_columnas(JTable tabla){
-            JOptionPane.showMessageDialog(tabla, "# columnas"+ tabla.getColumnCount()
-            +"#filas"+tabla.getRowCount());
-            
-        }
-        
-        public void ajustar_columnas(JTable tabla, int columnas, int filas){
-            DefaultTableModel modelo =new DefaultTableModel();
+    public void mostrar_toda_tabla(JTable tabla){
+    String dato="";
+    int columnas = tabla.getColumnCount();
+    int filas = tabla.getRowCount();
+
+        for (int i = 0; i < filas; i++) {
             for (int j = 0; j <columnas; j++) {
-                modelo.addColumn(""+j);
+                dato+=tabla.getValueAt(i , j)+ "|";
+
+                //System.out .println(""+tabla.getValueAt(i, j));
+
             }
-            for (int i = 0; i < filas; i++){
-                modelo.addRow(new String [] {" "," "});  
-            }
-            
-            int columna = tabla.getColumnCount();
-            int fila = tabla.getRowCount();
-            if(columnas>columna){
-                columnas=columna;
-            }
-            if(filas>fila){
-                filas=fila;
-            }
-            for (int i = 0; i < filas; i++) {
-                for (int j = 0; j < columnas; j++) {
-                    String dato=(String) tabla.getValueAt(i , j);
-                    modelo.setValueAt(dato, i, j);
-                }
-            }
-            tabla.setModel(modelo);
+            dato+="\n";
         }
+        System.out.println(""+dato);            
+    }
+    
+    public void mostrar_filas_y_columnas(JTable tabla){
+        JOptionPane.showMessageDialog(tabla, "# columnas"+ tabla.getColumnCount()
+        +"#filas"+tabla.getRowCount());
+    }
+
+    public void ajustar_columnas(JTable tabla, int columnas, int filas){
+        DefaultTableModel modelo =new DefaultTableModel();
+        for (int j = 0; j <columnas; j++) {
+            try{
+                modelo.addColumn(tabla.getColumnName(j));
+            }
+            catch(IndexOutOfBoundsException e){
+                String name = JOptionPane.showInputDialog("Señor usuario por favor ingrese el nombre de la columna #"+j);
+                modelo.addColumn(name);
+            }
+        }
+        
+        for (int i = 0; i < filas; i++){
+            modelo.addRow(new String [] {" "," "});  
+        }
+        int columna = tabla.getColumnCount();
+        int fila = tabla.getRowCount();
+        
+        if(columnas>columna){
+            columnas=columna;
+        }
+        if(filas>fila){
+            filas=fila;
+        }
+        
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                String dato=(String) tabla.getValueAt(i , j);
+                modelo.setValueAt(dato, i, j);
+            }
+        }
+        tabla.setModel(modelo);
+    }
     
 }

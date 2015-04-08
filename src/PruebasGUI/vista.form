@@ -186,20 +186,30 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="Title 1" type="java.lang.Object">
-                      <Data value="fila 1"/>
-                      <Data value="fila 2"/>
-                      <Data value="fila 3"/>
+                    <Column editable="true" title="Nombre" type="java.lang.Object">
+                      <Data value="Esteban"/>
+                      <Data value="Carlos"/>
+                      <Data value="Johnson"/>
+                      <Data value="Isacc"/>
+                    </Column>
+                    <Column editable="true" title="Apellido" type="java.lang.Object">
+                      <Data value="Morales"/>
+                      <Data value="Ramirez"/>
+                      <Data value="null"/>
                       <Data value="null"/>
                     </Column>
-                    <Column editable="true" title="Title 2" type="java.lang.Object">
-                      <Data value="fila 1.2"/>
+                    <Column editable="true" title="Edad" type="java.lang.Object">
+                      <Data value="21"/>
                       <Data value="null"/>
                       <Data value="null"/>
+                      <Data value="25"/>
+                    </Column>
+                    <Column editable="true" title="Nacionalidad" type="java.lang.Object">
+                      <Data value="Italiano"/>
+                      <Data value="null"/>
+                      <Data value="Costarricense"/>
                       <Data value="null"/>
                     </Column>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -303,16 +313,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar Columna"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton18ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton19">
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar Fila"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton19ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton20">
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar Fila"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton20ActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>

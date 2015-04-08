@@ -30,8 +30,8 @@ StorageLayerSMMDS prueba =null;
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Pantalla Principal");
-       c = new controla ();
-       prueba = new StorageLayerSMMDS();
+        c = new controla ();
+        prueba = new StorageLayerSMMDS();
     }
 
     /**
@@ -106,13 +106,13 @@ StorageLayerSMMDS prueba =null;
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"fila 1", "fila 1.2", null, null},
-                {"fila 2", null, null, null},
-                {"fila 3", null, null, null},
-                {null, null, null, null}
+                {"Esteban", "Morales", "21", "Italiano"},
+                {"Carlos", "Ramirez", null, null},
+                {"Johnson", null, null, "Costarricense"},
+                {"Isacc", null, "25", null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Apellido", "Edad", "Nacionalidad"
             }
         ));
         jScrollPane1.setViewportView(tabla);
@@ -171,10 +171,25 @@ StorageLayerSMMDS prueba =null;
         });
 
         jButton18.setText("Eliminar Columna");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
 
         jButton19.setText("Agregar Fila");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         jButton20.setText("Eliminar Fila");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -309,8 +324,20 @@ StorageLayerSMMDS prueba =null;
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
+        c.agregar_columna(tabla);
     }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        c.eliminar_columna(tabla);// TODO add your handling code here:
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        c.agregar_fila(tabla);
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        c.eliminar_fila(tabla);
+    }//GEN-LAST:event_jButton20ActionPerformed
 
     /**
      * @param args the command line arguments
