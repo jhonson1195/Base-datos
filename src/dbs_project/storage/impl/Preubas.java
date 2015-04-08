@@ -9,6 +9,7 @@ import dbs_project.exceptions.ColumnAlreadyExistsException;
 import dbs_project.exceptions.NoSuchColumnException;
 import dbs_project.exceptions.NoSuchRowException;
 import dbs_project.exceptions.NoSuchTableException;
+import dbs_project.exceptions.SchemaMismatchException;
 import dbs_project.exceptions.TableAlreadyExistsException;
 import dbs_project.storage.Column;
 import dbs_project.storage.Table;
@@ -30,22 +31,26 @@ import java.util.logging.Logger;
  */
 public class Preubas {
     
-    public static void main(String[] args) throws ColumnAlreadyExistsException, NoSuchRowException, NoSuchColumnException, NoSuchTableException, TableAlreadyExistsException {
+    public static void main(String[] args) throws ColumnAlreadyExistsException, NoSuchRowException, NoSuchColumnException, NoSuchTableException, TableAlreadyExistsException, SchemaMismatchException {
         
         
         Map <String, Type> tabla = new HashMap<>();
         tabla.put("Tabla integer", Type.INTEGER);
-        tabla.put("Tabla boolean", Type.BOOLEAN);
+        tabla.put("Tabla boolean", Type.INTEGER);
         StorageLayerSMMDS hola = new StorageLayerSMMDS();
         hola.createTable("f", tabla, DataStructure.STACK);
         hola.createTable("h", tabla, DataStructure.STACK);
-        int h=hola.getTable(0).getColumn(0).getMetaData().getId();
-        hola.renameTable(0,"nnnn");
-        hola.getTables(DataStructure.STACK);
-        hola.getDatabaseSchema();
-    
+        hola.getTable(0).createColumn("nueva", Type.INTEGER);
         
- 
+        Rows<Integer> row;
+        row = new Rows<>(0);
+        row.appentElement(7);
+        row.appentElement(2);
+        row.appentElement(7);
+        
+        hola.getTable(0).addRow(row);
+        
+        System.out.println(hola.getTable(0).getColumn(2).getInteger(0));
 	}
   
 }
