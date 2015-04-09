@@ -113,7 +113,7 @@
                                       <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="ajustar_Tamaño" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                                      <Component id="ajustar_Tam" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -169,7 +169,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="ajustar_Tamaño" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ajustar_Tam" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jButton17" min="-2" max="-2" attributes="0"/>
@@ -299,12 +299,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="ajustar_Tama&#xf1;o">
+        <Component class="javax.swing.JButton" name="ajustar_Tam">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ajustar Tama&#xf1;o"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ajustar_Tama&#xf1;oActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ajustar_TamActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Crear_Tabla">

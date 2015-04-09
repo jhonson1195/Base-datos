@@ -58,7 +58,7 @@ StorageLayerSMMDS prueba =null;
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        ajustar_Tamaño = new javax.swing.JButton();
+        ajustar_Tam = new javax.swing.JButton();
         Crear_Tabla = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
@@ -145,10 +145,10 @@ StorageLayerSMMDS prueba =null;
             }
         });
 
-        ajustar_Tamaño.setText("Ajustar Tamaño");
-        ajustar_Tamaño.addActionListener(new java.awt.event.ActionListener() {
+        ajustar_Tam.setText("Ajustar Tamaño");
+        ajustar_Tam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ajustar_TamañoActionPerformed(evt);
+                ajustar_TamActionPerformed(evt);
             }
         });
 
@@ -247,7 +247,7 @@ StorageLayerSMMDS prueba =null;
                                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ajustar_Tamaño, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(ajustar_Tam, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -289,7 +289,7 @@ StorageLayerSMMDS prueba =null;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ajustar_Tamaño))
+                                .addComponent(ajustar_Tam))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -346,10 +346,10 @@ StorageLayerSMMDS prueba =null;
         c.mostrar_filas_y_columnas(tabla);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void ajustar_TamañoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustar_TamañoActionPerformed
+    private void ajustar_TamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustar_TamActionPerformed
         // TODO add your handling code here:
         c.ajustar_tablas(tabla);
-    }//GEN-LAST:event_ajustar_TamañoActionPerformed
+    }//GEN-LAST:event_ajustar_TamActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -453,7 +453,7 @@ StorageLayerSMMDS prueba =null;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Crear_Tabla;
-    private javax.swing.JButton ajustar_Tamaño;
+    private javax.swing.JButton ajustar_Tam;
     private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_eliminar;
     private javax.swing.JButton jButton1;
