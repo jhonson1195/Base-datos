@@ -37,7 +37,6 @@ public class Tables implements Table{
     }
     
     public void SchemaMismatchRow(int countRow) throws SchemaMismatchException{
-        
         if(tablaEsquema.size()!=countRow){
             throw new SchemaMismatchException("La fila no concuerda con el numero de columnas");
         }
@@ -62,13 +61,14 @@ public class Tables implements Table{
     @Override
     public void renameColumn(int columnId, String newColumnName) throws ColumnAlreadyExistsException, NoSuchColumnException {
         ColumnAlreadyExists(newColumnName);
+        NoSuchColumn(columnId);
         tablaEsquema.get(columnId).getMetaData().setName(newColumnName);
     }
 
     @Override
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
         ColumnAlreadyExists(columnName);
-        Columns<Type> columna = new Columns<>(columnName, this, MetaData.getName()+"."+columnName, columnType, countID++);
+        Columns<Type> columna = new Columns<>(columnName, this, MetaData.getName()+"."+columnName, columnType, ++countID);
         tablaEsquema.put(countID, columna);
         return countID;
     }
@@ -80,7 +80,8 @@ public class Tables implements Table{
         for(int i=0; values.length>i;++i){
             tablaEsquema.get(i).appenElement(row.getInteger(i));
         }
-        return 0;
+        Columns columna=(Columns)values[0];
+        return columna.getMetaData().getRowCount();
         
     }
 
@@ -92,13 +93,16 @@ public class Tables implements Table{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int addColumn(Columns column) throws SchemaMismatchException, ColumnAlreadyExistsException {
-        
-        if(tablaEsquema.get(0).getMetaData().getRowCount()!=column.getMetaData().getRowCount()){
+    @Override
+    public int addColumn(Column column) throws SchemaMismatchException, ColumnAlreadyExistsException {
+        Object [] values=tablaEsquema.values().toArray();
+        Columns columna=(Columns)values[0];
+        if(columna.getMetaData().getRowCount()!=column.getMetaData().getRowCount()){
             throw new SchemaMismatchException("La columna no coincide con el numero de filas");
         }
-        tablaEsquema.put(tablaEsquema.size()+1, column);
-        return tablaEsquema.size();
+        tablaEsquema.put(++countID, (Columns) column);
+        System.out.println(countID);
+        return countID;
     }
 
     @Override
@@ -108,7 +112,9 @@ public class Tables implements Table{
 
     @Override
     public void deleteRow(int rowID) throws NoSuchRowException {
-        if(tablaEsquema.get(0).getList().size()>rowID){
+        Object [] values=tablaEsquema.values().toArray();
+        Columns columna=(Columns)values[0];
+        if(columna.getList().size()>rowID){
          
         for(int i=0; tablaEsquema.size()>i;++i){
             tablaEsquema.get(i).removeRow(rowID);
@@ -136,6 +142,7 @@ public class Tables implements Table{
 
     @Override
     public Columns getColumn(int columnId) throws NoSuchColumnException {
+        NoSuchColumn(columnId);
         return tablaEsquema.get(columnId);
     }
 
@@ -186,11 +193,6 @@ public class Tables implements Table{
 
     @Override
     public ColumnCursor getColumns(DataStructure type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int addColumn(Column column) throws SchemaMismatchException, ColumnAlreadyExistsException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

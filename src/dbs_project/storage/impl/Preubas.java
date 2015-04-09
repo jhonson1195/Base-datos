@@ -12,6 +12,7 @@ import dbs_project.exceptions.NoSuchTableException;
 import dbs_project.exceptions.SchemaMismatchException;
 import dbs_project.exceptions.TableAlreadyExistsException;
 import dbs_project.storage.Column;
+import dbs_project.storage.Row;
 import dbs_project.storage.Table;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
@@ -42,15 +43,23 @@ public class Preubas {
         hola.createTable("h", tabla, DataStructure.STACK);
         hola.getTable(0).createColumn("nueva", Type.INTEGER);
         
-        Rows<Integer> row;
+        Rows row;
+        Table ta = hola.getTable(0);
+        Columns co = new Columns("p", (Tables) ta,"t",Type.INTEGER,3);
+        hola.getTable(0).addColumn(co);
         row = new Rows<>(0);
-        row.appentElement(7);
+        row.appentElement(0);
         row.appentElement(2);
         row.appentElement(7);
+        row.appentElement(99);
         
         hola.getTable(0).addRow(row);
         
-        System.out.println(hola.getTable(0).getColumn(2).getInteger(0));
+        
+        
+        
+        System.out.println(hola.getTable(0).getColumn(3).getInteger(0));
+        hola.getTable(0).deleteRow(0);
 	}
   
 }
