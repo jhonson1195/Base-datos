@@ -21,6 +21,7 @@ import java.util.logging.Logger;
  */
 public class crear_Tablas extends javax.swing.JFrame {
     StorageLayerSMMDS hola = new StorageLayerSMMDS();
+    Map <String, dbs_project.storage.Type> tabla = new HashMap<>();
     private Object modelo;
     private Object txt_Name;
     private Object jList1;
@@ -137,7 +138,7 @@ public class crear_Tablas extends javax.swing.JFrame {
     private void btn_acceptTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_acceptTableActionPerformed
         String nametable;
         nametable = text_Nombre.getText();
-        Map <String, dbs_project.storage.Type> tabla = new HashMap<>();
+        
         tabla.put("Tabla integer", dbs_project.storage.Type.INTEGER);
         tabla.put("Tabla boolean", dbs_project.storage.Type.INTEGER);
         try {
@@ -152,11 +153,14 @@ public class crear_Tablas extends javax.swing.JFrame {
         } catch (ColumnAlreadyExistsException ex) {
             Logger.getLogger(crear_Tablas.class.getName()).log(Level.SEVERE, null, ex);
         }
+      
         try {
-            System.out.println(hola.getTable(0));
+            System.out.println(hola.getTable(0).getTableMetaData().getName());
         } catch (NoSuchTableException ex) {
             Logger.getLogger(crear_Tablas.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+     
 
         vista obj = new vista();
         obj.setVisible(true);

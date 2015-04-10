@@ -325,6 +325,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar Tabla"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deleteTableActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_changeName">
           <Properties>

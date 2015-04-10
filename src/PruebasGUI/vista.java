@@ -163,6 +163,11 @@ StorageLayerSMMDS prueba =null;
         });
 
         btn_deleteTable.setText("Eliminar Tabla");
+        btn_deleteTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteTableActionPerformed(evt);
+            }
+        });
 
         btn_changeName.setText("Cambiar Nombre");
 
@@ -423,6 +428,10 @@ StorageLayerSMMDS prueba =null;
     private void txtnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnomActionPerformed
+
+    private void btn_deleteTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteTableActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_deleteTableActionPerformed
 
     /**
      * @param args the command line arguments
