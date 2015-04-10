@@ -33,8 +33,7 @@ import java.util.logging.Logger;
 public class Preubas {
     
     public static void main(String[] args) throws ColumnAlreadyExistsException, NoSuchRowException, NoSuchColumnException, NoSuchTableException, TableAlreadyExistsException, SchemaMismatchException {
-        
-        
+     
         Map <String, Type> tabla = new HashMap<>();
         tabla.put("Tabla integer", Type.INTEGER);
         tabla.put("Tabla boolean", Type.INTEGER);
@@ -48,18 +47,21 @@ public class Preubas {
         Columns co = new Columns("p", (Tables) ta,"t",Type.INTEGER,3);
         hola.getTable(0).addColumn(co);
         row = new Rows<>(0);
-        row.appentElement(0);
-        row.appentElement(2);
-        row.appentElement(7);
-        row.appentElement(99);
-        
+        row.appentElement("zz");
+        row.appentElement("zz");
+        row.appentElement("zz");
+        row.appentElement("zz");
+        Rows row2 =new Rows<>(0);
+        row2.appentElement("c");
+        row2.appentElement("d");
+        row2.appentElement("ds");
+        row2.appentElement("s");
         hola.getTable(0).addRow(row);
+        hola.getTable(0).updateRow(0, row2);
         
+        System.out.println(hola.getTable(0).getRow(2).getString(2));
         
-        
-        
-        System.out.println(hola.getTable(0).getColumn(3).getInteger(0));
-        hola.getTable(0).deleteRow(0);
+       
 	}
   
 }

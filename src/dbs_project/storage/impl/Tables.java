@@ -57,6 +57,14 @@ public class Tables implements Table{
             throw new NoSuchColumnException("Columna no encontrada");  
         }
     }
+    public void NoSuchRowException(int id) throws NoSuchRowException{
+        Object [] values=tablaEsquema.values().toArray();
+        Columns columna=(Columns)values[0];
+        if(columna.getList().size()<id){
+            throw new NoSuchRowException("Id invalido");
+        }
+        
+    }
 
     @Override
     public void renameColumn(int columnId, String newColumnName) throws ColumnAlreadyExistsException, NoSuchColumnException {
@@ -75,10 +83,11 @@ public class Tables implements Table{
 
     @Override
     public int addRow(Row row) throws SchemaMismatchException {
-        SchemaMismatchRow(row.getMetaData().getColumnCount());
+        Rows row1 = (Rows) row;
+        SchemaMismatchRow(row1.getMetaData().getColumnCount());
         Object [] values=tablaEsquema.values().toArray();
         for(int i=0; values.length>i;++i){
-            tablaEsquema.get(i).appenElement(row.getInteger(i));
+            tablaEsquema.get(i).appenElement(row1.getElement(i));
         }
         Columns columna=(Columns)values[0];
         return columna.getMetaData().getRowCount();
@@ -87,9 +96,6 @@ public class Tables implements Table{
 
     @Override
     public IntIterator addRows(RowCursor rows) throws SchemaMismatchException {
-        for(int i=0; i<this.tablaEsquema.size();i++){
-            tablaEsquema.put(i, null);
-        }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -112,17 +118,9 @@ public class Tables implements Table{
 
     @Override
     public void deleteRow(int rowID) throws NoSuchRowException {
-        Object [] values=tablaEsquema.values().toArray();
-        Columns columna=(Columns)values[0];
-        if(columna.getList().size()>rowID){
-         
         for(int i=0; tablaEsquema.size()>i;++i){
             tablaEsquema.get(i).removeRow(rowID);
-        } 
-        }
-        else{
-            throw new NoSuchRowException("Id invalido");
-        }
+        }    
     }
 
     @Override
@@ -158,12 +156,33 @@ public class Tables implements Table{
 
     @Override
     public Row getRow(int rowId) throws NoSuchRowException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        NoSuchRowException(rowId);
+        Object [] values=tablaEsquema.values().toArray();
+        Rows row = new Rows(rowId);
+        for(Object i:values){
+            Columns columna=(Columns)i;
+            row.appentElement(columna.getElement(rowId));
+        }
+        return row;
     }
 
     @Override
     public void updateRow(int rowID, Row newRow) throws SchemaMismatchException, NoSuchRowException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        NoSuchRowException(rowID);
+        Rows row1 = (Rows) newRow;
+        SchemaMismatchRow(row1.getMetaData().getColumnCount());
+        Object [] values=tablaEsquema.values().toArray();
+        int indice=0;
+        for(Object i:values){
+            Columns columna=(Columns)i;
+            columna.getList().goToPos(rowID);
+            columna.getList().insert(row1.getElement(indice)); 
+            columna.getList().goToPos(rowID+1);
+            columna.getList().remove();
+            indice++;
+        }
+        
+        
     }
 
     @Override

@@ -28,7 +28,7 @@ import java.util.Date;
 */
 public class Rows <T> implements Row{
     // Atributos de la Clase "Rows"
-    private LinearList<T> list;
+    private DoublyLinkedList<T> list;
     private RowMetaDatas MetaData;
 
     /*
@@ -59,7 +59,8 @@ public class Rows <T> implements Row{
     public boolean getNext(){
         return list.next();
     }
-    public T getElement(){
+    public T getElement(int index){
+        list.goToPos(index);
         return list.getElement();
     }
 

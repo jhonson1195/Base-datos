@@ -40,11 +40,13 @@ public class DoublyLinkedList <T>implements LinearList<T> {
         temp.setNext(newnode);
         current.setLast(newnode);
         
-        if(current==tail){
-            tail=tail.getNext();
-        }
+        current=current.getLast();
+        
         size++;
-        position++;
+        
+    }
+    public void setElement(T Date){
+        current.setDate(Date);
     }
 
     @Override

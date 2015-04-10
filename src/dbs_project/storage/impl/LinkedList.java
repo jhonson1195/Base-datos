@@ -48,6 +48,9 @@ public class LinkedList<T> implements LinearList <T> {
 	this.size++;
     }
     
+    public void setElement(T Date){
+        current.setElement(Date);
+    }
      /**
      * Agrega un nodo despues del ultimo nodo
      * @param element

@@ -24,7 +24,7 @@ import java.util.Date;
  */
 public class Columns <T>implements Column{
     
-    private LinearList<T> list;
+    private DoublyLinkedList<T> list;
     private ColumnMetaDatas Metadata;
     
     public Columns(String Name, Tables Source, String Label, Type Type, int Id){
@@ -59,6 +59,10 @@ public class Columns <T>implements Column{
      */
     public ColumnMetaDatas getMetaData() {
         return Metadata;
+    }
+    public T getElement(int index){
+        list.goToPos(index);
+        return list.getElement();
     }
     //Retorna los datos de la lista
     @Override
