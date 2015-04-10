@@ -5,31 +5,15 @@
  */
 package PruebasGUI;
 
-import dbs_project.exceptions.ColumnAlreadyExistsException;
-import dbs_project.exceptions.NoSuchTableException;
-import dbs_project.exceptions.TableAlreadyExistsException;
-import dbs_project.storage.impl.StorageLayerSMMDS;
-import dbs_project.structures.DataStructure;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author carlosr
  */
 public class crear_Tablas extends javax.swing.JFrame {
-    StorageLayerSMMDS hola = new StorageLayerSMMDS();
-    private Object modelo;
-    private Object txt_Name;
-    private Object jList1;
 
     /**
      * Creates new form crear_Tablas
-     * pantalla para crear tablas
      */
-    
     public crear_Tablas() {
         initComponents();
         setLocationRelativeTo(null);
@@ -47,9 +31,9 @@ public class crear_Tablas extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btn_acceptTable = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        text_Nombre = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -60,18 +44,18 @@ public class crear_Tablas extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
 
-        btn_acceptTable.setText("Aceptar");
-        btn_acceptTable.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_acceptTableActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Nombre");
 
-        text_Nombre.addActionListener(new java.awt.event.ActionListener() {
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text_NombreActionPerformed(evt);
+                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -85,7 +69,7 @@ public class crear_Tablas extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_acceptTable)
+                .addComponent(jButton1)
                 .addGap(37, 37, 37))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
@@ -95,7 +79,7 @@ public class crear_Tablas extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(text_Nombre)
+                    .addComponent(jTextField1)
                     .addComponent(jTextField2)
                     .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
                 .addContainerGap(87, Short.MAX_VALUE))
@@ -106,7 +90,7 @@ public class crear_Tablas extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(text_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -116,7 +100,7 @@ public class crear_Tablas extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addComponent(btn_acceptTable)
+                .addComponent(jButton1)
                 .addGap(29, 29, 29))
         );
 
@@ -134,38 +118,15 @@ public class crear_Tablas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_acceptTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_acceptTableActionPerformed
-        String nametable;
-        nametable = text_Nombre.getText();
-        Map <String, dbs_project.storage.Type> tabla = new HashMap<>();
-        tabla.put("Tabla integer", dbs_project.storage.Type.INTEGER);
-        tabla.put("Tabla boolean", dbs_project.storage.Type.INTEGER);
-        try {
-            hola.createTable(nametable, tabla, DataStructure.STACK);// crear una nueva tabla 
-        } catch (TableAlreadyExistsException ex) {
-            Logger.getLogger(crear_Tablas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            hola.getTable(0).createColumn("nueva", dbs_project.storage.Type.INTEGER);
-        } catch (NoSuchTableException ex) {
-            Logger.getLogger(crear_Tablas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ColumnAlreadyExistsException ex) {
-            Logger.getLogger(crear_Tablas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            System.out.println(hola.getTable(0));
-        } catch (NoSuchTableException ex) {
-            Logger.getLogger(crear_Tablas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         vista obj = new vista();
         obj.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btn_acceptTableActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void text_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_NombreActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_text_NombreActionPerformed
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,13 +164,13 @@ public class crear_Tablas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_acceptTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField text_Nombre;
     // End of variables declaration//GEN-END:variables
 }
