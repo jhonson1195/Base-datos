@@ -10,17 +10,18 @@ import javax.swing.table.DefaultTableModel;
  * @author carlosr
  */
 public class modifica_tabla {
-    public void mostrar_celda_elegida(JTable tabla){
+    public String mostrar_celda_elegida(JTable tabla){
         int c= tabla.getSelectedColumn();
         int i= tabla.getSelectedRow();
         
         
         if((i==-1) || (c==-1)){
             JOptionPane.showMessageDialog(tabla, "señor usuario por favor selecione una fila ");
+            return "";
         }
         else{
             String colum1=(String)tabla.getValueAt(i, c);
-            System.out.println(""+colum1+"");
+            return colum1;
         }
     }
     

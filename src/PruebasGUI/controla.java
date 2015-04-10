@@ -17,9 +17,9 @@ public class controla {
     //crear un objeto storage layer
     StorageLayerSMMDS almacenamiento = new StorageLayerSMMDS();
     
-    public void recibe_tabla(JTable tabla){
+    public String recibe_tabla(JTable tabla){
         modifica_tabla t=new modifica_tabla();
-        t.mostrar_celda_elegida(tabla);
+        return t.mostrar_celda_elegida(tabla);
        
     }
     

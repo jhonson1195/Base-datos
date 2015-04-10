@@ -130,7 +130,14 @@ public class Tables implements Table{
 
     @Override
     public void dropColumn(int columnId) throws NoSuchColumnException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Object[] values=tablaEsquema.values().toArray();
+        Columns columna= (Columns)values[0];
+        if (columna.getList().size()>columnId){
+            tablaEsquema.remove(columnId);
+        }
+        else{
+            throw new NoSuchColumnException("Id invalido");
+        }
     }
 
     @Override
