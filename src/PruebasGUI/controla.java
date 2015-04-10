@@ -5,6 +5,7 @@
  */
 
 package PruebasGUI;
+import dbs_project.storage.impl.StorageLayerSMMDS;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -13,10 +14,13 @@ import javax.swing.JTable;
  * @author carlosr
  */
 public class controla {
+    //crear un objeto storage layer
+    StorageLayerSMMDS almacenamiento = new StorageLayerSMMDS();
     
     public void recibe_tabla(JTable tabla){
         modifica_tabla t=new modifica_tabla();
         t.mostrar_celda_elegida(tabla);
+       
     }
     
     public void mostrar_toda_tabla(JTable tabla){
@@ -37,6 +41,7 @@ public class controla {
     }
     
     public void agregar_columna(JTable tabla){
+        //almacenamiento.creartabla(nombre,tipo)
         modifica_tabla t = new modifica_tabla();
         t.ajustar_columnas(tabla, tabla.getColumnCount()+1, tabla.getRowCount());
     }
