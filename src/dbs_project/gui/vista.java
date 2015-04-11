@@ -40,7 +40,6 @@ DefaultTableModel vacio=new DefaultTableModel();
         c = new controla ();
         prueba = new StorageLayerSMMDS();
         tabla.setModel(vacio);
-        c.ajustar_tablas(tabla);
         
         
         //DefaultTableModel nn=new DefaultTableModel();
@@ -472,11 +471,10 @@ DefaultTableModel vacio=new DefaultTableModel();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void btn_addTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addTableActionPerformed
-        
-        crear_Tablas obj = new crear_Tablas();
-        obj.setVisible(true);
-        dispose();
-    
+        c.ajustar_tablas(tabla);
+        //crear_Tablas obj = new crear_Tablas();
+        //obj.setVisible(true);
+        //dispose();
     }//GEN-LAST:event_btn_addTableActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
