@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -23,6 +24,8 @@ import javax.swing.DefaultListModel;
 public class vista extends javax.swing.JFrame {
 controla c=null;
 StorageLayerSMMDS prueba;
+DefaultTableModel vacio=new DefaultTableModel();
+
 
 
     /**
@@ -36,6 +39,92 @@ StorageLayerSMMDS prueba;
         setTitle("Pantalla Principal");
         c = new controla ();
         prueba = new StorageLayerSMMDS();
+        
+        
+        //DefaultTableModel nn=new DefaultTableModel();
+        //tabla.setModel(vacio);
+        //c.ajustar_tablas(tabla);
+        
+        /*
+        //************************
+        
+        
+        Map <String, Type> tabla2;
+        tabla2 = new HashMap<>();
+        tabla2.put("Tabla integer", Type.INTEGER);
+        prueba.createTable("h", tabla2, DataStructure.DOUBLYLINKEDLIST);
+        
+        Table ta = prueba.getTable(0);
+        Columns co = new Columns("p", (Tables) ta,"t",Type.INTEGER,3,DataStructure.DOUBLYLINKEDLIST);
+        Columns co2 = new Columns("p1", (Tables) ta,"t",Type.INTEGER,3,DataStructure.DOUBLYLINKEDLIST);
+        Columns co3 = new Columns("p2", (Tables) ta,"t",Type.INTEGER,3,DataStructure.DOUBLYLINKEDLIST);
+        Columns co4 = new Columns("p3", (Tables) ta,"t",Type.INTEGER,3,DataStructure.DOUBLYLINKEDLIST);
+        
+        
+        Rows row;
+        row = new Rows<>(0);
+        row.appentElement("zz");
+        row.appentElement("z1");
+        row.appentElement("z2");
+        row.appentElement("z3");
+        
+        
+        
+        Rows row2 =new Rows<>(0);
+        row2.appentElement("c");
+        row2.appentElement("d");
+        row2.appentElement("ds");
+        row2.appentElement("s");
+        
+        
+        
+        
+        Rows row3 =new Rows<>(0);
+        row3.appentElement("77");
+        row3.appentElement("d");
+        row3.appentElement("dsff");
+        
+        
+        
+        Rows row4 =new Rows<>(0);
+        row4.appentElement("435te");
+        row4.appentElement("fgeg");
+        row4.appentElement("ferege");
+        
+        
+        prueba.getTable(0).addRow(row);
+        prueba.getTable(0).addRow(row2);
+        prueba.getTable(0).addRow(row3);
+        prueba.getTable(0).addRow(row4);
+        
+        prueba.getTable(0).addColumn(co);
+        prueba.getTable(0).addColumn(co2);
+        prueba.getTable(0).addColumn(co3);
+        prueba.getTable(0).addColumn(co4);
+        
+        
+        prueba.getTable(0).updateRow(0, row);
+        prueba.getTable(0).updateColumn(0, co);
+        prueba.getTable(0).updateRow(1, row2);
+        prueba.getTable(0).updateColumn(1, co2);
+        prueba.getTable(0).updateRow(2, row3);
+        prueba.getTable(0).updateColumn(2, co3);
+        prueba.getTable(0).updateRow(3, row4);
+        prueba.getTable(0).updateColumn(3, co4);
+        
+        Table list=prueba.getTable(0);
+        //**************************************
+        
+        
+                
+        for (int i = 0; i < tabla.getColumnCount(); i++) {
+            Columns col=(Columns) list.getColumn(i);
+            for (int j = 0; j < tabla.getRowCount(); j++){
+                Object obj = col.getObject(j);
+                tabla.setValueAt(obj, j, i);
+            }
+        }
+        */
     }
 
     /**
