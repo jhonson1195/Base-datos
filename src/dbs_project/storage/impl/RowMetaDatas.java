@@ -28,7 +28,7 @@ public class RowMetaDatas implements RowMetaData{
     Tables tabla;
 
     // Constructores de Clase "RowMetaDatas"
-    public RowMetaDatas(int Id) {
+    public RowMetaDatas(int Id, Tables tabla) {
         this.Id = Id;
         this.tabla=tabla;        
     }
@@ -45,13 +45,10 @@ public class RowMetaDatas implements RowMetaData{
     // Retorma el ColumnMetaData
     @Override
     public ColumnMetaData getColumnMetaData(int positionInTheRow) throws IndexOutOfBoundsException {
-        try {
-            if (positionInTheRow<0 || positionInTheRow>tabla.getColumn(positionInTheRow).getList().size()){
-                throw new IndexOutOfBoundsException("Indice invalido");
-            }
-        } catch (NoSuchColumnException ex) {
-            Logger.getLogger(RowMetaDatas.class.getName()).log(Level.SEVERE, null, ex);
+        if(tabla.getTableMetaData().getRowCount()<positionInTheRow){
+            throw new IndexOutOfBoundsException("Indice de fila fuera de rango");
         }
+        
         try {
             return tabla.getColumn(positionInTheRow).getMetaData();
         } catch (NoSuchColumnException ex) {

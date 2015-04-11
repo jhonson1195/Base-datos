@@ -10,7 +10,8 @@ public class StorageLayerGUI {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+		vista Interfaz = new vista();
+                Interfaz.setVisible(true);
 
 	}
 

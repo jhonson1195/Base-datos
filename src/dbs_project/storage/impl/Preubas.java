@@ -38,6 +38,7 @@ public class Preubas {
         tabla.put("Tabla integer", Type.INTEGER);
         tabla.put("Tabla boolean", Type.INTEGER);
         StorageLayerSMMDS hola = new StorageLayerSMMDS();
+        
         hola.createTable("f", tabla, DataStructure.DOUBLYLINKEDLIST);
         hola.createTable("h", tabla, DataStructure.DOUBLYLINKEDLIST);
         hola.getTable(0).createColumn("nueva", Type.INTEGER);
@@ -49,19 +50,22 @@ public class Preubas {
         
         co2.appenElement("ssssss");
         hola.getTable(0).addColumn(co);
-        row = new Rows<>(0);
+        Tables ttt1=(Tables)hola.getTable(0);
+        row = new Rows<>(0,ttt1);
         row.appentElement("zz");
         row.appentElement("zz");
         row.appentElement("zz");
         row.appentElement("zz");
-        Rows row2 =new Rows<>(0);
+        Rows row2 =new Rows<>(0,ttt1);
+        System.out.println(row2.getMetaData().getColumnMetaData(0).getName());
         row2.appentElement("c");
         row2.appentElement("d");
         row2.appentElement("ds");
         row2.appentElement("s");
         System.out.println(hola.getTable(1).getTableMetaData().getRowCount());
         hola.getTable(0).addRow(row);
-        Rows row3 =new Rows<>(0);
+        Tables ttt=(Tables)hola.getTable(1);
+        Rows row3 =new Rows<>(0,ttt);
         row3.appentElement("77");
         row3.appentElement("d");
         
@@ -70,6 +74,7 @@ public class Preubas {
         hola.getTable(0).updateColumn(0, co2);
         System.out.println(hola.getTable(0).getRow(0).getString(0));
         System.out.println(hola.getTable(1).getRow(0).getString(0));
+        hola.getTable(0).getTableMetaData().getTableSchema();
         
        
 	}

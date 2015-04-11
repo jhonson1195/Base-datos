@@ -8,6 +8,7 @@ package dbs_project.storage.impl;
 import dbs_project.storage.Row;
 import dbs_project.storage.RowMetaData;
 import dbs_project.structures.DataStructure;
+import static dbs_project.structures.DataStructure.DOUBLYLINKEDLIST;
 import static dbs_project.structures.DataStructure.LINKEDLIST;
 import static dbs_project.structures.DataStructure.QUEUE;
 import static dbs_project.structures.DataStructure.STACK;
@@ -36,9 +37,9 @@ public class Rows <T> implements Row{
     en RowMetaData
     */
     // Constructores de Clase "Rows"
-    public Rows(int Id){
+    public Rows(int Id, Tables tabla){
         list= new DoublyLinkedList<>(); //Lista de la fila
-        MetaData= new RowMetaDatas(Id);
+        MetaData= new RowMetaDatas(Id, tabla);
     }
     
     // Metodos de Clase "Rows"
@@ -72,7 +73,7 @@ public class Rows <T> implements Row{
 
     // Retorna un Integer en una posicion especifica
     @Override
-    public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Integer getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
         if (index<0 || index>list.size()){
             throw new IndexOutOfBoundsException("Indice invalido");
         }
@@ -82,7 +83,7 @@ public class Rows <T> implements Row{
 
     // Retorna un boolean en una posicion especifica
     @Override
-    public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
         if (index<0 || index>list.size()){
             throw new IndexOutOfBoundsException("Indice invalido");
         }
@@ -92,7 +93,7 @@ public class Rows <T> implements Row{
 
     // Retorna un double en una posicion especifica
     @Override
-    public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException{
+    public Double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException{
         if (index<0 || index>list.size()){
             throw new IndexOutOfBoundsException("Indice invalido");
         }
@@ -154,6 +155,15 @@ public class Rows <T> implements Row{
         }
         
         list.goToStart();
+        
+        if (type==DOUBLYLINKEDLIST){
+            LinearList <T> ListaDoble = new DoublyLinkedList<>();
+            ListaDoble.append(list.getElement());
+            while(list.next()){
+                ListaDoble.append(list.getElement());
+            }
+            return ListaDoble;
+        }
         
         if (type==LINKEDLIST){
             LinearList <T> ListaSimple = new LinkedList<>();

@@ -26,24 +26,24 @@ import java.util.Map;
 public class Tables implements Table{
     private Map<Integer, Columns> tablaEsquema;
     private TableMetaDatas MetaData;
-    int countID;
-    DataStructure tipoLista;
+    private int countID;
+    private DataStructure tipoLista;
     
     
     public Tables(Map <Integer, Columns> tablaEsquema, String Name, int Id,int countID, DataStructure tipoLista){
         this.tablaEsquema= tablaEsquema;
-        MetaData= new TableMetaDatas(Name, Id);
+        MetaData= new TableMetaDatas(Name, Id,tablaEsquema);
         this.countID= countID-1;
         this.tipoLista=tipoLista;
     }
     
-    public void SchemaMismatchRow(int countRow) throws SchemaMismatchException{
+    private void SchemaMismatchRow(int countRow) throws SchemaMismatchException{
         if(tablaEsquema.size()!=countRow){
             throw new SchemaMismatchException("La fila no concuerda con el numero de columnas");
         }
     }
     
-    public void ColumnAlreadyExists(String name)throws ColumnAlreadyExistsException{
+    private void ColumnAlreadyExists(String name)throws ColumnAlreadyExistsException{
         Object [] values=tablaEsquema.values().toArray();
         for(int i=0;values.length>i;++i){
             Columns temp =(Columns)values[i];
@@ -53,12 +53,12 @@ public class Tables implements Table{
         }  
     }
     
-    public void NoSuchColumn(int indice)throws NoSuchColumnException{
+    private void NoSuchColumn(int indice)throws NoSuchColumnException{
         if(!tablaEsquema.containsKey(indice)){
             throw new NoSuchColumnException("Columna no encontrada");  
         }
     }
-    public void NoSuchRow(int id) throws NoSuchRowException{
+    private void NoSuchRow(int id) throws NoSuchRowException{
         Object [] values=tablaEsquema.values().toArray();
         Columns columna=(Columns)values[0];
         if(id>=columna.getList().size()){
@@ -91,6 +91,7 @@ public class Tables implements Table{
             tablaEsquema.get(i).appenElement(row1.getElement(i));
         }
         Columns columna=(Columns)values[0];
+        MetaData.increaseCount();
         return columna.getMetaData().getRowCount();
         
     }
@@ -122,6 +123,7 @@ public class Tables implements Table{
         for(int i=0; tablaEsquema.size()>i;++i){
             tablaEsquema.get(i).removeRow(rowID);
         }    
+        MetaData.dicreaseCount();
     }
 
     @Override
@@ -133,7 +135,7 @@ public class Tables implements Table{
     public void dropColumn(int columnId) throws NoSuchColumnException {
         Object[] values=tablaEsquema.values().toArray();
         Columns columna= (Columns)values[0];
-        if (columna.getList().size()>columnId){
+        if (tablaEsquema.containsKey(columnId)){
             tablaEsquema.remove(columnId);
         }
         else{
@@ -166,7 +168,7 @@ public class Tables implements Table{
     public Row getRow(int rowId) throws NoSuchRowException {
         NoSuchRow(rowId);
         Object [] values=tablaEsquema.values().toArray();
-        Rows row = new Rows(rowId);
+        Rows row = new Rows(rowId,this);
         for(Object i:values){
             Columns columna=(Columns)i;
             row.appentElement(columna.getElement(rowId));

@@ -8,6 +8,7 @@ package dbs_project.storage.impl;
 import dbs_project.storage.Column;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
+import static dbs_project.structures.DataStructure.DOUBLYLINKEDLIST;
 import static dbs_project.structures.DataStructure.LINKEDLIST;
 import static dbs_project.structures.DataStructure.QUEUE;
 import static dbs_project.structures.DataStructure.STACK;
@@ -72,7 +73,7 @@ public class Columns <T>implements Column{
     }
     //Retorna los datos de la lista
     @Override
-    public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Integer getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
         if (index<0 || index>list.size()){
             throw new IndexOutOfBoundsException("Indice invalido");
         }
@@ -81,7 +82,7 @@ public class Columns <T>implements Column{
     }
 
     @Override
-    public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
         if (index<0 || index>list.size()){
             throw new IndexOutOfBoundsException("Indice invalido");
         }
@@ -90,7 +91,7 @@ public class Columns <T>implements Column{
     }
 
     @Override
-    public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
         if (index<0 || index>list.size()){
             throw new IndexOutOfBoundsException("Indice invalido");
         }
@@ -147,6 +148,15 @@ public class Columns <T>implements Column{
         }
         
         list.goToStart();
+        
+        if (type==DOUBLYLINKEDLIST){
+            LinearList <T> ListaDoble = new DoublyLinkedList<>();
+            ListaDoble.append(list.getElement());
+            while(list.next()){
+                ListaDoble.append(list.getElement());
+            }
+            return ListaDoble;
+        }
         
         if (type==LINKEDLIST){
             LinearList <T> ListaSimple = new LinkedList<>();

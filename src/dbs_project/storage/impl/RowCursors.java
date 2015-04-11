@@ -8,7 +8,14 @@ package dbs_project.storage.impl;
 import dbs_project.storage.RowCursor;
 import dbs_project.storage.RowMetaData;
 import dbs_project.structures.DataStructure;
+import static dbs_project.structures.DataStructure.DOUBLYLINKEDLIST;
+import static dbs_project.structures.DataStructure.LINKEDLIST;
+import static dbs_project.structures.DataStructure.QUEUE;
+import static dbs_project.structures.DataStructure.STACK;
 import dbs_project.structures.LinearDataStructure;
+import dbs_project.structures.LinearList;
+import dbs_project.structures.Queue;
+import dbs_project.structures.Stack;
 import java.util.Date;
 
 /**
@@ -19,84 +26,124 @@ import java.util.Date;
 /*
 * Clase RowCursors Implementada con la Interfaz generica RowCursor
 */
-public class RowCursors <T>implements RowCursor{
+public class RowCursors implements RowCursor{
     // Atributos de la Clase "RowCursors"
-    private Rows<T> Fila;
+    private DoublyLinkedList<Rows> ListaFila;
 
     // Constructores de Clase "RowCursors"
-    public RowCursors(Rows <T> Fila){
-        this.Fila = Fila;
+    public RowCursors(DoublyLinkedList<Rows> ListaFila){
+        this.ListaFila = ListaFila;
+    }
+    
+    public void append(Rows Date){
+        ListaFila.append(Date);
     }
         
-    // Metodos de Clase "RowCursors"
-    
-    /*
-    * Utiliza los metodos de la Clase "Rows", para retornar los datos
-    */
-    
+    // Metodos de Clase "RowCursors, Utiliza los metodos de la Clase "Rows", para retornar los datos
     // Retorna el MetaData de la Fila
     @Override
     public RowMetaData getMetaData(){
-        return Fila.getMetaData();
+        return ListaFila.getElement().getMetaData();
     }
 
     @Override
-    public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-        return Fila.getInteger(index);
+    public Integer getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
+        return ListaFila.getElement().getInteger(index);
     }
 
     @Override
-    public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
-        return Fila.getBoolean(index);
+    public Boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
+        return ListaFila.getElement().getBoolean(index);
     }
 
     @Override
-    public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
-        return Fila.getDouble(index);
+    public Double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
+        return ListaFila.getElement().getDouble(index);
     }
 
     @Override
     public Date getDate(int index) throws IndexOutOfBoundsException, ClassCastException {
-        return Fila.getDate(index);
+        return ListaFila.getElement().getDate(index);
     }
 
     @Override
     public String getString(int index) throws IndexOutOfBoundsException {
-        return Fila.getString(index);
+        return ListaFila.getElement().getString(index);
     }
 
     @Override
     public Object getObject(int index) throws IndexOutOfBoundsException {
-        return Fila.getObject(index);
+        return ListaFila.getElement().getObject(index);
     }
 
     @Override
     public boolean isNull(int index) throws IndexOutOfBoundsException {
-        return Fila.isNull(index);
+        return ListaFila.getElement().isNull(index);
     }
 
     @Override
     public LinearDataStructure<?> asLinearDataStructure (DataStructure type) {
-        return Fila.asLinearDataStructure(type);
+        if (type==ListaFila.getType()){
+            return ListaFila;
+        }
+        
+        ListaFila.goToStart();
+        
+        if (type==DOUBLYLINKEDLIST){
+            LinearList <Rows> ListaDoble = new DoublyLinkedList<>();
+            ListaDoble.append(ListaFila.getElement());
+            while(ListaFila.next()){
+                ListaDoble.append(ListaFila.getElement());
+            }
+            return ListaDoble;
+        }
+        
+        if (type==LINKEDLIST){
+            LinearList <Rows> ListaSimple = new LinkedList<>();
+            ListaSimple.append(ListaFila.getElement());
+            while(ListaFila.next()){
+                ListaSimple.append(ListaFila.getElement());
+            }
+            return ListaSimple;
+        }
+        if(type==QUEUE){
+            Queue<Rows> Cola = new Queues<>();
+            Cola.enqueue(ListaFila.getElement());
+            while(ListaFila.next()){
+                Cola.enqueue(ListaFila.getElement());
+            }
+            return Cola;
+            
+        }
+        if(type==STACK){
+            Stack<Rows> Pila = new Stacks<>();
+            Pila.push(ListaFila.getElement());
+            while(ListaFila.next()){
+                Pila.push(ListaFila.getElement());
+            }
+            return Pila;
+        }
+        return null;
     }
 
     @Override
     public boolean next(){
-        return Fila.getList().next();
+        return ListaFila.next();
     }
 
     @Override
     public int getCursorPosition(){
-        return Fila.getList().getPosition();
+        return ListaFila.getPosition();
     }
     
     // Close es igual a limpiar???
+    @Override
     public void close(){
-        Fila.getList().clear();
+        ListaFila.clear();
     }
 
     @Override
     public DataStructure getType() {
-        return Fila.getList().getType();
+        return ListaFila.getType();
     }   
 }

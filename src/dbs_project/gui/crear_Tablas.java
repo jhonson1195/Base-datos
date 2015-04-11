@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PruebasGUI;
-
+package dbs_project.gui;
 import dbs_project.exceptions.ColumnAlreadyExistsException;
 import dbs_project.exceptions.NoSuchTableException;
 import dbs_project.exceptions.TableAlreadyExistsException;
@@ -196,6 +195,7 @@ public class crear_Tablas extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(crear_Tablas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

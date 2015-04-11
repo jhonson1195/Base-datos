@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PruebasGUI;
+package dbs_project.gui;
 
 import dbs_project.exceptions.TableAlreadyExistsException;
 import dbs_project.storage.impl.StorageLayerSMMDS;
@@ -553,6 +553,7 @@ DefaultTableModel vacio=new DefaultTableModel();
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

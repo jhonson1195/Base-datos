@@ -8,23 +8,31 @@ package dbs_project.storage.impl;
 import dbs_project.storage.ColumnCursor;
 import dbs_project.storage.ColumnMetaData;
 import dbs_project.structures.DataStructure;
+import static dbs_project.structures.DataStructure.DOUBLYLINKEDLIST;
+import static dbs_project.structures.DataStructure.LINKEDLIST;
+import static dbs_project.structures.DataStructure.QUEUE;
+import static dbs_project.structures.DataStructure.STACK;
 import dbs_project.structures.LinearDataStructure;
+import dbs_project.structures.LinearList;
+import dbs_project.structures.Queue;
+import dbs_project.structures.Stack;
 import java.util.Date;
 
 /**
  *Creacion de una columna
  * @author jhonson
- * @param <T>
  */
-public class ColumnCursors <T>implements ColumnCursor{
-    
-    private Columns<T> Columna;
+public class ColumnCursors implements ColumnCursor{
+    private DoublyLinkedList<Columns> ListaColum;
     /**
-     * Constructor que recibe la columna para manipularla
-     * @param Columna
+     * Constructor que recibe la una lists de columnas para manipularla
+     * @param ListaColum
      */
-    public ColumnCursors(Columns<T> Columna){
-        this.Columna=Columna;
+    public ColumnCursors(DoublyLinkedList<Columns> ListaColum){
+        this.ListaColum=ListaColum;
+    }
+    public void append(Columns Date){
+        ListaColum.append(Date);
     }
     
     @Override
@@ -33,43 +41,43 @@ public class ColumnCursors <T>implements ColumnCursor{
      * @return ColumnMetaData
      */
     public ColumnMetaData getMetaData() {
-        return Columna.getMetaData();
+        return ListaColum.getElement().getMetaData();
     }
 
     //Metodos que retornan los tipos de datos relizando una convercion o comprovacion del dato
     @Override
-    public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-        return Columna.getInteger(index);
+    public Integer getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
+        return ListaColum.getElement().getInteger(index);
     }
 
     @Override
-    public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
-        return Columna.getBoolean(index);
+    public Boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
+        return ListaColum.getElement().getBoolean(index);
     }
 
     @Override
-    public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
-        return Columna.getDouble(index);
+    public Double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
+        return ListaColum.getElement().getDouble(index);
     }
 
     @Override
     public Date getDate(int index) throws IndexOutOfBoundsException, ClassCastException {
-        return Columna.getDate(index);
+        return ListaColum.getElement().getDate(index);
     }
 
     @Override
     public String getString(int index) throws IndexOutOfBoundsException {
-        return Columna.getString(index);
+        return ListaColum.getElement().getString(index);
     }
 
     @Override
     public Object getObject(int index) throws IndexOutOfBoundsException {
-        return Columna.getObject(index);
+        return ListaColum.getElement().getObject(index);
     }
 
     @Override
     public boolean isNull(int index) throws IndexOutOfBoundsException {
-        return Columna.isNull(index);
+        return ListaColum.getElement().isNull(index);
     }
 
     @Override
@@ -79,7 +87,47 @@ public class ColumnCursors <T>implements ColumnCursor{
      * @return LinearDataStructure<?>
      */
     public LinearDataStructure<?> asLinearDataStructure(DataStructure type) {
-        return Columna.asLinearDataStructure(type);
+        if (type==ListaColum.getType()){
+            return ListaColum;
+        }
+        
+        ListaColum.goToStart();
+        
+        if (type==DOUBLYLINKEDLIST){
+            LinearList <Columns> ListaDoble = new DoublyLinkedList<>();
+            ListaDoble.append(ListaColum.getElement());
+            while(ListaColum.next()){
+                ListaDoble.append(ListaColum.getElement());
+            }
+            return ListaDoble;
+        }
+        
+        if (type==LINKEDLIST){
+            LinearList <Columns> ListaSimple = new LinkedList<>();
+            ListaSimple.append(ListaColum.getElement());
+            while(ListaColum.next()){
+                ListaSimple.append(ListaColum.getElement());
+            }
+            return ListaSimple;
+        }
+        if(type==QUEUE){
+            Queue<Columns> Cola = new Queues<>();
+            Cola.enqueue(ListaColum.getElement());
+            while(ListaColum.next()){
+                Cola.enqueue(ListaColum.getElement());
+            }
+            return Cola;
+            
+        }
+        if(type==STACK){
+            Stack<Columns> Pila = new Stacks<>();
+            Pila.push(ListaColum.getElement());
+            while(ListaColum.next()){
+                Pila.push(ListaColum.getElement());
+            }
+            return Pila;
+        }
+        return null;
     }
 
     @Override
@@ -88,7 +136,7 @@ public class ColumnCursors <T>implements ColumnCursor{
      * @return boolean
      */
     public boolean next() {
-        return Columna.getList().next();
+        return ListaColum.next();
     }
 
     @Override
@@ -97,7 +145,7 @@ public class ColumnCursors <T>implements ColumnCursor{
      * @return int
      */
     public int getCursorPosition() {
-        return Columna.getList().getPosition();
+        return ListaColum.getPosition();
     }
 
     @Override
@@ -105,7 +153,7 @@ public class ColumnCursors <T>implements ColumnCursor{
      * Vacia la lista
      */
     public void close() {
-        Columna.getList().clear();
+        ListaColum.clear();
     }
 
     @Override
@@ -114,7 +162,7 @@ public class ColumnCursors <T>implements ColumnCursor{
      * @return DataStructure
      */
     public DataStructure getType() {
-        return Columna.getList().getType();
+        return ListaColum.getType();
     }
 
 }

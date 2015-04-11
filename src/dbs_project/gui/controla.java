@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package PruebasGUI;
+package dbs_project.gui;
 import dbs_project.storage.impl.StorageLayerSMMDS;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;

@@ -1,6 +1,6 @@
 
 
-package PruebasGUI;
+package dbs_project.gui;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

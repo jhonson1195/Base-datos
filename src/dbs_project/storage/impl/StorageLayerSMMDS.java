@@ -36,7 +36,7 @@ public class StorageLayerSMMDS implements StorageLayer{
         con=-1;
     }
     
-    public void TableAlreadyExists(String name) throws TableAlreadyExistsException{
+    private void TableAlreadyExists(String name) throws TableAlreadyExistsException{
         Object [] values=MapTablas.values().toArray();
         for(int i=0;values.length>i;++i){
             Tables temp =(Tables)values[i];
@@ -46,7 +46,7 @@ public class StorageLayerSMMDS implements StorageLayer{
         }  
     }
     
-    public void NoSuchTable(int id) throws NoSuchTableException{
+    private void NoSuchTable(int id) throws NoSuchTableException{
             if (!MapTablas.containsKey(id)){
                 throw new NoSuchTableException("Id no encontrado");
             }
