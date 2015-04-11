@@ -22,6 +22,7 @@ public class TableMetaDatas implements TableMetaData{
     public TableMetaDatas(String Name, int Id){
         this.Name=Name;
         this.Id=Id;
+        rowcount=0;
         
     }
 

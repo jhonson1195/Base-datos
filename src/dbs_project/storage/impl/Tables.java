@@ -16,7 +16,6 @@ import dbs_project.storage.RowCursor;
 import dbs_project.storage.Table;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
-import java.util.HashMap;
 import org.apache.commons.collections.primitives.IntIterator;
 import java.util.Map;
 
@@ -28,12 +27,14 @@ public class Tables implements Table{
     private Map<Integer, Columns> tablaEsquema;
     private TableMetaDatas MetaData;
     int countID;
+    DataStructure tipoLista;
     
     
-    public Tables(Map <Integer, Columns> tablaEsquema, String Name, int Id,int countID){
+    public Tables(Map <Integer, Columns> tablaEsquema, String Name, int Id,int countID, DataStructure tipoLista){
         this.tablaEsquema= tablaEsquema;
         MetaData= new TableMetaDatas(Name, Id);
         this.countID= countID-1;
+        this.tipoLista=tipoLista;
     }
     
     public void SchemaMismatchRow(int countRow) throws SchemaMismatchException{
@@ -57,10 +58,10 @@ public class Tables implements Table{
             throw new NoSuchColumnException("Columna no encontrada");  
         }
     }
-    public void NoSuchRowException(int id) throws NoSuchRowException{
+    public void NoSuchRow(int id) throws NoSuchRowException{
         Object [] values=tablaEsquema.values().toArray();
         Columns columna=(Columns)values[0];
-        if(columna.getList().size()<id){
+        if(id>=columna.getList().size()){
             throw new NoSuchRowException("Id invalido");
         }
         
@@ -76,7 +77,7 @@ public class Tables implements Table{
     @Override
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
         ColumnAlreadyExists(columnName);
-        Columns<Type> columna = new Columns<>(columnName, this, MetaData.getName()+"."+columnName, columnType, ++countID);
+        Columns<Type> columna = new Columns<>(columnName, this, MetaData.getName()+"."+columnName, columnType, ++countID,tipoLista);
         tablaEsquema.put(countID, columna);
         return countID;
     }
@@ -107,7 +108,6 @@ public class Tables implements Table{
             throw new SchemaMismatchException("La columna no coincide con el numero de filas");
         }
         tablaEsquema.put(++countID, (Columns) column);
-        System.out.println(countID);
         return countID;
     }
 
@@ -118,6 +118,7 @@ public class Tables implements Table{
 
     @Override
     public void deleteRow(int rowID) throws NoSuchRowException {
+        NoSuchRow(rowID);
         for(int i=0; tablaEsquema.size()>i;++i){
             tablaEsquema.get(i).removeRow(rowID);
         }    
@@ -163,7 +164,7 @@ public class Tables implements Table{
 
     @Override
     public Row getRow(int rowId) throws NoSuchRowException {
-        NoSuchRowException(rowId);
+        NoSuchRow(rowId);
         Object [] values=tablaEsquema.values().toArray();
         Rows row = new Rows(rowId);
         for(Object i:values){
@@ -175,17 +176,26 @@ public class Tables implements Table{
 
     @Override
     public void updateRow(int rowID, Row newRow) throws SchemaMismatchException, NoSuchRowException {
-        NoSuchRowException(rowID);
+        NoSuchRow(rowID);
         Rows row1 = (Rows) newRow;
         SchemaMismatchRow(row1.getMetaData().getColumnCount());
         Object [] values=tablaEsquema.values().toArray();
         int indice=0;
         for(Object i:values){
             Columns columna=(Columns)i;
-            columna.getList().goToPos(rowID);
-            columna.getList().insert(row1.getElement(indice)); 
-            columna.getList().goToPos(rowID+1);
-            columna.getList().remove();
+            try{
+                DoublyLinkedList lista=(DoublyLinkedList)columna.getList();
+                lista.goToPos(rowID);
+                lista.setElement(row1.getElement(indice));
+                
+            }
+            catch(ClassCastException e){
+                LinkedList lista=(LinkedList)columna.getList();
+                lista.goToPos(rowID);
+                lista.setElement(row1.getElement(indice));
+            }
+            
+            
             indice++;
         }
         
@@ -204,7 +214,14 @@ public class Tables implements Table{
 
     @Override
     public void updateColumn(int columnId, Column updateColumn) throws SchemaMismatchException, NoSuchColumnException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        NoSuchColumn(columnId);
+        Object [] values=tablaEsquema.values().toArray();
+        Columns columna=(Columns)values[0];
+        Columns columna2=(Columns)updateColumn;
+        if(columna.getMetaData().getRowCount()!=updateColumn.getMetaData().getRowCount()){
+            throw new SchemaMismatchException("La columna no coincide con el numero de filas");
+        }
+        tablaEsquema.put(columnId, columna2);
     }
 
     @Override

@@ -38,13 +38,16 @@ public class Preubas {
         tabla.put("Tabla integer", Type.INTEGER);
         tabla.put("Tabla boolean", Type.INTEGER);
         StorageLayerSMMDS hola = new StorageLayerSMMDS();
-        hola.createTable("f", tabla, DataStructure.STACK);
-        hola.createTable("h", tabla, DataStructure.STACK);
+        hola.createTable("f", tabla, DataStructure.DOUBLYLINKEDLIST);
+        hola.createTable("h", tabla, DataStructure.DOUBLYLINKEDLIST);
         hola.getTable(0).createColumn("nueva", Type.INTEGER);
         
         Rows row;
         Table ta = hola.getTable(0);
-        Columns co = new Columns("p", (Tables) ta,"t",Type.INTEGER,3);
+        Columns co = new Columns("p", (Tables) ta,"t",Type.INTEGER,3,DataStructure.DOUBLYLINKEDLIST);
+        Columns co2 = new Columns("p", (Tables) ta,"t",Type.INTEGER,3,DataStructure.DOUBLYLINKEDLIST);
+        
+        co2.appenElement("ssssss");
         hola.getTable(0).addColumn(co);
         row = new Rows<>(0);
         row.appentElement("zz");
@@ -56,10 +59,17 @@ public class Preubas {
         row2.appentElement("d");
         row2.appentElement("ds");
         row2.appentElement("s");
+        System.out.println(hola.getTable(1).getTableMetaData().getRowCount());
         hola.getTable(0).addRow(row);
-        hola.getTable(0).updateRow(0, row2);
+        Rows row3 =new Rows<>(0);
+        row3.appentElement("77");
+        row3.appentElement("d");
         
-        System.out.println(hola.getTable(0).getRow(2).getString(2));
+        hola.getTable(1).addRow(row3);
+        hola.getTable(0).updateRow(0, row2);
+        hola.getTable(0).updateColumn(0, co2);
+        System.out.println(hola.getTable(0).getRow(0).getString(0));
+        System.out.println(hola.getTable(1).getRow(0).getString(0));
         
        
 	}

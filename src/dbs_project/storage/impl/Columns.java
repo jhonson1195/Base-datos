@@ -24,11 +24,17 @@ import java.util.Date;
  */
 public class Columns <T>implements Column{
     
-    private DoublyLinkedList<T> list;
+    private LinearList<T> list;
     private ColumnMetaDatas Metadata;
     
-    public Columns(String Name, Tables Source, String Label, Type Type, int Id){
-         list= new DoublyLinkedList<>();
+    public Columns(String Name, Tables Source, String Label, Type Type, int Id, DataStructure tipoLista){
+        if(tipoLista==DataStructure.LINKEDLIST){
+            list= new LinkedList<>();
+        }
+        else{
+           list= new DoublyLinkedList<>(); 
+        }
+         
          Metadata=new ColumnMetaDatas(Name, Source, Label, Type,Id);
     }
     /**

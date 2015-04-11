@@ -22,7 +22,7 @@ import javax.swing.DefaultListModel;
  */
 public class vista extends javax.swing.JFrame {
 controla c=null;
-StorageLayerSMMDS prueba =null;
+StorageLayerSMMDS prueba;
 
 
     /**
