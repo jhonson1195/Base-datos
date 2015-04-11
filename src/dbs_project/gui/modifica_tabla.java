@@ -33,9 +33,6 @@ public class modifica_tabla {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j <columnas; j++) {
                 dato+=tabla.getValueAt(i , j)+ "|";
-
-                //System.out .println(""+tabla.getValueAt(i, j));
-
             }
             dato+="\n";
         }

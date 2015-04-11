@@ -39,6 +39,8 @@ DefaultTableModel vacio=new DefaultTableModel();
         setTitle("Pantalla Principal");
         c = new controla ();
         prueba = new StorageLayerSMMDS();
+        tabla.setModel(vacio);
+        c.ajustar_tablas(tabla);
         
         
         //DefaultTableModel nn=new DefaultTableModel();
@@ -525,7 +527,7 @@ DefaultTableModel vacio=new DefaultTableModel();
     }//GEN-LAST:event_txtnomActionPerformed
 
     private void btn_deleteTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteTableActionPerformed
-        // TODO add your handling code here:
+         c.eliminar_tabla(tabla);
     }//GEN-LAST:event_btn_deleteTableActionPerformed
 
     /**
