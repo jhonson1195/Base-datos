@@ -28,8 +28,8 @@ public class RowMetaDatas implements RowMetaData{
     Tables tabla;
 
     // Constructores de Clase "RowMetaDatas"
-    public RowMetaDatas(int Id, Tables tabla) {
-        this.Id = Id;
+    public RowMetaDatas(Tables tabla) {
+        
         this.tabla=tabla;        
     }
     
@@ -38,6 +38,9 @@ public class RowMetaDatas implements RowMetaData{
     // Incrementa el contador
     public void increaseCount(){
         Count++;
+    }
+    public void setId(int Id){
+        this.Id = Id;
     }
     
     // Retorma el ColumnMetaData

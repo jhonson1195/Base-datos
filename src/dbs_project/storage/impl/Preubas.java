@@ -43,12 +43,12 @@ public class Preubas {
         co2.appenElement("ssssss");
         hola.getTable(0).addColumn(co);
         Tables ttt1=(Tables)hola.getTable(0);
-        row = new Rows<>(0,ttt1);
+        row = new Rows<>(ttt1);
         row.appentElement("zz");
         row.appentElement("zz");
         row.appentElement("zz");
         row.appentElement("zz");
-        Rows row2 =new Rows<>(0,ttt1);
+        Rows row2 =new Rows<>(ttt1);
         System.out.println(row2.getMetaData().getColumnMetaData(0).getName());
         row2.appentElement("c");
         row2.appentElement("d");
@@ -59,7 +59,7 @@ public class Preubas {
         hola.getTable(0).addRow(row);
         hola.getTable(0).addRow(row);
         Tables ttt=(Tables)hola.getTable(1);
-        Rows row3 =new Rows<>(0,ttt);
+        Rows row3 =new Rows<>(ttt);
         row3.appentElement("77");
         row3.appentElement("d");
         

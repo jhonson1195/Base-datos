@@ -39,9 +39,12 @@ public class Rows <T> implements Row{
     en RowMetaData
     */
     // Constructores de Clase "Rows"
-    public Rows(int Id, Tables tabla){
+    public Rows( Tables tabla){
         list= new DoublyLinkedList<>(); //Lista de la fila
-        MetaData= new RowMetaDatas(Id, tabla);
+        MetaData= new RowMetaDatas(tabla);
+    }
+    public void setId(int id){
+        
     }
     
     // Metodos de Clase "Rows"

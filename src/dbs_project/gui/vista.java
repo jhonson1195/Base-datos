@@ -6,11 +6,22 @@
 package dbs_project.gui;
 
 import dbs_project.exceptions.NoSuchTableException;
+<<<<<<< HEAD
+=======
+import dbs_project.exceptions.SchemaMismatchException;
+import dbs_project.exceptions.TableAlreadyExistsException;
+import dbs_project.storage.ColumnMetaData;
+import dbs_project.storage.Table;
+import dbs_project.storage.impl.ColumnCursors;
+>>>>>>> origin/master
 import dbs_project.storage.impl.Columns;
 import dbs_project.storage.impl.DoublyLinkedList;
+import dbs_project.storage.impl.RowCursors;
+import dbs_project.storage.impl.Rows;
 import dbs_project.storage.impl.StorageLayerSMMDS;
 import dbs_project.storage.impl.Tables;
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -81,11 +92,49 @@ public class vista extends javax.swing.JFrame {
         btn_metaDatosTabla = new javax.swing.JButton();
         lbl_tablas = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+<<<<<<< HEAD
         lbl_tabla = new javax.swing.JLabel();
         lbl_columna = new javax.swing.JLabel();
         lbl_Fila = new javax.swing.JLabel();
         btn_salir = new javax.swing.JButton();
         btn_actualizarTabla = new javax.swing.JButton();
+=======
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jButton13 = new javax.swing.JButton();
+
+        jButton5.setText("Agregar Tabla");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Eliminar Tabla");
+
+        jButton7.setText("Cambiar Nombre");
+
+        jButton8.setText("Modificar Seleccion");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("Agregar Columna");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText("Eliminar Columna");
+
+        jButton11.setText("Agregar Fila");
+
+        jButton12.setText("Eliminar Fila");
+>>>>>>> origin/master
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,10 +226,15 @@ public class vista extends javax.swing.JFrame {
 
         lbl_Fila.setText("Fila");
 
+<<<<<<< HEAD
         btn_salir.setText("Salir");
 
         btn_actualizarTabla.setText("Actualizar tabla");
         btn_actualizarTabla.addActionListener(new java.awt.event.ActionListener() {
+=======
+        jButton13.setText("Actualizar tabla");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> origin/master
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_actualizarTablaActionPerformed(evt);
             }
@@ -195,7 +249,11 @@ public class vista extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                         .addGap(0, 3, Short.MAX_VALUE))
+=======
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> origin/master
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -224,10 +282,15 @@ public class vista extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
+<<<<<<< HEAD
                                 .addComponent(btn_actualizarTabla)))
                         .addGap(15, 15, 15)
                         .addComponent(btn_salir)))
                 .addContainerGap())
+=======
+                                .addComponent(jButton13)))
+                        .addGap(40, 40, 40))))
+>>>>>>> origin/master
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(353, 353, 353)
                 .addComponent(jLabel1)
@@ -240,8 +303,13 @@ public class vista extends javax.swing.JFrame {
                 .addGap(107, 107, 107)
                 .addComponent(lbl_Fila)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< HEAD
                 .addComponent(lbl_tablas)
                 .addGap(115, 115, 115))
+=======
+                .addComponent(jLabel4)
+                .addGap(87, 87, 87))
+>>>>>>> origin/master
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,11 +341,17 @@ public class vista extends javax.swing.JFrame {
                             .addComponent(btn_deleteTable)
                             .addComponent(btn_deleteColumn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+<<<<<<< HEAD
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_salir)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btn_metaDatosColumna)
                                 .addComponent(btn_metaDatosTabla))))
+=======
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3)))
+>>>>>>> origin/master
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -349,7 +423,23 @@ public class vista extends javax.swing.JFrame {
 
     //Metodo del Boton para agregar una nueva Fila a la Tabla
     private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addRowActionPerformed
-        c.agregar_fila(tabla);
+        String Elemento = (String) jList1.getSelectedValue();
+    try {
+        Tables tablaseleccion = (Tables)Almacenamiento.getTable(TablaIndex.get(Elemento));
+        agregarfila fila=new agregarfila();
+        fila.setVisible(true);
+        fila.setStorage(tablaseleccion,this);
+        dispose();
+        
+    } catch (NoSuchTableException ex) {
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
+    }catch (java.lang.NullPointerException ex){
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
+    }
+    
+        
+        
+        
     }//GEN-LAST:event_btn_addRowActionPerformed
 
     //Metodo del Boton para elimanar una Fila a la Tabla
@@ -372,22 +462,51 @@ public class vista extends javax.swing.JFrame {
     private void btn_actualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarTablaActionPerformed
         // TODO add your handling code here:
         String Elemento = (String) jList1.getSelectedValue();
+        jLabel1.setText(Elemento);
     try {
-        
-        Almacenamiento.getTable(TablaIndex.get(Elemento));
-        
-        //tabla.addRow(Temporal2);
-        
-        
-        
-    } catch (NoSuchTableException ex) {
-        
+        ColumnCursors columnas = (ColumnCursors)Almacenamiento.getTable(TablaIndex.get(Elemento)).getColumns(DataStructure.DOUBLYLINKEDLIST);
+        RowCursors filas = (RowCursors)Almacenamiento.getTable(TablaIndex.get(Elemento)).getRows(DataStructure.DOUBLYLINKEDLIST);
+        System.out.println("bine");
+        String Datos [][]={};
+        boolean bandera=true;
+        ArrayList arreglo=new ArrayList();
+        while(bandera){
+            arreglo.add(columnas.getElement().getMetaData().getName());
+            bandera=columnas.next();
+            
+        }
+        String [] nombres = new String [arreglo.size()];
+        for(int i=0;i<arreglo.size();i++){
+            nombres[i]=(String)arreglo.get(i);
+        }
+        Modelo = new DefaultTableModel(Datos, nombres);
+        tabla.setModel(Modelo);
+        bandera=true;
+        try{
+        while(bandera){
+            String [] arreglo2= new String [filas.getElement().getMetaData().getColumnCount()];
+            for(int i=0; i<filas.getElement().getMetaData().getColumnCount();i++){
+                arreglo2[i]=(String)filas.getElement().getElement(i);
+            }
+            bandera=filas.next();
+            Modelo.addRow(arreglo2);
+        }
+        }catch(java.lang.NullPointerException e){
+            JOptionPane.showMessageDialog(frame,"Cree una tabla");
+        }
+    }catch (NoSuchTableException ex) {
         JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
+<<<<<<< HEAD
     }
         
        
         
     }//GEN-LAST:event_btn_actualizarTablaActionPerformed
+=======
+    }catch(java.lang.NullPointerException e){
+            JOptionPane.showMessageDialog(frame,"Cree una tabla");}  
+    }//GEN-LAST:event_jButton13ActionPerformed
+>>>>>>> origin/master
 
     /**
      * @param args the command line arguments
@@ -435,9 +554,24 @@ public class vista extends javax.swing.JFrame {
     private javax.swing.JButton btn_deleteColumn;
     private javax.swing.JButton btn_deleteRow;
     private javax.swing.JButton btn_deleteTable;
+<<<<<<< HEAD
     private javax.swing.JButton btn_metaDatosColumna;
     private javax.swing.JButton btn_metaDatosTabla;
     private javax.swing.JButton btn_salir;
+=======
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+>>>>>>> origin/master
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private DefaultListModel modelo;
