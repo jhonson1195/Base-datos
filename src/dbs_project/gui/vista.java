@@ -5,7 +5,9 @@
  */
 package dbs_project.gui;
 
+import dbs_project.exceptions.ColumnAlreadyExistsException;
 import dbs_project.exceptions.NoSuchColumnException;
+import dbs_project.exceptions.NoSuchRowException;
 import dbs_project.exceptions.NoSuchTableException;
 import dbs_project.exceptions.SchemaMismatchException;
 import dbs_project.exceptions.TableAlreadyExistsException;
@@ -13,6 +15,7 @@ import dbs_project.storage.ColumnMetaData;
 import dbs_project.storage.Table;
 import dbs_project.storage.TableMetaData;
 import dbs_project.storage.impl.ColumnCursors;
+import dbs_project.storage.impl.ColumnMetaDatas;
 import dbs_project.storage.impl.Columns;
 import dbs_project.storage.impl.DoublyLinkedList;
 import dbs_project.storage.impl.RowCursors;
@@ -370,7 +373,37 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        c.mostrar_toda_tabla(tabla);
+         
+    try {
+        String Elemento = (String) jList1.getSelectedValue();
+        Tables tablaseleccion = (Tables)Almacenamiento.getTable(TablaIndex.get(Elemento));
+        ColumnCursors cursor=(ColumnCursors)tablaseleccion.getColumns(DataStructure.DOUBLYLINKEDLIST);
+        String Nombre= JOptionPane.showInputDialog("Por favor ingrese el nombre de la columna");
+        if(Nombre==null){
+            return;
+        }
+        //tablaseleccion.renameColumn(in, NuevoNombre);
+        boolean bandera=true;
+        while(bandera){
+            if(Nombre.equals(cursor.getMetaData().getName())){
+                break;
+            }
+            bandera=cursor.next();
+            
+        }
+        if(!bandera){
+                JOptionPane.showMessageDialog(frame,"Columna no encontrada");
+                return;
+            }
+        String NuevoNombre= JOptionPane.showInputDialog("Por favor ingrese el nuevo nombre");
+        if(NuevoNombre==null){
+            return;
+        }
+        ColumnMetaDatas meta=(ColumnMetaDatas)cursor.getMetaData();
+        meta.setName(NuevoNombre);
+        
+    } catch (NoSuchTableException | java.lang.NullPointerException ex) {
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");}
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -395,11 +428,48 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     }//GEN-LAST:event_btn_addTableActionPerformed
 
     private void btn_addColumnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addColumnActionPerformed
-        c.agregar_columna(tabla);
+        
+    try {
+        String Elemento = (String) jList1.getSelectedValue();
+        Tables tablaseleccion = (Tables)Almacenamiento.getTable(TablaIndex.get(Elemento));
+        crearColumna agregar = new crearColumna();
+        agregar.setTable(tablaseleccion, this);
+        agregar.setVisible(true);
+        dispose();
+          
+    } catch (NoSuchTableException | java.lang.NullPointerException ex) {
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
+    }
     }//GEN-LAST:event_btn_addColumnActionPerformed
 
     private void btn_deleteColumnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteColumnActionPerformed
-        c.eliminar_columna(tabla);// TODO add your handling code here:
+        
+        try {
+        String Elemento = (String) jList1.getSelectedValue();
+        Tables tablaseleccion = (Tables)Almacenamiento.getTable(TablaIndex.get(Elemento));
+        ColumnCursors cursor=(ColumnCursors)tablaseleccion.getColumns(DataStructure.DOUBLYLINKEDLIST);
+        String Nombre= JOptionPane.showInputDialog("Por favor ingrese el nombre de la columna");
+        if(Nombre==null){
+            return;
+        }
+        //tablaseleccion.renameColumn(in, NuevoNombre);
+        boolean bandera=true;
+        while(bandera){
+            if(Nombre.equals(cursor.getMetaData().getName())){
+                break;
+            }
+            bandera=cursor.next();
+            
+        }
+        if(!bandera){
+                JOptionPane.showMessageDialog(frame,"Columna no encontrada");
+                return;
+            }
+        tablaseleccion.dropColumn(cursor.getMetaData().getId());
+        
+        } catch (NoSuchTableException | NoSuchColumnException ex) {
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
+    }
     }//GEN-LAST:event_btn_deleteColumnActionPerformed
 
     private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addRowActionPerformed
@@ -411,9 +481,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         fila.setStorage(tablaseleccion,this);
         dispose();
         
-    } catch (NoSuchTableException ex) {
-        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
-    }catch (java.lang.NullPointerException ex){
+    } catch (NoSuchTableException | java.lang.NullPointerException ex) {
         JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
     }
     
@@ -423,11 +491,36 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     }//GEN-LAST:event_btn_addRowActionPerformed
 
     private void btn_deleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteRowActionPerformed
-        c.eliminar_fila(tabla);
+        
+    try {
+        String Elemento = (String) jList1.getSelectedValue();
+        Tables tablaseleccion = (Tables)Almacenamiento.getTable(TablaIndex.get(Elemento));
+        String indice= JOptionPane.showInputDialog("Por favor ingrese el id de la fila");
+        if(indice==null){
+            return;
+        }
+        int intnum;
+        intnum = Integer.parseInt(indice); 
+        tablaseleccion.deleteRow(intnum);
+        
+    } catch (NoSuchTableException | NoSuchRowException | java.lang.NullPointerException ex) {
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
+    }
+        
+        
     }//GEN-LAST:event_btn_deleteRowActionPerformed
 
     private void btn_deleteTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteTableActionPerformed
-         c.eliminar_tabla(tabla);
+        String Elemento = (String) jList1.getSelectedValue(); 
+    try {
+        
+        Almacenamiento.deleteTable(TablaIndex.get(Elemento));
+        TablaIndex.remove(Elemento);
+        modelojlist.removeElement(Elemento);
+        
+    } catch (NoSuchTableException | java.lang.NullPointerException ex) {
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
+    } 
     }//GEN-LAST:event_btn_deleteTableActionPerformed
 
     private void btn_changeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeNameActionPerformed
@@ -435,6 +528,9 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     try {
         TableMetaDatas meta=(TableMetaDatas)Almacenamiento.getTable(TablaIndex.get(Elemento)).getTableMetaData();
         String NuevoNombre= JOptionPane.showInputDialog("Por favor ingrese el nuevo nombre");
+        if(NuevoNombre==null){
+            return;
+        }
         meta.setName(NuevoNombre);
         int indice=TablaIndex.get(Elemento);
         TablaIndex.remove(Elemento);

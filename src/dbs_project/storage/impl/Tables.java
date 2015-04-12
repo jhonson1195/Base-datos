@@ -84,6 +84,10 @@ public class Tables implements Table{
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
         ColumnAlreadyExists(columnName);
         Columns<Type> columna = new Columns<>(columnName, this, MetaData.getName()+"."+columnName, columnType, ++countID,tipoLista);
+        for(int i=0;i<countIDFilas;i++){
+            columna.appenElement(null);
+        }
+        
         tablaEsquema.put(countID, columna);
         return countID;
     }

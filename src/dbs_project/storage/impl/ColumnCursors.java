@@ -167,5 +167,8 @@ public class ColumnCursors implements ColumnCursor{
     public DataStructure getType() {
         return ListaColum.getType();
     }
+    public int getSize(){
+        return ListaColum.size();
+    }
 
 }
