@@ -20,20 +20,14 @@ import java.util.Date;
 
 /**
  *
- * En esta clase se van a crear las columnas con sus respectivos datos
- * 
  * @author jhonson
  * @param <T>
  */
 public class Columns <T>implements Column{
-    //Atributos de Columns
+    
     private LinearList<T> list;
     private ColumnMetaDatas Metadata;
     
-    //Se Crean una Columna
-    
-    //Debe tener como entradas= El Nombre, Tabla a la que pertenece, un Tipo,
-    //un Id y el tipo de Estructura
     public Columns(String Name, Tables Source, String Label, Type Type, int Id, DataStructure tipoLista){
         if(tipoLista==DataStructure.LINKEDLIST){
             list= new LinkedList<>();
@@ -44,8 +38,6 @@ public class Columns <T>implements Column{
          
          Metadata=new ColumnMetaDatas(Name, Source, Label, Type,Id);
     }
-    
-    //Metodos de Columns
     /**
      * Agrega un elemento a la lista
      * @param elemnt
@@ -62,7 +54,6 @@ public class Columns <T>implements Column{
         return list;
     }
     
-    //Quita una Fila en especifico de la Columna
     public void removeRow(int index){
         list.goToPos(index);
         list.remove();
@@ -76,15 +67,11 @@ public class Columns <T>implements Column{
     public ColumnMetaDatas getMetaData() {
         return Metadata;
     }
-    
-    //Retorna un elemnto en una posicion en especifico
     public T getElement(int index){
         list.goToPos(index);
         return list.getElement();
     }
-    
-    //Metodos para retornar los datos de la lista
-    //Pueden ser Integer, String, Booolean, Date, Double, Object
+    //Retorna los datos de la lista
     @Override
     public Integer getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
         if (index<0 || index>list.size()){
@@ -145,7 +132,6 @@ public class Columns <T>implements Column{
         return null==list.getElement();
     }
     
-    //Retorna Tamaño
     public int getSize(){
         return list.size();
     }

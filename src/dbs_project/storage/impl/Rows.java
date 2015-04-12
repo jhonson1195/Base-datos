@@ -20,8 +20,6 @@ import java.util.Date;
 
 /**
  *
- * Se crea una estructura de una sola fila
- *
  * @author Esteban
  * @param <T>
  */
@@ -57,16 +55,14 @@ public class Rows <T> implements Row{
     }
 
     // Retorna la lista de la fila
+    // ++++++++++++++++++
     public LinearList getList(){
         return list;
     }
     
-    //Retorna si la fila tiene un siguiente
     public boolean getNext(){
         return list.next();
     }
-    
-    //Retorna un elemento de la fila en una posicion en especifico
     public T getElement(int index){
         list.goToPos(index);
         return list.getElement();
@@ -148,7 +144,6 @@ public class Rows <T> implements Row{
         return null==list.getElement();
     }
     
-    //Retorna el tamaño de la Fila
     public int getSize(){
         return list.size();
     }
