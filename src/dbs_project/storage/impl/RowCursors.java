@@ -20,6 +20,7 @@ import java.util.Date;
 
 /**
  *
+ *  RowCursor es una estructura de Filas(Rows),
  * @author Esteban
  * @param <T>
  */
@@ -129,22 +130,25 @@ public class RowCursors implements RowCursor{
         return null;
     }
 
+    //Retorna si tiene una siguiente fila
     @Override
     public boolean next(){
         return ListaFila.next();
     }
 
+    //Retorna la posicion del Cursor
     @Override
     public int getCursorPosition(){
         return ListaFila.getPosition();
     }
     
-    // Close es igual a limpiar???
+    // Vaciar
     @Override
     public void close(){
         ListaFila.clear();
     }
 
+    //Retorna el Tipo de Fila
     @Override
     public DataStructure getType() {
         return ListaFila.getType();

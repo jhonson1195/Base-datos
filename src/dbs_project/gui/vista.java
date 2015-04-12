@@ -5,16 +5,11 @@
  */
 package dbs_project.gui;
 
-import dbs_project.exceptions.NoSuchColumnException;
 import dbs_project.exceptions.NoSuchTableException;
-import dbs_project.exceptions.TableAlreadyExistsException;
-import dbs_project.storage.ColumnMetaData;
-import dbs_project.storage.Table;
 import dbs_project.storage.impl.Columns;
 import dbs_project.storage.impl.DoublyLinkedList;
 import dbs_project.storage.impl.StorageLayerSMMDS;
 import dbs_project.storage.impl.Tables;
-import dbs_project.structures.DataStructure;
 import java.awt.Component;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -32,20 +26,22 @@ import javax.swing.table.DefaultTableModel;
  * @author carlosr
  */
 public class vista extends javax.swing.JFrame {
-controla c=null;
-StorageLayerSMMDS Almacenamiento;
-DefaultTableModel vacio =new DefaultTableModel();
-DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
-int contadorID;
-DefaultTableModel Modelo;
-DefaultListModel modelojlist = new DefaultListModel();
-//almacena el nombre como key y el id como valor
-Map <String, Integer> TablaIndex = new HashMap<>();
+    //Atributos de la interfaz
+    controla c=null;
+    StorageLayerSMMDS Almacenamiento;
+    DefaultTableModel vacio =new DefaultTableModel();
+    DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
+    int contadorID;
+    DefaultTableModel Modelo;
+    DefaultListModel modelojlist = new DefaultListModel();
+    //almacena el nombre como key y el id como valor
+    Map <String, Integer> TablaIndex = new HashMap<>();
     private Component frame;
 
     /**
-     * Creates new form vista
-     * pantalla principal
+     * 
+     *  Se Crea la pantalla principal
+     * 
      */
     public vista() {
         initComponents();
@@ -67,18 +63,10 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btn_changeNameColumnn = new javax.swing.JButton();
         btn_addTable = new javax.swing.JButton();
         btn_deleteTable = new javax.swing.JButton();
         btn_changeName = new javax.swing.JButton();
@@ -89,47 +77,15 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         modelo = new DefaultListModel();
         jList1 = new javax.swing.JList();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        btn_metaDatosColumna = new javax.swing.JButton();
+        btn_metaDatosTabla = new javax.swing.JButton();
+        lbl_tablas = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-
-        jButton5.setText("Agregar Tabla");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("Eliminar Tabla");
-
-        jButton7.setText("Cambiar Nombre");
-
-        jButton8.setText("Modificar Seleccion");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setText("Agregar Columna");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setText("Eliminar Columna");
-
-        jButton11.setText("Agregar Fila");
-
-        jButton12.setText("Eliminar Fila");
+        lbl_tabla = new javax.swing.JLabel();
+        lbl_columna = new javax.swing.JLabel();
+        lbl_Fila = new javax.swing.JLabel();
+        btn_salir = new javax.swing.JButton();
+        btn_actualizarTabla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,10 +104,10 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         ));
         jScrollPane1.setViewportView(tabla);
 
-        jButton2.setText("Cambiar Nombre");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_changeNameColumnn.setText("Cambiar Nombre");
+        btn_changeNameColumnn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_changeNameColumnnActionPerformed(evt);
             }
         });
 
@@ -207,26 +163,26 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         jList1.setModel(modelo);
         jScrollPane2.setViewportView(jList1);
 
-        jButton1.setText("Metadatos");
+        btn_metaDatosColumna.setText("Metadatos");
 
-        jButton3.setText("Metadatos");
+        btn_metaDatosTabla.setText("Metadatos");
 
-        jLabel4.setText("Tablas");
+        lbl_tablas.setText("Tablas");
 
         jLabel1.setText("Nombre Tabla");
 
-        jLabel2.setText("Talba");
+        lbl_tabla.setText("Tabla");
 
-        jLabel5.setText("Columna");
+        lbl_columna.setText("Columna");
 
-        jLabel6.setText("Fila");
+        lbl_Fila.setText("Fila");
 
-        jButton4.setText("Salir");
+        btn_salir.setText("Salir");
 
-        jButton13.setText("Actualizar tabla");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        btn_actualizarTabla.setText("Actualizar tabla");
+        btn_actualizarTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                btn_actualizarTablaActionPerformed(evt);
             }
         });
 
@@ -239,7 +195,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 3, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -251,27 +207,26 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btn_changeNameColumnn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btn_addColumn, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
                                     .addComponent(btn_deleteColumn))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btn_addRow, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btn_deleteRow, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
-                                .addComponent(jButton3)
+                                .addComponent(btn_metaDatosTabla)
                                 .addGap(63, 63, 63)
-                                .addComponent(jButton1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_metaDatosColumna)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(jButton13)))
+                                .addComponent(btn_actualizarTabla)))
                         .addGap(15, 15, 15)
-                        .addComponent(jButton4)))
+                        .addComponent(btn_salir)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(353, 353, 353)
@@ -279,13 +234,13 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addComponent(jLabel2)
+                .addComponent(lbl_tabla)
                 .addGap(103, 103, 103)
-                .addComponent(jLabel5)
+                .addComponent(lbl_columna)
                 .addGap(107, 107, 107)
-                .addComponent(jLabel6)
+                .addComponent(lbl_Fila)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addComponent(lbl_tablas)
                 .addGap(115, 115, 115))
         );
         jPanel1Layout.setVerticalGroup(
@@ -295,14 +250,12 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                 .addComponent(jLabel1)
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(lbl_tablas, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_tabla)
+                    .addComponent(lbl_columna)
+                    .addComponent(lbl_Fila))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -313,7 +266,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_changeName)
-                            .addComponent(jButton2)
+                            .addComponent(btn_changeNameColumnn)
                             .addComponent(btn_deleteRow))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -321,14 +274,14 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                             .addComponent(btn_deleteColumn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
+                            .addComponent(btn_salir)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton1)
-                                .addComponent(jButton3))))
+                                .addComponent(btn_metaDatosColumna)
+                                .addComponent(btn_metaDatosTabla))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton13)))
+                        .addComponent(btn_actualizarTabla)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -336,7 +289,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,6 +299,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Metodo para visualizar una tabla del StorageLayer
     public void visualizarTabla(){
         try {
         Tables t = (Tables) Almacenamiento.getTable(contadorID);
@@ -363,30 +317,18 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         String Datos [][]={};
         Modelo = new DefaultTableModel(Datos, NombreColumnas);
         tabla.setModel(Modelo);
-    } catch (NoSuchTableException ex) {
-        Logger.getLogger(vista.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        } catch (NoSuchTableException ex) {
+            Logger.getLogger(vista.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    //Metodo del boton para cambiar el nombre a una Columna
+    private void btn_changeNameColumnnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeNameColumnnActionPerformed
         // TODO add your handling code here:
-        c.mostrar_toda_tabla(tabla);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_changeNameColumnnActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
-
+    //Metodo del Boton para Crear una nueva tabla
     private void btn_addTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addTableActionPerformed
-
         creartabla ceartabla = new creartabla();
         ceartabla.setVisible(true);
         ceartabla.setStorage(Almacenamiento, this);
@@ -394,31 +336,40 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         dispose();
     }//GEN-LAST:event_btn_addTableActionPerformed
 
+    //Metodo del Boton para agregar una nueva Columna a la Tabla
     private void btn_addColumnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addColumnActionPerformed
         c.agregar_columna(tabla);
     }//GEN-LAST:event_btn_addColumnActionPerformed
 
+    //Metodo del Boton para elimanar una Columna a la Tabla
+    //ESTO ELIMINA LA ULTIMA COLUMNA DE LA TABLA, NO ELIMINA UNA COLUMNA EN ESPECIFICO
     private void btn_deleteColumnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteColumnActionPerformed
         c.eliminar_columna(tabla);// TODO add your handling code here:
     }//GEN-LAST:event_btn_deleteColumnActionPerformed
 
+    //Metodo del Boton para agregar una nueva Fila a la Tabla
     private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addRowActionPerformed
         c.agregar_fila(tabla);
     }//GEN-LAST:event_btn_addRowActionPerformed
 
+    //Metodo del Boton para elimanar una Fila a la Tabla
+    //ESTO ELIMINA LA ULTIMA FILA DE LA TABLA, NO ELIMINA UNA FILA EN ESPECIFICO
     private void btn_deleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteRowActionPerformed
         c.eliminar_fila(tabla);
     }//GEN-LAST:event_btn_deleteRowActionPerformed
-
+    
+    //Metodo del Boton para eliminar la Tabla o hacerla Vacia
     private void btn_deleteTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteTableActionPerformed
          c.eliminar_tabla(tabla);
     }//GEN-LAST:event_btn_deleteTableActionPerformed
 
+    //Metodo para cambiar el nombre a la tabla
     private void btn_changeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeNameActionPerformed
     
     }//GEN-LAST:event_btn_changeNameActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    //Metodo del boton para actualizar la tabla
+    private void btn_actualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarTablaActionPerformed
         // TODO add your handling code here:
         String Elemento = (String) jList1.getSelectedValue();
     try {
@@ -436,7 +387,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         
        
         
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_btn_actualizarTablaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,37 +426,28 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_actualizarTabla;
     private javax.swing.JButton btn_addColumn;
     private javax.swing.JButton btn_addRow;
     private javax.swing.JButton btn_addTable;
     private javax.swing.JButton btn_changeName;
+    private javax.swing.JButton btn_changeNameColumnn;
     private javax.swing.JButton btn_deleteColumn;
     private javax.swing.JButton btn_deleteRow;
     private javax.swing.JButton btn_deleteTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton btn_metaDatosColumna;
+    private javax.swing.JButton btn_metaDatosTabla;
+    private javax.swing.JButton btn_salir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JList jList1;
     private DefaultListModel modelo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_Fila;
+    private javax.swing.JLabel lbl_columna;
+    private javax.swing.JLabel lbl_tabla;
+    private javax.swing.JLabel lbl_tablas;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

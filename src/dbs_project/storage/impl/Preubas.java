@@ -11,19 +11,11 @@ import dbs_project.exceptions.NoSuchRowException;
 import dbs_project.exceptions.NoSuchTableException;
 import dbs_project.exceptions.SchemaMismatchException;
 import dbs_project.exceptions.TableAlreadyExistsException;
-import dbs_project.storage.Column;
-import dbs_project.storage.Row;
 import dbs_project.storage.Table;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
-import dbs_project.structures.LinearList;
-import dbs_project.structures.Queue;
-import dbs_project.structures.Stack;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
