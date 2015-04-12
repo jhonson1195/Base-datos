@@ -5,35 +5,22 @@
  */
 package dbs_project.gui;
 
-import dbs_project.exceptions.TableAlreadyExistsException;
 import dbs_project.storage.impl.DoublyLinkedList;
 import dbs_project.storage.impl.StorageLayerSMMDS;
-import dbs_project.structures.DataStructure;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 
 
-/**
- *
- * @author carlosr
- */
 public class vista extends javax.swing.JFrame {
-controla c=null;
-StorageLayerSMMDS prueba;
-DefaultTableModel vacio=new DefaultTableModel();
-
-DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
-
-
+    //Atributos de la interfaz
+    controla c=null;
+    StorageLayerSMMDS prueba;
+    DefaultTableModel vacio=new DefaultTableModel();
+    DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
 
     /**
-     * Creates new form vista
-     * pantalla principal
+     * Se Crea la pantalla principal
      */
     public vista() {
         initComponents();
@@ -44,12 +31,9 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
         prueba = new StorageLayerSMMDS();
         tabla.setModel(vacio);
         
-        
-        //DefaultTableModel nn=new DefaultTableModel();
-        //tabla.setModel(vacio);
-        //c.ajustar_tablas(tabla);
-        
-        /*
+        /* 
+        *Esto es una prueba para tratar de iniciar la tabla de la intefaz, con
+        los datos de la tabla del StorageLayerSMMDS
         //************************
         
         
@@ -119,7 +103,9 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
         Table list=prueba.getTable(0);
         //**************************************
         
-        
+        * Una vez que se extraia la tabla del StorageLayer, mi idea era
+        * que hiciera un ciclo que mientra hubieran columnas en dicha tabla
+        * que los datos en cada columna para agregarlos en la tabla de la interfaz
                 
         for (int i = 0; i < tabla.getColumnCount(); i++) {
             Columns col=(Columns) list.getColumn(i);
@@ -140,19 +126,11 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_cambNombColumn = new javax.swing.JButton();
+        btn_verTabla = new javax.swing.JButton();
         btn_addTable = new javax.swing.JButton();
         btn_deleteTable = new javax.swing.JButton();
         btn_changeName = new javax.swing.JButton();
@@ -162,42 +140,11 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
         btn_deleteRow = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         modelo = new DefaultListModel();
-        jList1 = new javax.swing.JList();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        listColumn = new javax.swing.JList();
+        lbl_cantidadTablas = new javax.swing.JLabel();
+        lbl_numeroTablas = new javax.swing.JLabel();
         txtnom = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-
-        jButton5.setText("Agregar Tabla");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("Eliminar Tabla");
-
-        jButton7.setText("Cambiar Nombre");
-
-        jButton8.setText("Modificar Seleccion");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setText("Agregar Columna");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setText("Eliminar Columna");
-
-        jButton11.setText("Agregar Fila");
-
-        jButton12.setText("Eliminar Fila");
+        lbl_printValue = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,17 +163,17 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
         ));
         jScrollPane1.setViewportView(tabla);
 
-        jButton2.setText("Cambiar Nombre Columna");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_cambNombColumn.setText("Cambiar Nombre Columna");
+        btn_cambNombColumn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_cambNombColumnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Mostrar Tabla");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_verTabla.setText("Mostrar Tabla");
+        btn_verTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_verTablaActionPerformed(evt);
             }
         });
 
@@ -274,12 +221,12 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
             }
         });
 
-        jList1.setModel(modelo);
-        jScrollPane2.setViewportView(jList1);
+        listColumn.setModel(modelo);
+        jScrollPane2.setViewportView(listColumn);
 
-        jLabel1.setText("Cantidad de Tablas");
+        lbl_cantidadTablas.setText("Cantidad de Tablas");
 
-        jLabel2.setText("Tablas Creadas");
+        lbl_numeroTablas.setText("Tablas Creadas");
 
         txtnom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,13 +244,13 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_changeName, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
+                        .addComponent(lbl_cantidadTablas))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(141, 141, 141)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_cambNombColumn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btn_deleteRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -314,15 +261,15 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
                                 .addComponent(btn_addTable, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                    .addComponent(btn_verTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                                     .addComponent(btn_deleteTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(lbl_printValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 22, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_numeroTablas, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,21 +295,21 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
                                 .addComponent(btn_addRow)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(btn_cambNombColumn)
                                 .addGap(31, 31, 31)))
                         .addComponent(btn_deleteRow)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtnom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
+                    .addComponent(lbl_printValue)
                     .addComponent(btn_addTable)
                     .addComponent(btn_deleteTable))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
+                    .addComponent(lbl_cantidadTablas)
+                    .addComponent(lbl_numeroTablas)
                     .addComponent(btn_changeName)
-                    .addComponent(jButton3))
+                    .addComponent(btn_verTabla))
                 .addGap(13, 13, 13))
         );
 
@@ -382,29 +329,18 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    //Metodo del Boton para Cambiar el Nombre a una Columna
+    private void btn_cambNombColumnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cambNombColumnActionPerformed
         // TODO add your handling code here:
-        c.mostrar_toda_tabla(tabla);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_cambNombColumnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    //Metodo del Boton para ver el tamaño de la tabla
+    private void btn_verTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verTablaActionPerformed
         // TODO add your handling code here:
         c.mostrar_filas_y_columnas(tabla);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btn_verTablaActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
-
+    //Metodo del Boton para Crear una nueva tabla
     private void btn_addTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addTableActionPerformed
         c.ajustar_tablas(tabla);
         //crear_Tablas obj = new crear_Tablas();
@@ -412,26 +348,34 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
         //dispose();
     }//GEN-LAST:event_btn_addTableActionPerformed
 
+    //Metodo del Boton para agregar una nueva Columna a la Tabla
     private void btn_addColumnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addColumnActionPerformed
         c.agregar_columna(tabla);
     }//GEN-LAST:event_btn_addColumnActionPerformed
 
+    //Metodo del Boton para elimanar una Columna a la Tabla
+    //ESTO ELIMINA LA ULTIMA COLUMNA DE LA TABLA, NO ELIMINA UNA COLUMNA EN ESPECIFICO
     private void btn_deleteColumnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteColumnActionPerformed
         c.eliminar_columna(tabla);// TODO add your handling code here:
     }//GEN-LAST:event_btn_deleteColumnActionPerformed
 
+    //Metodo del Boton para agregar una nueva Fila a la Tabla
     private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addRowActionPerformed
         c.agregar_fila(tabla);
     }//GEN-LAST:event_btn_addRowActionPerformed
 
+    //Metodo del Boton para elimanar una Fila a la Tabla
+    //ESTO ELIMINA LA ULTIMA FILA DE LA TABLA, NO ELIMINA UNA FILA EN ESPECIFICO
     private void btn_deleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteRowActionPerformed
         c.eliminar_fila(tabla);
     }//GEN-LAST:event_btn_deleteRowActionPerformed
 
+    
     private void txtnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnomActionPerformed
 
+    //Metodo del Boton para eliminar la Tabla o hacerla Vacia
     private void btn_deleteTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteTableActionPerformed
          c.eliminar_tabla(tabla);
     }//GEN-LAST:event_btn_deleteTableActionPerformed
@@ -476,28 +420,20 @@ DoublyLinkedList almacenar_tablas= new DoublyLinkedList();
     private javax.swing.JButton btn_addColumn;
     private javax.swing.JButton btn_addRow;
     private javax.swing.JButton btn_addTable;
+    private javax.swing.JButton btn_cambNombColumn;
     private javax.swing.JButton btn_changeName;
     private javax.swing.JButton btn_deleteColumn;
     private javax.swing.JButton btn_deleteRow;
     private javax.swing.JButton btn_deleteTable;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JList jList1;
-    private DefaultListModel modelo;
+    private javax.swing.JButton btn_verTabla;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_cantidadTablas;
+    private javax.swing.JLabel lbl_numeroTablas;
+    private javax.swing.JLabel lbl_printValue;
+    private javax.swing.JList listColumn;
+    private DefaultListModel modelo;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtnom;
     // End of variables declaration//GEN-END:variables
