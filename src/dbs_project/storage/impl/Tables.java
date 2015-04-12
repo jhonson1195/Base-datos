@@ -36,6 +36,9 @@ public class Tables implements Table{
         this.countID= countID-1;
         this.tipoLista=tipoLista;
     }
+    public Object [] getValues(){
+        return tablaEsquema.values().toArray();
+    }
     
     private void SchemaMismatchRow(int countRow) throws SchemaMismatchException{
         if(tablaEsquema.size()!=countRow){
@@ -232,12 +235,31 @@ public class Tables implements Table{
     }
 
     @Override
-    public RowCursor getRows(DataStructure type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public RowCursor getRows(DataStructure type){
+        Object [] values=tablaEsquema.values().toArray();
+        Columns f= (Columns)values[0];
+        RowCursors cursor=new RowCursors();
+        for(int i=0;i<f.getSize();i++){
+            Rows row= new Rows<>(0,this);
+            for(Object j:values){
+                Columns columna=(Columns)j;
+                row.appentElement(columna.getElement(i));
+                
+            }
+            cursor.append(row); 
+        }
+        return cursor;
     }
 
     @Override
     public ColumnCursor getColumns(DataStructure type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Object [] values=tablaEsquema.values().toArray();
+        ColumnCursors cursor =new ColumnCursors();
+        for(Object j:values){
+           Columns columna=(Columns)j;
+           cursor.append(columna);
+        }
+        
+        return cursor; 
     }
 }

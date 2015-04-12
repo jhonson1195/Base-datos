@@ -11,11 +11,19 @@ import dbs_project.exceptions.NoSuchRowException;
 import dbs_project.exceptions.NoSuchTableException;
 import dbs_project.exceptions.SchemaMismatchException;
 import dbs_project.exceptions.TableAlreadyExistsException;
+import dbs_project.storage.Column;
+import dbs_project.storage.Row;
 import dbs_project.storage.Table;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
+import dbs_project.structures.LinearList;
+import dbs_project.structures.Queue;
+import dbs_project.structures.Stack;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -56,6 +64,8 @@ public class Preubas {
         row2.appentElement("s");
         System.out.println(hola.getTable(1).getTableMetaData().getRowCount());
         hola.getTable(0).addRow(row);
+        hola.getTable(0).addRow(row);
+        hola.getTable(0).addRow(row);
         Tables ttt=(Tables)hola.getTable(1);
         Rows row3 =new Rows<>(0,ttt);
         row3.appentElement("77");
@@ -63,12 +73,13 @@ public class Preubas {
         
         hola.getTable(1).addRow(row3);
         hola.getTable(0).updateRow(0, row2);
-        hola.getTable(0).updateColumn(0, co2);
+        
         System.out.println(hola.getTable(0).getRow(0).getString(0));
         System.out.println(hola.getTable(1).getRow(0).getString(0));
         hola.getTable(0).getTableMetaData().getTableSchema();
+        hola.getTable(0).getRows(DataStructure.STACK);
+        System.out.println(hola.getTable(0).getRows(DataStructure.STACK).getString(0));
         
-       
 	}
   
 }
