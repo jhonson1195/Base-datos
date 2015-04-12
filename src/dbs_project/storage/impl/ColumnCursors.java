@@ -19,7 +19,7 @@ import dbs_project.structures.Stack;
 import java.util.Date;
 
 /**
- *Creacion de una columna
+ * Una estructura de columnas
  * @author jhonson
  */
 public class ColumnCursors implements ColumnCursor{

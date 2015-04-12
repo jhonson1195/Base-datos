@@ -48,6 +48,7 @@ public class LinkedList<T> implements LinearList <T> {
 	this.size++;
     }
     
+    //Ingresa un elemento en el nodo actual
     public void setElement(T Date){
         current.setElement(Date);
     }

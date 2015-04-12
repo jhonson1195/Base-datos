@@ -42,9 +42,9 @@ public class DoublyLinkedList <T>implements LinearList<T> {
         
         current=current.getLast();
         
-        size++;
-        
+        size++;        
     }
+    //Ingresa un elemento en el nodo actual
     public void setElement(T Date){
         current.setDate(Date);
     }
