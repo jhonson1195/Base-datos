@@ -10,7 +10,7 @@ import static dbs_project.structures.DataStructure.STACK;
 import dbs_project.structures.Stack;
 
 /**
- * Clase de tipo pila
+ *Clase de tipo pila
  * @author jhonson
  */
 public class Stacks <T>implements Stack<T>{

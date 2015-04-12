@@ -48,7 +48,7 @@ public class ColumnMetaDatas implements ColumnMetaData {
     public void increaseCount(){
         Count++;
     }
-    //retorna el numero de Filas en la Columna
+    //get de todas la variables definidas
     @Override
     public int getRowCount() {
         return Count;
@@ -64,15 +64,13 @@ public class ColumnMetaDatas implements ColumnMetaData {
         return Label;
     }
 
-    //Retorna el tipo de Dato
     @Override
     public Type getType() {
         return Type;
     }
 
     @Override
-    //Retorna el Id de una Fila, lo que seria lo mismo a retornar una posicion
-    //de la columna
+    //Falta implementar y entender
     public int getRowId(int positionInColumn) throws IndexOutOfBoundsException {
         /**
         if (index<0 || index>list.size()){
@@ -81,19 +79,16 @@ public class ColumnMetaDatas implements ColumnMetaData {
         return positionInColumn;
     }
 
-    //Retorna el id de la Columna
     @Override
     public int getId() {
         return Id;
     }
 
-    //Retorna el nombre la columna
     @Override
     public String getName() {
         return Name;
     }
     
-    //Cambia el nombre la columna
     public void setName(String name){
         this.Name=name;
     }

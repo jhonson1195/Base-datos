@@ -19,7 +19,7 @@ import dbs_project.structures.Stack;
 import java.util.Date;
 
 /**
- * Una estructura de columnas
+ *Creacion de una columna
  * @author jhonson
  */
 public class ColumnCursors implements ColumnCursor{
@@ -28,11 +28,14 @@ public class ColumnCursors implements ColumnCursor{
      * Constructor que recibe la una lists de columnas para manipularla
      * @param ListaColum
      */
-    public ColumnCursors(DoublyLinkedList<Columns> ListaColum){
-        this.ListaColum=ListaColum;
+    public ColumnCursors(){
+        this.ListaColum=new DoublyLinkedList<>();
     }
     public void append(Columns Date){
         ListaColum.append(Date);
+    }
+    public Columns getElement(){
+        return ListaColum.getElement();
     }
     
     @Override

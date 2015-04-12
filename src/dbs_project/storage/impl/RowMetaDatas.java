@@ -36,10 +36,12 @@ public class RowMetaDatas implements RowMetaData{
     // Metodos de Clase "RowMetaDatas"
     
     // Incrementa el contador
+    // +++++++++++++++++++++
     public void increaseCount(){
         Count++;
     }
     
+    // ¿?
     // Retorma el ColumnMetaData
     @Override
     public ColumnMetaData getColumnMetaData(int positionInTheRow) throws IndexOutOfBoundsException {
