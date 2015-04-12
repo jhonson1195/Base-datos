@@ -51,7 +51,7 @@ public class modifica_tabla {
                 modelo.addColumn(tabla.getColumnName(j));
             }
             catch(IndexOutOfBoundsException e){
-                String name = JOptionPane.showInputDialog("Señor usuario por favor ingrese el nombre de la columna #"+j);
+                String name = JOptionPane.showInputDialog("Señor usuario por favor ingrese el nombre de la columna #"+(j+1));
                 modelo.addColumn(name);
             }
         }
