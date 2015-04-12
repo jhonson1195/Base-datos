@@ -7,15 +7,20 @@ package dbs_project.gui;
 
 import dbs_project.exceptions.NoSuchColumnException;
 import dbs_project.exceptions.NoSuchTableException;
+import dbs_project.exceptions.SchemaMismatchException;
 import dbs_project.exceptions.TableAlreadyExistsException;
 import dbs_project.storage.ColumnMetaData;
 import dbs_project.storage.Table;
+import dbs_project.storage.impl.ColumnCursors;
 import dbs_project.storage.impl.Columns;
 import dbs_project.storage.impl.DoublyLinkedList;
+import dbs_project.storage.impl.RowCursors;
+import dbs_project.storage.impl.Rows;
 import dbs_project.storage.impl.StorageLayerSMMDS;
 import dbs_project.storage.impl.Tables;
 import dbs_project.structures.DataStructure;
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -97,7 +102,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
 
         jButton5.setText("Agregar Tabla");
@@ -221,8 +225,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
 
         jLabel6.setText("Fila");
 
-        jButton4.setText("Salir");
-
         jButton13.setText("Actualizar tabla");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,7 +241,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -270,9 +272,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addComponent(jButton13)))
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton4)))
-                .addContainerGap())
+                        .addGap(40, 40, 40))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(353, 353, 353)
                 .addComponent(jLabel1)
@@ -286,7 +286,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(115, 115, 115))
+                .addGap(87, 87, 87))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,11 +320,9 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                             .addComponent(btn_deleteTable)
                             .addComponent(btn_deleteColumn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton1)
-                                .addComponent(jButton3))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -403,7 +401,23 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     }//GEN-LAST:event_btn_deleteColumnActionPerformed
 
     private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addRowActionPerformed
-        c.agregar_fila(tabla);
+        String Elemento = (String) jList1.getSelectedValue();
+    try {
+        Tables tablaseleccion = (Tables)Almacenamiento.getTable(TablaIndex.get(Elemento));
+        agregarfila fila=new agregarfila();
+        fila.setVisible(true);
+        fila.setStorage(tablaseleccion,this);
+        dispose();
+        
+    } catch (NoSuchTableException ex) {
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
+    }catch (java.lang.NullPointerException ex){
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
+    }
+    
+        
+        
+        
     }//GEN-LAST:event_btn_addRowActionPerformed
 
     private void btn_deleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteRowActionPerformed
@@ -421,21 +435,42 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
         String Elemento = (String) jList1.getSelectedValue();
+        jLabel1.setText(Elemento);
     try {
-        
-        Almacenamiento.getTable(TablaIndex.get(Elemento));
-        
-        //tabla.addRow(Temporal2);
-        
-        
-        
-    } catch (NoSuchTableException ex) {
-        
+        ColumnCursors columnas = (ColumnCursors)Almacenamiento.getTable(TablaIndex.get(Elemento)).getColumns(DataStructure.DOUBLYLINKEDLIST);
+        RowCursors filas = (RowCursors)Almacenamiento.getTable(TablaIndex.get(Elemento)).getRows(DataStructure.DOUBLYLINKEDLIST);
+        System.out.println("bine");
+        String Datos [][]={};
+        boolean bandera=true;
+        ArrayList arreglo=new ArrayList();
+        while(bandera){
+            arreglo.add(columnas.getElement().getMetaData().getName());
+            bandera=columnas.next();
+            
+        }
+        String [] nombres = new String [arreglo.size()];
+        for(int i=0;i<arreglo.size();i++){
+            nombres[i]=(String)arreglo.get(i);
+        }
+        Modelo = new DefaultTableModel(Datos, nombres);
+        tabla.setModel(Modelo);
+        bandera=true;
+        try{
+        while(bandera){
+            String [] arreglo2= new String [filas.getElement().getMetaData().getColumnCount()];
+            for(int i=0; i<filas.getElement().getMetaData().getColumnCount();i++){
+                arreglo2[i]=(String)filas.getElement().getElement(i);
+            }
+            bandera=filas.next();
+            Modelo.addRow(arreglo2);
+        }
+        }catch(java.lang.NullPointerException e){
+            JOptionPane.showMessageDialog(frame,"Cree una tabla");
+        }
+    }catch (NoSuchTableException ex) {
         JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
-    }
-        
-       
-        
+    }catch(java.lang.NullPointerException e){
+            JOptionPane.showMessageDialog(frame,"Cree una tabla");}  
     }//GEN-LAST:event_jButton13ActionPerformed
 
     /**
@@ -489,7 +524,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

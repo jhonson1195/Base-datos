@@ -27,6 +27,8 @@ public class Tables implements Table{
     private Map<Integer, Columns> tablaEsquema;
     private TableMetaDatas MetaData;
     private int countID;
+    private int countIDFilas;
+    
     private DataStructure tipoLista;
     
     
@@ -35,6 +37,7 @@ public class Tables implements Table{
         MetaData= new TableMetaDatas(Name, Id,tablaEsquema);
         this.countID= countID-1;
         this.tipoLista=tipoLista;
+        countIDFilas=0;
     }
     public Object [] getValues(){
         return tablaEsquema.values().toArray();
@@ -88,6 +91,7 @@ public class Tables implements Table{
     @Override
     public int addRow(Row row) throws SchemaMismatchException {
         Rows row1 = (Rows) row;
+        row1.setId(countIDFilas++);
         SchemaMismatchRow(row1.getMetaData().getColumnCount());
         Object [] values=tablaEsquema.values().toArray();
         for(int i=0; values.length>i;++i){
@@ -95,7 +99,7 @@ public class Tables implements Table{
         }
         Columns columna=(Columns)values[0];
         MetaData.increaseCount();
-        return columna.getMetaData().getRowCount();
+        return countIDFilas;
         
     }
 
@@ -171,7 +175,8 @@ public class Tables implements Table{
     public Row getRow(int rowId) throws NoSuchRowException {
         NoSuchRow(rowId);
         Object [] values=tablaEsquema.values().toArray();
-        Rows row = new Rows(rowId,this);
+        Rows row = new Rows(this);
+        row.setId(rowId);
         for(Object i:values){
             Columns columna=(Columns)i;
             row.appentElement(columna.getElement(rowId));
@@ -235,12 +240,13 @@ public class Tables implements Table{
     }
 
     @Override
-    public RowCursor getRows(DataStructure type){
+    public RowCursors getRows(DataStructure type){
         Object [] values=tablaEsquema.values().toArray();
         Columns f= (Columns)values[0];
         RowCursors cursor=new RowCursors();
         for(int i=0;i<f.getSize();i++){
-            Rows row= new Rows<>(0,this);
+            Rows row= new Rows<>(this);
+            row.setId(i);
             for(Object j:values){
                 Columns columna=(Columns)j;
                 row.appentElement(columna.getElement(i));
@@ -252,7 +258,7 @@ public class Tables implements Table{
     }
 
     @Override
-    public ColumnCursor getColumns(DataStructure type) {
+    public ColumnCursors getColumns(DataStructure type) {
         Object [] values=tablaEsquema.values().toArray();
         ColumnCursors cursor =new ColumnCursors();
         for(Object j:values){
