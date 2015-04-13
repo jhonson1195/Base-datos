@@ -357,7 +357,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Metodo para visualizar una tabla del StorageLayer
     public void visualizarTabla(){
         try {
         Tables t = (Tables) Almacenamiento.getTable(contadorID);
@@ -380,7 +379,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     }
     }
     
-    //Metodo del boton para cambiar el nombre a una Columna
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          
@@ -428,7 +426,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    //Metodo del Boton para Crear una nueva tabla
     private void btn_addTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addTableActionPerformed
 
         creartabla ceartabla = new creartabla();
@@ -438,7 +435,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         dispose();
     }//GEN-LAST:event_btn_addTableActionPerformed
 
-    //Metodo del Boton para agregar una nueva Columna a la Tabla
     private void btn_addColumnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addColumnActionPerformed
         
     try {
@@ -454,7 +450,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     }
     }//GEN-LAST:event_btn_addColumnActionPerformed
 
-    //Metodo del Boton para elimanar una Columna a la Tabla
     private void btn_deleteColumnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteColumnActionPerformed
         
         try {
@@ -485,7 +480,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     }
     }//GEN-LAST:event_btn_deleteColumnActionPerformed
 
-    //Metodo del Boton para agregar una nueva Fila a la Tabla
     private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addRowActionPerformed
         String Elemento = (String) jList1.getSelectedValue();
     try {
@@ -504,7 +498,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         
     }//GEN-LAST:event_btn_addRowActionPerformed
 
-    //Metodo del Boton para elimanar una Fila a la Tabla
     private void btn_deleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteRowActionPerformed
         
     try {
@@ -525,7 +518,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         
     }//GEN-LAST:event_btn_deleteRowActionPerformed
 
-    //Metodo del Boton para eliminar una tabla
     private void btn_deleteTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteTableActionPerformed
         String Elemento = (String) jList1.getSelectedValue(); 
     try {
@@ -539,7 +531,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     } 
     }//GEN-LAST:event_btn_deleteTableActionPerformed
 
-    //Metodo para cambiar el nombre a la tabla
     private void btn_changeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeNameActionPerformed
     String Elemento = (String) jList1.getSelectedValue();
     try {
@@ -564,7 +555,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         
     }//GEN-LAST:event_btn_changeNameActionPerformed
 
-    //Metodo del boton para actualizar la tabla
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
         String Elemento = (String) jList1.getSelectedValue();
@@ -603,7 +593,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
             
     }//GEN-LAST:event_jButton13ActionPerformed
 
-    //Metodo del Boton MetaData de la Tabla
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        
     try {
@@ -623,7 +612,6 @@ Map <String, Integer> TablaIndex = new HashMap<>();
       
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    //Metodo del Boton MetaData de la Columna
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
         String Elemento = (String) jList1.getSelectedValue();

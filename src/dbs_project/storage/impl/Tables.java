@@ -16,7 +16,6 @@ import dbs_project.storage.RowCursor;
 import dbs_project.storage.Table;
 import dbs_project.storage.Type;
 import dbs_project.structures.DataStructure;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.collections.primitives.IntIterator;
 import java.util.Map;
@@ -111,18 +110,7 @@ public class Tables implements Table{
 
     @Override
     public IntIterator addRows(RowCursor rows) throws SchemaMismatchException {
-        RowCursors row = (RowCursors)rows;
-        ArrayList array= new ArrayList();
-        int index=0;
-        Object [] values=tablaEsquema.values().toArray();
-        while (!row.isNull(index)){
-            for(int i=0; values.length>i;++i){
-                tablaEsquema.get(i).appenElement(row.getElement().getElement(i));
-            }
-            array.add(row.getElement());
-        }
-        IntIterator interator=(IntIterator) array.iterator();
-        return interator;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -143,17 +131,22 @@ public class Tables implements Table{
 
     @Override
     public void deleteRow(int rowID) throws NoSuchRowException {
+        Object[] values=tablaEsquema.values().toArray();
+        
         NoSuchRow(rowID);
-        for(int i=0; tablaEsquema.size()>i;++i){
-            tablaEsquema.get(i).removeRow(rowID);
+        for(int i=0; tablaEsquema.size()>i;i++){
+            Columns columna=(Columns)values[i];
+            columna.removeRow(rowID);
         }    
         MetaData.dicreaseCount();
     }
 
     @Override
     public void deleteRows(IntIterator rowIDs) throws NoSuchRowException {
-        //NoSuchRow(rowIDs);
+        
+        NoSuchRow(rowIDs);
         for(int i=0; tablaEsquema.size()>i;++i){
+            
             tablaEsquema.get(i).removeRow(rowIDs.hashCode());
         }    
         MetaData.dicreaseCount();
@@ -265,7 +258,7 @@ public class Tables implements Table{
     
     @Override
     public void updateColumns(IntIterator columnIDs, ColumnCursor updateColumns) throws SchemaMismatchException, NoSuchColumnException {
-        //NoSuchColumn(columnIDs);
+        NoSuchColumn(columnIDs);
         Object [] values=tablaEsquema.values().toArray();
         Columns columna=(Columns)values[0];
         ColumnCursors columna2=(ColumnCursors)updateColumns;
@@ -324,5 +317,13 @@ public class Tables implements Table{
         }
         
         return cursor; 
+    }
+
+    private void NoSuchColumn(IntIterator columnIDs) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void NoSuchRow(IntIterator rowIDs) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

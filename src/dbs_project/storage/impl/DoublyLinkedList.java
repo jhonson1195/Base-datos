@@ -79,6 +79,8 @@ public class DoublyLinkedList <T>implements LinearList<T> {
         if(current==tail){
             current.getLast().setNext(null);
             tail=current=current.getLast();
+            position--;
+            size--;
             return;
         }
         
@@ -181,6 +183,7 @@ public class DoublyLinkedList <T>implements LinearList<T> {
                     else{break;}
                 }   
             }  
+            position=pos;
         }
         else{System.out.println("posicion invalida");}
     }

@@ -34,6 +34,20 @@ public class Preubas {
     
     public static void main(String[] args) throws ColumnAlreadyExistsException, NoSuchRowException, NoSuchColumnException, NoSuchTableException, TableAlreadyExistsException, SchemaMismatchException {
      
+        DoublyLinkedList<Integer> l= new DoublyLinkedList<>();
+        l.append(1);
+        l.append(2);
+        l.append(3);
+        l.append(4);
+        
+        System.out.print(l.toString());
+        l.goToPos(3);
+        l.remove();
+        System.out.print(l.toString());
+        l.goToPos(2);
+        l.remove();
+        System.out.print(l.toString());
+        
         Map <String, Type> tabla = new HashMap<>();
         tabla.put("Tabla integer", Type.INTEGER);
         tabla.put("Tabla boolean", Type.INTEGER);
