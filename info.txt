@@ -1,0 +1,16 @@
+a. Nombre del curso
+Algoritmos y Estructuras de Datos Grupo 1
+b. Número de semestre y año lectivo
+I semestre, 2015
+c. Nombre del Estudiante x3
+d. Número de carnet x3
+Carlos Ramirez 2014159929
+Jhonson Jimenez 2014088999
+Esteban Morales 2013008356
+e. Número de tarea programada
+I Entrega de la Tarea Programada "Storage Layer"
+f. Fecha de entrega
+Domingo 12 de Abril del 2015
+g. Estatus de la entrega (definido por el responsable de la implementación de la
+tarea): [Deplorable|Regular|Buena|MuyBuena|Excelente|Superior] 
+Excelente
