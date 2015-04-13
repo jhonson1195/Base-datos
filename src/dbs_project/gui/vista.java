@@ -217,8 +217,18 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         jScrollPane2.setViewportView(jList1);
 
         jButton1.setText("Metadatos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Metadatos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Tablas");
 
@@ -246,7 +256,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(13, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -339,7 +349,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -584,6 +594,40 @@ Map <String, Integer> TablaIndex = new HashMap<>();
         catch(java.lang.NullPointerException e){}
             
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String Id_Tables= JOptionPane.showInputDialog("Por favor ingrese el ID");
+        int Id_Table= Integer.parseInt(Id_Tables);
+        try {
+        System.out.println("Nombre de la tabla" + Almacenamiento.getTable(Id_Table).getTableMetaData().getName());
+        System.out.println("Id de la Tabla" + Almacenamiento.getTable(Id_Table).getTableMetaData().getId());
+        System.out.println("Cantidad de Filas" + Almacenamiento.getTable(Id_Table).getTableMetaData().getRowCount());
+       // modelojlist.removeElement(Elemento)
+        
+        
+        // TODO add your handling code here:
+    } catch (NoSuchTableException ex) {
+        Logger.getLogger(vista.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String Id_Tables= JOptionPane.showInputDialog("Por favor ingrese el ID de la Tabla");
+    int Id_Table= Integer.parseInt(Id_Tables);
+    String Id_Columns= JOptionPane.showInputDialog("Por favor ingrese el ID de la Columna");
+    int Id_Column= Integer.parseInt(Id_Columns);
+        try {
+        System.out.println("Nombre "+Almacenamiento.getTable(Id_Table).getColumn(Id_Column).getMetaData().getName());
+        System.out.println("Titulos "+ Almacenamiento.getTable(Id_Table).getColumn(Id_Column).getMetaData().getLabel());
+        System.out.println("Id "+ Almacenamiento.getTable(Id_Table).getColumn(Id_Column).getMetaData().getId());
+        System.out.println("Filas "+Almacenamiento.getTable(Id_Table).getColumn(Id_Column).getMetaData().getRowCount());
+        System.out.println("Tipo "+Almacenamiento.getTable(Id_Table).getColumn(Id_Column).getMetaData().getType());
+        
+// TODO add your handling code here:
+    } catch (NoSuchTableException | NoSuchColumnException ex) {
+        Logger.getLogger(vista.class.getName()).log(Level.SEVERE, null, ex);
+    }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
