@@ -177,6 +177,10 @@ public class creartabla extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(frame,"Por favor ingrese un nombre de tabla");
             return;
         }
+        if(tabla.isEmpty()){
+            JOptionPane.showMessageDialog(frame,"Por favor cree una columna");
+            return;
+        }
         try {
             // TODO add your handling code here:
             Almacenamiento.createTable((String)jTextField1.getText(), tabla, DataStructure.DOUBLYLINKEDLIST);

@@ -234,7 +234,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
 
         jLabel1.setText("Nombre Tabla");
 
-        jLabel2.setText("Talba");
+        jLabel2.setText("Tabla");
 
         jLabel5.setText("Columna");
 
@@ -282,11 +282,9 @@ Map <String, Integer> TablaIndex = new HashMap<>();
                                 .addGap(63, 63, 63)
                                 .addComponent(jButton1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jButton13)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(40, 40, 40))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(353, 353, 353)
@@ -295,13 +293,13 @@ Map <String, Integer> TablaIndex = new HashMap<>();
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(jLabel2)
-                .addGap(103, 103, 103)
+                .addGap(119, 119, 119)
                 .addComponent(jLabel5)
-                .addGap(107, 107, 107)
+                .addGap(105, 105, 105)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(87, 87, 87))
+                .addGap(89, 89, 89))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -477,7 +475,7 @@ Map <String, Integer> TablaIndex = new HashMap<>();
             }
         tablaseleccion.dropColumn(cursor.getMetaData().getId());
         
-        } catch (NoSuchTableException | NoSuchColumnException ex) {
+        } catch (NoSuchTableException | java.lang.NullPointerException | NoSuchColumnException ex) {
         JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
     }
     }//GEN-LAST:event_btn_deleteColumnActionPerformed
@@ -596,37 +594,53 @@ Map <String, Integer> TablaIndex = new HashMap<>();
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String Id_Tables= JOptionPane.showInputDialog("Por favor ingrese el ID");
-        int Id_Table= Integer.parseInt(Id_Tables);
-        try {
-        System.out.println("Nombre de la tabla" + Almacenamiento.getTable(Id_Table).getTableMetaData().getName());
-        System.out.println("Id de la Tabla" + Almacenamiento.getTable(Id_Table).getTableMetaData().getId());
-        System.out.println("Cantidad de Filas" + Almacenamiento.getTable(Id_Table).getTableMetaData().getRowCount());
-       // modelojlist.removeElement(Elemento)
-        
-        
-        // TODO add your handling code here:
-    } catch (NoSuchTableException ex) {
-        Logger.getLogger(vista.class.getName()).log(Level.SEVERE, null, ex);
+       
+    try {
+        MetaTabla metadatos = new MetaTabla();
+        String Elemento = (String) jList1.getSelectedValue();
+        TableMetaDatas meta=(TableMetaDatas)Almacenamiento.getTable(TablaIndex.get(Elemento)).getTableMetaData();
+        metadatos.setTalble(meta, this);
+        metadatos.setVisible(true);
+        dispose();
+    
+    
+    } catch (NoSuchTableException | java.lang.NullPointerException ex) {
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
     }
+       
+        
+      
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String Id_Tables= JOptionPane.showInputDialog("Por favor ingrese el ID de la Tabla");
-    int Id_Table= Integer.parseInt(Id_Tables);
-    String Id_Columns= JOptionPane.showInputDialog("Por favor ingrese el ID de la Columna");
-    int Id_Column= Integer.parseInt(Id_Columns);
         try {
-        System.out.println("Nombre "+Almacenamiento.getTable(Id_Table).getColumn(Id_Column).getMetaData().getName());
-        System.out.println("Titulos "+ Almacenamiento.getTable(Id_Table).getColumn(Id_Column).getMetaData().getLabel());
-        System.out.println("Id "+ Almacenamiento.getTable(Id_Table).getColumn(Id_Column).getMetaData().getId());
-        System.out.println("Filas "+Almacenamiento.getTable(Id_Table).getColumn(Id_Column).getMetaData().getRowCount());
-        System.out.println("Tipo "+Almacenamiento.getTable(Id_Table).getColumn(Id_Column).getMetaData().getType());
+        String Elemento = (String) jList1.getSelectedValue();
+        Tables tablaseleccion = (Tables)Almacenamiento.getTable(TablaIndex.get(Elemento));
+        ColumnCursors cursor=(ColumnCursors)tablaseleccion.getColumns(DataStructure.DOUBLYLINKEDLIST);
+        String Nombre= JOptionPane.showInputDialog("Por favor ingrese el nombre de la columna");
+        if(Nombre==null){
+            return;
+        }
+        boolean bandera=true;
+        while(bandera){
+            if(Nombre.equals(cursor.getMetaData().getName())){
+                break;
+            }
+            bandera=cursor.next();
+            
+        }
+        if(!bandera){
+                JOptionPane.showMessageDialog(frame,"Columna no encontrada");
+                return;
+            }
+        Metacolu metacolumna = new Metacolu();
+        metacolumna.setColum(cursor.getElement().getMetaData(), this);
+        metacolumna.setVisible(true);
+        } catch (NoSuchTableException | java.lang.NullPointerException ex) {
+        JOptionPane.showMessageDialog(frame,"Por favor seleccione una tabla");
+    }
         
-// TODO add your handling code here:
-    } catch (NoSuchTableException | NoSuchColumnException ex) {
-        Logger.getLogger(vista.class.getName()).log(Level.SEVERE, null, ex);
-    }        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
