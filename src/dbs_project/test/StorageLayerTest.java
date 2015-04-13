@@ -300,7 +300,7 @@ public class StorageLayerTest {
         final String newColName = "colVarchar";
         //get the test column 
         final Column testColumn = this.getColumnByName(table1, oldColName);
-        assertTrue("la columna no se encontró", testColumn != null);
+        assertTrue("la columna no se encontra", testColumn != null);
         if(testColumn == null){
         	throw new NullPointerException();
         }
@@ -547,7 +547,7 @@ private Map<String,TableCreationResult> createTablesTestDropTable(List<String> t
 	private Map<String,TableCreationResult> createTablesAndAddRows(List<String> tables, StorageLayer storage) throws TableAlreadyExistsException, NoSuchTableException, SchemaMismatchException{
 		Map<String,TableCreationResult> result = createTables(tables, storage);
 		
-		// IMPORTANTE! Aquí se está utilizando una implementación propia del profesor de Row (RowCST), RowMetaData (RowMetaDataCST), 
+		// IMPORTANTE! Aqui se esta utilizando una implementacion propia del profesor de Row (RowCST), RowMetaData (RowMetaDataCST), 
 		// ColumnMetaData (ColumnMetaDataCST), estan implementaciones son para poder probar su proyecto, no lo debe cambiar!
 		
 		//create Rows (2 rows)
@@ -613,7 +613,7 @@ private Map<String,TableCreationResult> createTablesTestDropTable(List<String> t
 	private Map<String,TableCreationResult> createTablesAndAddRowsTestDropTable(List<String> tables, StorageLayer storage) throws TableAlreadyExistsException, NoSuchTableException, SchemaMismatchException{
 		Map<String,TableCreationResult> result = createTablesTestDropTable(tables, storage);
 		
-		// IMPORTANTE! Aquí se está utilizando una implementación propia del profesor de Row (RowCST), RowMetaData (RowMetaDataCST), 
+		// IMPORTANTE! Aquï¿½ se estï¿½ utilizando una implementaciï¿½n propia del profesor de Row (RowCST), RowMetaData (RowMetaDataCST), 
 		// ColumnMetaData (ColumnMetaDataCST), estan implementaciones son para poder probar su proyecto, no lo debe cambiar!
 		
 		//create Rows (2 rows)
@@ -1055,11 +1055,11 @@ private Map<String,TableCreationResult> createTablesTestDropTable(List<String> t
     }
 
 	public static void main(String[] args) {
-		/*Esta clase será dada por el profesor para probar el entregable 1. La clase de dará antes de la entrega del proyecto, y 
-		deberá ser incluida en el mismo para ser ejecutada en la revisión.*/
+		/*Esta clase serï¿½ dada por el profesor para probar el entregable 1. La clase de darï¿½ antes de la entrega del proyecto, y 
+		deberï¿½ ser incluida en el mismo para ser ejecutada en la revisiï¿½n.*/
 		
-		System.out.println("IMPORTANTE: Cada test es independiente, es decir, si un test falla, la ejecución del siguiente debería ejecutarse independientemente. Por eso, al inicio de cada test"
-				+ " se encuentra la instrucción: storage = new StorageLayerSMMDS(); para 'borrar'y 'reiniciar' la capa de almacenamiento.");
+		System.out.println("IMPORTANTE: Cada test es independiente, es decir, si un test falla, la ejecuciï¿½n del siguiente deberï¿½a ejecutarse independientemente. Por eso, al inicio de cada test"
+				+ " se encuentra la instrucciï¿½n: storage = new StorageLayerSMMDS(); para 'borrar'y 'reiniciar' la capa de almacenamiento.");
 		System.out.println("****** Iniciando test ****** ");
 		System.out.println("****** Iniciando tests para probar StorageLayer (acciones sobrre tablas) ****** ");
 		StorageLayerTest test = new StorageLayerTest();
